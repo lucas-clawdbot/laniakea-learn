@@ -232,8 +232,8 @@
         <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
       </div>
       <div class="stats">
-        <div class="stat">Modules: <span class="stat-value" id="modules-completed">0</span>/7</div>
-        <div class="stat">Questions: <span class="stat-value" id="questions-answered">0</span>/70</div>
+        <div class="stat">Modules: <span class="stat-value" id="modules-completed">0</span>/8</div>
+        <div class="stat">Questions: <span class="stat-value" id="questions-answered">0</span>/80</div>
         <div class="stat">Score: <span class="stat-value" id="current-score">0</span>%</div>
       </div>
     </div>
@@ -244,28 +244,32 @@
           1. Introduction to Laniakea
         </button>
       
+        <button class="nav-tab" data-module="nomenclature" onclick="showModule('nomenclature')">
+          2. Nomenclature & Glossary
+        </button>
+      
         <button class="nav-tab" data-module="whitepaper" onclick="showModule('whitepaper')">
-          2. Sky Whitepaper
+          3. Sky Whitepaper
         </button>
       
         <button class="nav-tab" data-module="risk" onclick="showModule('risk')">
-          3. Risk Framework
+          4. Risk Framework
         </button>
       
         <button class="nav-tab" data-module="contracts" onclick="showModule('contracts')">
-          4. Smart Contracts
+          5. Smart Contracts
         </button>
       
         <button class="nav-tab" data-module="governance" onclick="showModule('governance')">
-          5. Governance & Operations
+          6. Governance & Operations
         </button>
       
         <button class="nav-tab" data-module="legal" onclick="showModule('legal')">
-          6. Legal & Trading
+          7. Legal & Trading
         </button>
       
         <button class="nav-tab" data-module="forecast" onclick="showModule('forecast')">
-          7. Forecast Model
+          8. Forecast Model
         </button>
       
     </nav>
@@ -526,13 +530,13 @@
               <div class="options">
                 
                   
-                    <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('intro', 1, 'A temporary measure during the transition period', 'Capital flows from Sky Core → Primes → Halos → end investments, with every flow rate-limited')">A temporary measure during the transition period</div>
-                  
                     <div class="option" data-value="Capital flows from Sky Core → Primes → Halos → end investments, with every flow rate-limited" onclick="selectAnswer('intro', 1, 'Capital flows from Sky Core → Primes → Halos → end investments, with every flow rate-limited', 'Capital flows from Sky Core → Primes → Halos → end investments, with every flow rate-limited')">Capital flows from Sky Core → Primes → Halos → end investments, with every flow rate-limited</div>
                   
-                    <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('intro', 1, 'An external integration point for third parties', 'Capital flows from Sky Core → Primes → Halos → end investments, with every flow rate-limited')">An external integration point for third parties</div>
-                  
                     <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('intro', 1, 'A deprecated feature from the old system', 'Capital flows from Sky Core → Primes → Halos → end investments, with every flow rate-limited')">A deprecated feature from the old system</div>
+                  
+                    <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('intro', 1, 'A temporary measure during the transition period', 'Capital flows from Sky Core → Primes → Halos → end investments, with every flow rate-limited')">A temporary measure during the transition period</div>
+                  
+                    <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('intro', 1, 'An external integration point for third parties', 'Capital flows from Sky Core → Primes → Halos → end investments, with every flow rate-limited')">An external integration point for third parties</div>
                   
                 
               </div>
@@ -545,13 +549,13 @@
               <div class="options">
                 
                   
-                    <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('intro', 2, 'A temporary measure during the transition period', 'Basel III-inspired framework determining capital requirements based on asset duration and forced realization probability')">A temporary measure during the transition period</div>
+                    <div class="option" data-value="Basel III-inspired framework determining capital requirements based on asset duration and forced realization probability" onclick="selectAnswer('intro', 2, 'Basel III-inspired framework determining capital requirements based on asset duration and forced realization probability', 'Basel III-inspired framework determining capital requirements based on asset duration and forced realization probability')">Basel III-inspired framework determining capital requirements based on asset duration and forced realization probability</div>
                   
-                    <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('intro', 2, 'An external integration point for third parties', 'Basel III-inspired framework determining capital requirements based on asset duration and forced realization probability')">An external integration point for third parties</div>
+                    <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('intro', 2, 'A temporary measure during the transition period', 'Basel III-inspired framework determining capital requirements based on asset duration and forced realization probability')">A temporary measure during the transition period</div>
                   
                     <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('intro', 2, 'A deprecated feature from the old system', 'Basel III-inspired framework determining capital requirements based on asset duration and forced realization probability')">A deprecated feature from the old system</div>
                   
-                    <div class="option" data-value="Basel III-inspired framework determining capital requirements based on asset duration and forced realization probability" onclick="selectAnswer('intro', 2, 'Basel III-inspired framework determining capital requirements based on asset duration and forced realization probability', 'Basel III-inspired framework determining capital requirements based on asset duration and forced realization probability')">Basel III-inspired framework determining capital requirements based on asset duration and forced realization probability</div>
+                    <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('intro', 2, 'An external integration point for third parties', 'Basel III-inspired framework determining capital requirements based on asset duration and forced realization probability')">An external integration point for third parties</div>
                   
                 
               </div>
@@ -600,15 +604,15 @@
               <div class="options">
                 
                   
-                    <div class="option" data-value="settlement" onclick="selectAnswer('intro', 6, 'settlement', 'requirements')">settlement</div>
-                  
                     <div class="option" data-value="requirements" onclick="selectAnswer('intro', 6, 'requirements', 'requirements')">requirements</div>
                   
-                    <div class="option" data-value="liquidity" onclick="selectAnswer('intro', 6, 'liquidity', 'requirements')">liquidity</div>
+                    <div class="option" data-value="settlement" onclick="selectAnswer('intro', 6, 'settlement', 'requirements')">settlement</div>
+                  
+                    <div class="option" data-value="protocol" onclick="selectAnswer('intro', 6, 'protocol', 'requirements')">protocol</div>
                   
                     <div class="option" data-value="governance" onclick="selectAnswer('intro', 6, 'governance', 'requirements')">governance</div>
                   
-                    <div class="option" data-value="protocol" onclick="selectAnswer('intro', 6, 'protocol', 'requirements')">protocol</div>
+                    <div class="option" data-value="liquidity" onclick="selectAnswer('intro', 6, 'liquidity', 'requirements')">liquidity</div>
                   
                 
               </div>
@@ -621,7 +625,7 @@
               <div class="options">
                 
                   
-                    <div class="option" data-value="infrastructure" onclick="selectAnswer('intro', 7, 'infrastructure', 'infrastructure')">infrastructure</div>
+                    <div class="option" data-value="liquidity" onclick="selectAnswer('intro', 7, 'liquidity', 'infrastructure')">liquidity</div>
                   
                     <div class="option" data-value="governance" onclick="selectAnswer('intro', 7, 'governance', 'infrastructure')">governance</div>
                   
@@ -629,7 +633,7 @@
                   
                     <div class="option" data-value="protocol" onclick="selectAnswer('intro', 7, 'protocol', 'infrastructure')">protocol</div>
                   
-                    <div class="option" data-value="liquidity" onclick="selectAnswer('intro', 7, 'liquidity', 'infrastructure')">liquidity</div>
+                    <div class="option" data-value="infrastructure" onclick="selectAnswer('intro', 7, 'infrastructure', 'infrastructure')">infrastructure</div>
                   
                 
               </div>
@@ -642,13 +646,13 @@
               <div class="options">
                 
                   
-                    <div class="option" data-value="What is Laniakea?" onclick="selectAnswer('intro', 8, 'What is Laniakea?', 'What is Laniakea?')">What is Laniakea?</div>
-                  
-                    <div class="option" data-value="External Audit Framework" onclick="selectAnswer('intro', 8, 'External Audit Framework', 'What is Laniakea?')">External Audit Framework</div>
+                    <div class="option" data-value="Manual Override System" onclick="selectAnswer('intro', 8, 'Manual Override System', 'What is Laniakea?')">Manual Override System</div>
                   
                     <div class="option" data-value="Legacy Migration Protocol" onclick="selectAnswer('intro', 8, 'Legacy Migration Protocol', 'What is Laniakea?')">Legacy Migration Protocol</div>
                   
-                    <div class="option" data-value="Manual Override System" onclick="selectAnswer('intro', 8, 'Manual Override System', 'What is Laniakea?')">Manual Override System</div>
+                    <div class="option" data-value="What is Laniakea?" onclick="selectAnswer('intro', 8, 'What is Laniakea?', 'What is Laniakea?')">What is Laniakea?</div>
+                  
+                    <div class="option" data-value="External Audit Framework" onclick="selectAnswer('intro', 8, 'External Audit Framework', 'What is Laniakea?')">External Audit Framework</div>
                   
                 
               </div>
@@ -661,13 +665,13 @@
               <div class="options">
                 
                   
-                    <div class="option" data-value="To provide backward compatibility with Maker" onclick="selectAnswer('intro', 9, 'To provide backward compatibility with Maker', 'To define and implement introduction to laniakea mechanisms for the Sky ecosystem')">To provide backward compatibility with Maker</div>
-                  
                     <div class="option" data-value="To replace the existing governance structure entirely" onclick="selectAnswer('intro', 9, 'To replace the existing governance structure entirely', 'To define and implement introduction to laniakea mechanisms for the Sky ecosystem')">To replace the existing governance structure entirely</div>
+                  
+                    <div class="option" data-value="To enable manual intervention in all operations" onclick="selectAnswer('intro', 9, 'To enable manual intervention in all operations', 'To define and implement introduction to laniakea mechanisms for the Sky ecosystem')">To enable manual intervention in all operations</div>
                   
                     <div class="option" data-value="To define and implement introduction to laniakea mechanisms for the Sky ecosystem" onclick="selectAnswer('intro', 9, 'To define and implement introduction to laniakea mechanisms for the Sky ecosystem', 'To define and implement introduction to laniakea mechanisms for the Sky ecosystem')">To define and implement introduction to laniakea mechanisms for the Sky ecosystem</div>
                   
-                    <div class="option" data-value="To enable manual intervention in all operations" onclick="selectAnswer('intro', 9, 'To enable manual intervention in all operations', 'To define and implement introduction to laniakea mechanisms for the Sky ecosystem')">To enable manual intervention in all operations</div>
+                    <div class="option" data-value="To provide backward compatibility with Maker" onclick="selectAnswer('intro', 9, 'To provide backward compatibility with Maker', 'To define and implement introduction to laniakea mechanisms for the Sky ecosystem')">To provide backward compatibility with Maker</div>
                   
                 
               </div>
@@ -682,13 +686,857 @@
         
         <div class="module-nav">
           <div></div>
+          <button class="btn" onclick="showModule('nomenclature')">Next Module →</button>
+        </div>
+      </div>
+    
+      <div class="module" id="module-nomenclature">
+        <div class="module-header">
+          <h2>Module 2: Nomenclature & Glossary</h2>
+          <p>10 quiz questions • Estimated 15-20 min</p>
+        </div>
+        
+        <div class="content-section">
+          <h1>Appendix F: Glossary</h1>
+<p>Term definitions for the Sky Protocol.</p>
+<hr>
+<h2>Core Concepts</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Sky</strong></td>
+<td>Evolution of MakerDAO; decentralized stablecoin protocol</td>
+</tr>
+<tr>
+<td><strong>Sky Core</strong></td>
+<td>Central governance and monetary policy layer</td>
+</tr>
+<tr>
+<td><strong>Atlas</strong></td>
+<td>Constitutional governance document; human-readable; ~10-20 pages</td>
+</tr>
+<tr>
+<td><strong>Synome</strong></td>
+<td>Machine-readable operational database; contains all parameters and configurations</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Tokens</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>USDS</strong></td>
+<td>Sky stablecoin; 1:1 with USD</td>
+</tr>
+<tr>
+<td><strong>sUSDS</strong></td>
+<td>Savings token; earns Sky Savings Rate</td>
+</tr>
+<tr>
+<td><strong>SKY</strong></td>
+<td>Governance token; staking rewards + buyback/burn</td>
+</tr>
+<tr>
+<td><strong>stUSDS</strong></td>
+<td>Segregated risk capital for SKY-backed borrowing</td>
+</tr>
+<tr>
+<td><strong>DAI</strong></td>
+<td>Legacy stablecoin; 1:1 convertible with USDS</td>
+</tr>
+<tr>
+<td><strong>MKR</strong></td>
+<td>Legacy governance token; 1:24000 convertible with SKY</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Rates</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>SSR</strong></td>
+<td>Sky Savings Rate — base yield for sUSDS holders</td>
+</tr>
+<tr>
+<td><strong>Base Rate</strong></td>
+<td>Protocol-wide stability fee</td>
+</tr>
+<tr>
+<td><strong>Sky Borrow Rate</strong></td>
+<td>Rate for borrowing USDS against SKY</td>
+</tr>
+<tr>
+<td><strong>stUSDS Rate</strong></td>
+<td>Yield for stUSDS holders (higher than SSR)</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Stability</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>ALM</strong></td>
+<td>Asset Liability Management — liquidity and portfolio rules that support the USDS peg</td>
+</tr>
+<tr>
+<td><strong>ASC</strong></td>
+<td>Actively Stabilizing Collateral — highly liquid non‑USDS assets used to buy USDS during downward peg pressure</td>
+</tr>
+<tr>
+<td><strong>DAB</strong></td>
+<td>Demand Absorption Buffer — highly liquid USDS (or USDS-equivalent) positions used to sell USDS during upward peg pressure</td>
+</tr>
+<tr>
+<td><strong>LitePSM</strong></td>
+<td>Lite Peg Stability Module — 1:1 USDC ↔ USDS conversion backstop used for peg stability</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Treasury</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>TMF</strong></td>
+<td>Treasury Management Function — the waterfall that allocates protocol net revenue to security/operations, buffers, burn, and staking rewards</td>
+</tr>
+<tr>
+<td><strong>Smart Burn Engine</strong></td>
+<td>Automated mechanism that executes SKY buybacks (and related actions) using TMF-allocated surplus</td>
+</tr>
+<tr>
+<td><strong>Aggregate Backstop Capital</strong></td>
+<td>Protocol solvency buffer for bad debt protection (targeted as a percentage of USDS liabilities)</td>
+</tr>
+<tr>
+<td><strong>Fortification Conserver</strong></td>
+<td>Treasury allocation for legal defense and unquantifiable risk management (often implemented via a designated foundation/entity)</td>
+</tr>
+<tr>
+<td><strong>Net Revenue Ratio</strong></td>
+<td>Scaling factor used in TMF allocations that increases with protocol net revenue (higher revenue increases allocations to certain steps like burn/fortification)</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Agents</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Agent</strong></td>
+<td>Autonomous entity operating within Sky&#39;s framework</td>
+</tr>
+<tr>
+<td><strong>Synomic Agent</strong></td>
+<td>Durable, ledger-native entity that can own assets and make binding commitments; four types: Prime, Halo, Generator, Executor</td>
+</tr>
+<tr>
+<td><strong>Prime</strong></td>
+<td>Capital-deploying agent category; heavyweight. Two subtypes: Star Primes (5) and Institutional Primes (1)</td>
+</tr>
+<tr>
+<td><strong>Star Prime</strong></td>
+<td>Standard Prime operating under a Generator; 5 genesis Stars: Spark, Grove, Keel, Star4, Star5</td>
+</tr>
+<tr>
+<td><strong>Institutional Prime</strong></td>
+<td>Prime serving institutional clients with higher compliance requirements; example: Obex</td>
+</tr>
+<tr>
+<td><strong>Halo</strong></td>
+<td>Lighter operational agent; wraps external value. Organized into Halo Classes containing Halo Units</td>
+</tr>
+<tr>
+<td><strong>Halo Class</strong></td>
+<td>Grouping of Halo Units sharing the same smart contract infrastructure (PAU, sentinel) and legal framework (buybox). Examples: tranched Passthrough Halo (senior/junior sharing one PAU), NFAT Facility (same buybox, varying duration/size)</td>
+</tr>
+<tr>
+<td><strong>Halo Unit</strong></td>
+<td>Individual instance within a Halo Class; specific parameters within the class&#39;s bounds (e.g., a specific tranche, a specific NFAT deal)</td>
+</tr>
+<tr>
+<td><strong>Core Halos</strong></td>
+<td>Legacy assets (Morpho vaults, Aave pools, SparkLend, etc.) standardized as Halo Units under Core Council governance. Primes deploy to Core Halos via CoreHaloFacet. Core Halos can transition to Prime ownership or wind down systematically</td>
+</tr>
+<tr>
+<td><strong>Executor</strong></td>
+<td>Governance operator agent; performs privileged operations</td>
+</tr>
+<tr>
+<td><strong>Generator</strong></td>
+<td>Layer interfacing with stablecoin ERC20 contract</td>
+</tr>
+<tr>
+<td><strong>Generator Agent</strong></td>
+<td>Agent that issues Sky Generated Assets (SGAs); future growth vector</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Agent Components</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>SubProxy</strong></td>
+<td>On-chain treasury controlled by an Agent</td>
+</tr>
+<tr>
+<td><strong>Agent Artifact</strong></td>
+<td>Governance documentation for an Agent</td>
+</tr>
+<tr>
+<td><strong>Agent Token</strong></td>
+<td>Native token for an Agent (10B supply, no emissions)</td>
+</tr>
+<tr>
+<td><strong>Nested Contributors</strong></td>
+<td>Core contributors serving both Agent and Sky</td>
+</tr>
+<tr>
+<td><strong>Foundation</strong></td>
+<td>Legal entity associated with a Prime</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Risk Capital</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>JRC</strong></td>
+<td>Junior Risk Capital — first to absorb losses</td>
+</tr>
+<tr>
+<td><strong>SRC</strong></td>
+<td>Senior Risk Capital — absorbs after JRC depleted</td>
+</tr>
+<tr>
+<td><strong>IJRC</strong></td>
+<td>Internal JRC — Prime&#39;s own capital</td>
+</tr>
+<tr>
+<td><strong>EJRC</strong></td>
+<td>External JRC — from other parties</td>
+</tr>
+<tr>
+<td><strong>TEJRC</strong></td>
+<td>Tokenized External JRC</td>
+</tr>
+<tr>
+<td><strong>TISRC</strong></td>
+<td>Tokenized Isolated SRC (per-Prime)</td>
+</tr>
+<tr>
+<td><strong>srUSDS</strong></td>
+<td>Senior Risk USDS — global senior risk capital</td>
+</tr>
+<tr>
+<td><strong>Encumbrance Ratio</strong></td>
+<td>Required Risk Capital / Total Risk Capital</td>
+</tr>
+<tr>
+<td><strong>First Loss Capital (FLC)</strong></td>
+<td>The first 10% of JRC losses, absorbed solely by Prime&#39;s own capital (IJRC) before external JRC shares losses</td>
+</tr>
+<tr>
+<td><strong>Agent Token Inflation</strong></td>
+<td>Loss absorption mechanism (step 3) where Prime token is inflated to cover losses after JRC exhaustion; can theoretically cover unlimited losses</td>
+</tr>
+<tr>
+<td><strong>SKY Token Inflation</strong></td>
+<td>Loss absorption mechanism (step 6) where SKY token is inflated to cover losses at protocol level after Global SRC exhaustion</td>
+</tr>
+<tr>
+<td><strong>Genesis Capital</strong></td>
+<td>Protocol reserves; loss absorption step 7 — haircut applied only after all risk capital and token inflation mechanisms exhausted</td>
+</tr>
+<tr>
+<td><strong>Loss Absorption Waterfall</strong></td>
+<td>8-step sequence for absorbing losses: (1) FLC → (2) JRC → (3) Agent Token → (4) TISRC → (5) Global SRC → (6) SKY Token → (7) Genesis Capital → (8) Peg Adjustment</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Infrastructure</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PAU</strong></td>
+<td>Parallelized Allocation Unit — standard building block (Controller + ALMProxy + RateLimits)</td>
+</tr>
+<tr>
+<td><strong>BEAM</strong></td>
+<td>Bounded External Access Module — authorized role with constraints</td>
+</tr>
+<tr>
+<td><strong>pBEAM</strong></td>
+<td>Process BEAM — directly impacts contracts</td>
+</tr>
+<tr>
+<td><strong>cBEAM</strong></td>
+<td>Configurator BEAM — modifies pBEAM guardrails</td>
+</tr>
+<tr>
+<td><strong>aBEAM</strong></td>
+<td>Admin BEAM — grants cBEAMs, creates inits</td>
+</tr>
+<tr>
+<td><strong>Keeper</strong></td>
+<td>LPHA (Low Power, High Authority) beacon for deterministic rule execution; applies rules exactly as written without judgment</td>
+</tr>
+<tr>
+<td><strong>SORL</strong></td>
+<td>Second-Order Rate Limit — constraint on rate limit increase speed</td>
+</tr>
+<tr>
+<td><strong>Init</strong></td>
+<td>Pre-approved configuration that GovOps can instantiate</td>
+</tr>
+<tr>
+<td><strong>Configurator Unit</strong></td>
+<td>Stack enabling spell-less Prime operations (BEAMTimeLock → BEAMState → Configurator)</td>
+</tr>
+<tr>
+<td><strong>BEAMTimeLock</strong></td>
+<td>Timelock component of Configurator Unit; enforces 14-day delay on additions, instant removals</td>
+</tr>
+<tr>
+<td><strong>Buybox</strong></td>
+<td>Defined parameter ranges for automated Halo operations (duration, size, APY, counterparties); deals within buybox execute without governance approval</td>
+</tr>
+<tr>
+<td><strong>TTS</strong></td>
+<td>Time to Shutdown — maximum time for a Sentinel to safely unwind positions during emergency</td>
+</tr>
+<tr>
+<td><strong>Streaming Accord</strong></td>
+<td>Agreement between Prime and Sentinel defining operational parameters, risk limits, and accountability</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Settlement</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>LCTS</strong></td>
+<td>Liquidity Constrained Token Standard — queue-based conversion</td>
+</tr>
+<tr>
+<td><strong>Generation</strong></td>
+<td>LCTS grouping; users in same generation share capacity proportionally</td>
+</tr>
+<tr>
+<td><strong>Settlement Cycle</strong></td>
+<td>Weekly: Tue lock → Wed settle (post-Laniakea)</td>
+</tr>
+<tr>
+<td><strong>Settlement Lock Period</strong></td>
+<td>Period when queue entries cannot be withdrawn. Weekly mode: 24h (Tue 12:00 → Wed 12:00 UTC). Weekday mode: 3h (12:00 → 15:00 UTC)</td>
+</tr>
+<tr>
+<td><strong>OSRC Auction</strong></td>
+<td>Sealed-bid auction for Senior Risk Capital capacity</td>
+</tr>
+<tr>
+<td><strong>SPTP</strong></td>
+<td>Stressed Pull-to-Par — time until an asset converges to fundamental value under stress conditions; the asset-side duration metric. Assets are assigned to Duration Buckets based on their SPTP</td>
+</tr>
+<tr>
+<td><strong>Prime Intent Vault</strong></td>
+<td>Restricted trading sub-account for delegated Prime trading. Holds bounded working capital, enforces trading policy (allowed pairs, slippage limits, notional caps). Limits blast radius — only vault balance is exposed to settlement, not full Prime PAU</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Governance</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Governance Poll</strong></td>
+<td>SKY holder decision-making; 3-day duration</td>
+</tr>
+<tr>
+<td><strong>Executive Vote</strong></td>
+<td>On-chain parameter changes</td>
+</tr>
+<tr>
+<td><strong>Aligned Delegate</strong></td>
+<td>Recognized governance participant; ranked L1-L3</td>
+</tr>
+<tr>
+<td><strong>Facilitator</strong></td>
+<td>Interprets Atlas on behalf of Executors</td>
+</tr>
+<tr>
+<td><strong>Root Edit</strong></td>
+<td>Process for token holders to modify Agent Artifacts</td>
+</tr>
+<tr>
+<td><strong>Core Council</strong></td>
+<td>Group of Executors responsible for Sky Core operations</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Beacon Framework</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Beacon</strong></td>
+<td>Synome-registered action aperture through which an agent affects the external world; the parent concept for all autonomous systems</td>
+</tr>
+<tr>
+<td><strong>LPLA</strong></td>
+<td>Low Power, Low Authority beacon — simple reporting, data exposure, basic coordination</td>
+</tr>
+<tr>
+<td><strong>LPHA</strong></td>
+<td>Low Power, High Authority beacon — deterministic rule execution on behalf of Synomic Agents (e.g., lpha-auction)</td>
+</tr>
+<tr>
+<td><strong>HPLA</strong></td>
+<td>High Power, Low Authority beacon — sophisticated peer-to-peer interaction with private capital</td>
+</tr>
+<tr>
+<td><strong>HPHA</strong></td>
+<td>High Power, High Authority beacon — governance execution with real-time capability; includes Sentinels</td>
+</tr>
+<tr>
+<td><strong>Sentinel</strong></td>
+<td>Distinguished subclass of HPHA beacons forming coordinated Baseline/Stream/Warden formations; specifically the trading and execution layer that deploys capital in live markets</td>
+</tr>
+<tr>
+<td><em><em>stl-</em> (prefix)</em>*</td>
+<td>Sentinel interface specification</td>
+</tr>
+<tr>
+<td><em><em>stk-</em> (prefix)</em>*</td>
+<td>Sentinel toolkit operation</td>
+</tr>
+<tr>
+<td><em><em>lpla-</em> (prefix)</em>*</td>
+<td>LPLA (Low Power, Low Authority) reporting/monitoring beacon</td>
+</tr>
+<tr>
+<td><em><em>lpha-</em> (prefix)</em>*</td>
+<td>LPHA (Low Power, High Authority) keeper beacon</td>
+</tr>
+<tr>
+<td><em><em>hpha-</em> (prefix)</em>*</td>
+<td>HPHA (High Power, High Authority) governance beacon</td>
+</tr>
+<tr>
+<td><strong>stl-base</strong></td>
+<td>Baseline sentinel — primary execution for formations (long-term)</td>
+</tr>
+<tr>
+<td><strong>stl-stream</strong></td>
+<td>Stream sentinel — proprietary intelligence streaming (long-term)</td>
+</tr>
+<tr>
+<td><strong>stl-warden</strong></td>
+<td>Warden sentinel — independent safety oversight (long-term)</td>
+</tr>
+<tr>
+<td><strong>lpha-lcts</strong></td>
+<td>LPHA beacon for Passthrough Halo LCTS operations — deposits, redemptions, capacity management</td>
+</tr>
+<tr>
+<td><strong>lpha-nfat</strong></td>
+<td>LPHA beacon for Structuring Halo NFAT operations — queue sweeping, NFAT issuance, redemption funding</td>
+</tr>
+<tr>
+<td><strong>lpha-auction</strong></td>
+<td>OSRC auction matching and capacity allocation</td>
+</tr>
+<tr>
+<td><strong>lpha-exchange</strong></td>
+<td>Exchange Halo orderbook and matching engine</td>
+</tr>
+<tr>
+<td><strong>lpha-identity</strong></td>
+<td>Identity Network registry keeper</td>
+</tr>
+<tr>
+<td><strong>hpha-gov</strong></td>
+<td>High-authority governance execution</td>
+</tr>
+<tr>
+<td><strong>Synome</strong></td>
+<td>Decentralized database for operational data</td>
+</tr>
+<tr>
+<td><strong>CC Synome</strong></td>
+<td>Core Council Synome — authoritative source</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Risk Framework</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>GRF (deprecated)</strong></td>
+<td>Former monolithic &quot;General Risk Framework&quot;; replaced by the modular Risk Framework docs in <code>risk-framework/</code></td>
+</tr>
+<tr>
+<td><strong>ALDM</strong></td>
+<td>Asset-Liability Duration Matching — the system that matches asset durations (SPTP) against liability durations (Lindy) via Duration Buckets. Enables capital-efficient deployment when assets can be held to maturity</td>
+</tr>
+<tr>
+<td><strong>Duration Bucket</strong></td>
+<td>Time bucket for duration matching (0.5 months each, 101 buckets total). Assets require capacity in buckets matching their SPTP; liabilities provide capacity based on Lindy-estimated remaining duration</td>
+</tr>
+<tr>
+<td><strong>Lindy Duration Model</strong></td>
+<td>Liability-side duration estimation based on current holding age; the longer someone has held, the longer they&#39;re likely to continue holding. Structural caps (double exponential decay) limit capacity per bucket based on empirical bank run data</td>
+</tr>
+<tr>
+<td><strong>Risk Weight</strong></td>
+<td>Capital for fundamental risk (credit, smart contract)</td>
+</tr>
+<tr>
+<td><strong>FRTB Drawdown</strong></td>
+<td>Capital for full mark-to-market drawdown</td>
+</tr>
+<tr>
+<td><strong>Gap Risk</strong></td>
+<td>Risk from discrete price jumps that bypass stop-losses; relevant for collateralized lending liquidations</td>
+</tr>
+<tr>
+<td><strong>FRTB</strong></td>
+<td>Fundamental Review of the Trading Book — Basel framework for market risk capital; Sky adapts FRTB principles for crypto asset valuation</td>
+</tr>
+<tr>
+<td><strong>Ingression Rate</strong></td>
+<td>Speed at which new risk capital can be deployed; constrained by SORL and governance limits</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Multi-Chain</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>SkyLink</strong></td>
+<td>Multi-chain token bridging infrastructure</td>
+</tr>
+<tr>
+<td><strong>Foreign Prime</strong></td>
+<td>Prime equivalent on altchains</td>
+</tr>
+<tr>
+<td><strong>Foreign Halo</strong></td>
+<td>Halo equivalent on altchains</td>
+</tr>
+<tr>
+<td><strong>CCTP</strong></td>
+<td>Circle Cross-Chain Transfer Protocol</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Legacy</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>MakerDAO</strong></td>
+<td>Original protocol; evolved into Sky</td>
+</tr>
+<tr>
+<td><strong>Vault</strong></td>
+<td>Original collateralized debt position</td>
+</tr>
+<tr>
+<td><strong>DSR</strong></td>
+<td>DAI Savings Rate; predecessor to SSR</td>
+</tr>
+<tr>
+<td><strong>PSM</strong></td>
+<td>Peg Stability Module</td>
+</tr>
+</tbody></table>
+
+        </div>
+        
+        <div class="quiz-section">
+          <h3>Module Quiz (10 Questions)</h3>
+          <div class="quiz-progress" id="quiz-progress-nomenclature">
+            <div class="quiz-dot" data-q="0"></div><div class="quiz-dot" data-q="1"></div><div class="quiz-dot" data-q="2"></div><div class="quiz-dot" data-q="3"></div><div class="quiz-dot" data-q="4"></div><div class="quiz-dot" data-q="5"></div><div class="quiz-dot" data-q="6"></div><div class="quiz-dot" data-q="7"></div><div class="quiz-dot" data-q="8"></div><div class="quiz-dot" data-q="9"></div>
+          </div>
+          
+          
+            <div class="question" id="q-nomenclature-0">
+              <div class="question-text">
+                <span class="question-num">Q1.</span> What is "Executor"?
+              </div>
+              <div class="options">
+                
+                  
+                    <div class="option" data-value="Governance operator agent; performs privileged operations" onclick="selectAnswer('nomenclature', 0, 'Governance operator agent; performs privileged operations', 'Governance operator agent; performs privileged operations')">Governance operator agent; performs privileged operations</div>
+                  
+                    <div class="option" data-value="Legal entity associated with a Prime" onclick="selectAnswer('nomenclature', 0, 'Legal entity associated with a Prime', 'Governance operator agent; performs privileged operations')">Legal entity associated with a Prime</div>
+                  
+                    <div class="option" data-value="Required Risk Capital / Total Risk Capital" onclick="selectAnswer('nomenclature', 0, 'Required Risk Capital / Total Risk Capital', 'Governance operator agent; performs privileged operations')">Required Risk Capital / Total Risk Capital</div>
+                  
+                    <div class="option" data-value="Group of Executors responsible for Sky Core operations" onclick="selectAnswer('nomenclature', 0, 'Group of Executors responsible for Sky Core operations', 'Governance operator agent; performs privileged operations')">Group of Executors responsible for Sky Core operations</div>
+                  
+                
+              </div>
+            </div>
+          
+            <div class="question" id="q-nomenclature-1">
+              <div class="question-text">
+                <span class="question-num">Q2.</span> What is "Core Council"?
+              </div>
+              <div class="options">
+                
+                  
+                    <div class="option" data-value="Required Risk Capital / Total Risk Capital" onclick="selectAnswer('nomenclature', 1, 'Required Risk Capital / Total Risk Capital', 'Group of Executors responsible for Sky Core operations')">Required Risk Capital / Total Risk Capital</div>
+                  
+                    <div class="option" data-value="Group of Executors responsible for Sky Core operations" onclick="selectAnswer('nomenclature', 1, 'Group of Executors responsible for Sky Core operations', 'Group of Executors responsible for Sky Core operations')">Group of Executors responsible for Sky Core operations</div>
+                  
+                    <div class="option" data-value="Governance operator agent; performs privileged operations" onclick="selectAnswer('nomenclature', 1, 'Governance operator agent; performs privileged operations', 'Group of Executors responsible for Sky Core operations')">Governance operator agent; performs privileged operations</div>
+                  
+                    <div class="option" data-value="Legal entity associated with a Prime" onclick="selectAnswer('nomenclature', 1, 'Legal entity associated with a Prime', 'Group of Executors responsible for Sky Core operations')">Legal entity associated with a Prime</div>
+                  
+                
+              </div>
+            </div>
+          
+            <div class="question" id="q-nomenclature-2">
+              <div class="question-text">
+                <span class="question-num">Q3.</span> What is "Foundation"?
+              </div>
+              <div class="options">
+                
+                  
+                    <div class="option" data-value="Required Risk Capital / Total Risk Capital" onclick="selectAnswer('nomenclature', 2, 'Required Risk Capital / Total Risk Capital', 'Legal entity associated with a Prime')">Required Risk Capital / Total Risk Capital</div>
+                  
+                    <div class="option" data-value="Legal entity associated with a Prime" onclick="selectAnswer('nomenclature', 2, 'Legal entity associated with a Prime', 'Legal entity associated with a Prime')">Legal entity associated with a Prime</div>
+                  
+                    <div class="option" data-value="Group of Executors responsible for Sky Core operations" onclick="selectAnswer('nomenclature', 2, 'Group of Executors responsible for Sky Core operations', 'Legal entity associated with a Prime')">Group of Executors responsible for Sky Core operations</div>
+                  
+                    <div class="option" data-value="Governance operator agent; performs privileged operations" onclick="selectAnswer('nomenclature', 2, 'Governance operator agent; performs privileged operations', 'Legal entity associated with a Prime')">Governance operator agent; performs privileged operations</div>
+                  
+                
+              </div>
+            </div>
+          
+            <div class="question" id="q-nomenclature-3">
+              <div class="question-text">
+                <span class="question-num">Q4.</span> What is "Encumbrance Ratio"?
+              </div>
+              <div class="options">
+                
+                  
+                    <div class="option" data-value="Group of Executors responsible for Sky Core operations" onclick="selectAnswer('nomenclature', 3, 'Group of Executors responsible for Sky Core operations', 'Required Risk Capital / Total Risk Capital')">Group of Executors responsible for Sky Core operations</div>
+                  
+                    <div class="option" data-value="Governance operator agent; performs privileged operations" onclick="selectAnswer('nomenclature', 3, 'Governance operator agent; performs privileged operations', 'Required Risk Capital / Total Risk Capital')">Governance operator agent; performs privileged operations</div>
+                  
+                    <div class="option" data-value="Legal entity associated with a Prime" onclick="selectAnswer('nomenclature', 3, 'Legal entity associated with a Prime', 'Required Risk Capital / Total Risk Capital')">Legal entity associated with a Prime</div>
+                  
+                    <div class="option" data-value="Required Risk Capital / Total Risk Capital" onclick="selectAnswer('nomenclature', 3, 'Required Risk Capital / Total Risk Capital', 'Required Risk Capital / Total Risk Capital')">Required Risk Capital / Total Risk Capital</div>
+                  
+                
+              </div>
+            </div>
+          
+            <div class="question" id="q-nomenclature-4">
+              <div class="question-text">
+                <span class="question-num">Q5.</span> What is "Generator"?
+              </div>
+              <div class="options">
+                
+                  
+                    <div class="option" data-value="Legal entity associated with a Prime" onclick="selectAnswer('nomenclature', 4, 'Legal entity associated with a Prime', 'Layer interfacing with stablecoin ERC20 contract')">Legal entity associated with a Prime</div>
+                  
+                    <div class="option" data-value="Layer interfacing with stablecoin ERC20 contract" onclick="selectAnswer('nomenclature', 4, 'Layer interfacing with stablecoin ERC20 contract', 'Layer interfacing with stablecoin ERC20 contract')">Layer interfacing with stablecoin ERC20 contract</div>
+                  
+                    <div class="option" data-value="Group of Executors responsible for Sky Core operations" onclick="selectAnswer('nomenclature', 4, 'Group of Executors responsible for Sky Core operations', 'Layer interfacing with stablecoin ERC20 contract')">Group of Executors responsible for Sky Core operations</div>
+                  
+                    <div class="option" data-value="Governance operator agent; performs privileged operations" onclick="selectAnswer('nomenclature', 4, 'Governance operator agent; performs privileged operations', 'Layer interfacing with stablecoin ERC20 contract')">Governance operator agent; performs privileged operations</div>
+                  
+                
+              </div>
+            </div>
+          
+            <div class="question" id="q-nomenclature-5">
+              <div class="question-text">
+                <span class="question-num">Q6.</span> What is "cBEAM"?
+              </div>
+              <div class="options">
+                
+                  
+                    <div class="option" data-value="Governance operator agent; performs privileged operations" onclick="selectAnswer('nomenclature', 5, 'Governance operator agent; performs privileged operations', 'Configurator BEAM — modifies pBEAM guardrails')">Governance operator agent; performs privileged operations</div>
+                  
+                    <div class="option" data-value="Group of Executors responsible for Sky Core operations" onclick="selectAnswer('nomenclature', 5, 'Group of Executors responsible for Sky Core operations', 'Configurator BEAM — modifies pBEAM guardrails')">Group of Executors responsible for Sky Core operations</div>
+                  
+                    <div class="option" data-value="Legal entity associated with a Prime" onclick="selectAnswer('nomenclature', 5, 'Legal entity associated with a Prime', 'Configurator BEAM — modifies pBEAM guardrails')">Legal entity associated with a Prime</div>
+                  
+                    <div class="option" data-value="Configurator BEAM — modifies pBEAM guardrails" onclick="selectAnswer('nomenclature', 5, 'Configurator BEAM — modifies pBEAM guardrails', 'Configurator BEAM — modifies pBEAM guardrails')">Configurator BEAM — modifies pBEAM guardrails</div>
+                  
+                
+              </div>
+            </div>
+          
+            <div class="question" id="q-nomenclature-6">
+              <div class="question-text">
+                <span class="question-num">Q7.</span> What is "First Loss Capital (FLC)"?
+              </div>
+              <div class="options">
+                
+                  
+                    <div class="option" data-value="The first 10% of JRC losses, absorbed solely by Prime&#39;s own capital (IJRC) before external JRC share..." onclick="selectAnswer('nomenclature', 6, 'The first 10% of JRC losses, absorbed solely by Prime\'s own capital (IJRC) before external JRC share...', 'The first 10% of JRC losses, absorbed solely by Prime\'s own capital (IJRC) before external JRC share...')">The first 10% of JRC losses, absorbed solely by Prime's own capital (IJRC) before external JRC share...</div>
+                  
+                    <div class="option" data-value="Governance operator agent; performs privileged operations" onclick="selectAnswer('nomenclature', 6, 'Governance operator agent; performs privileged operations', 'The first 10% of JRC losses, absorbed solely by Prime\'s own capital (IJRC) before external JRC share...')">Governance operator agent; performs privileged operations</div>
+                  
+                    <div class="option" data-value="Legal entity associated with a Prime" onclick="selectAnswer('nomenclature', 6, 'Legal entity associated with a Prime', 'The first 10% of JRC losses, absorbed solely by Prime\'s own capital (IJRC) before external JRC share...')">Legal entity associated with a Prime</div>
+                  
+                    <div class="option" data-value="Group of Executors responsible for Sky Core operations" onclick="selectAnswer('nomenclature', 6, 'Group of Executors responsible for Sky Core operations', 'The first 10% of JRC losses, absorbed solely by Prime\'s own capital (IJRC) before external JRC share...')">Group of Executors responsible for Sky Core operations</div>
+                  
+                
+              </div>
+            </div>
+          
+            <div class="question" id="q-nomenclature-7">
+              <div class="question-text">
+                <span class="question-num">Q8.</span> What is "Halo"?
+              </div>
+              <div class="options">
+                
+                  
+                    <div class="option" data-value="Governance operator agent; performs privileged operations" onclick="selectAnswer('nomenclature', 7, 'Governance operator agent; performs privileged operations', 'Lighter operational agent; wraps external value. Organized into Halo Classes containing Halo Units')">Governance operator agent; performs privileged operations</div>
+                  
+                    <div class="option" data-value="Legal entity associated with a Prime" onclick="selectAnswer('nomenclature', 7, 'Legal entity associated with a Prime', 'Lighter operational agent; wraps external value. Organized into Halo Classes containing Halo Units')">Legal entity associated with a Prime</div>
+                  
+                    <div class="option" data-value="Group of Executors responsible for Sky Core operations" onclick="selectAnswer('nomenclature', 7, 'Group of Executors responsible for Sky Core operations', 'Lighter operational agent; wraps external value. Organized into Halo Classes containing Halo Units')">Group of Executors responsible for Sky Core operations</div>
+                  
+                    <div class="option" data-value="Lighter operational agent; wraps external value. Organized into Halo Classes containing Halo Units" onclick="selectAnswer('nomenclature', 7, 'Lighter operational agent; wraps external value. Organized into Halo Classes containing Halo Units', 'Lighter operational agent; wraps external value. Organized into Halo Classes containing Halo Units')">Lighter operational agent; wraps external value. Organized into Halo Classes containing Halo Units</div>
+                  
+                
+              </div>
+            </div>
+          
+            <div class="question" id="q-nomenclature-8">
+              <div class="question-text">
+                <span class="question-num">Q9.</span> What is "Agent"?
+              </div>
+              <div class="options">
+                
+                  
+                    <div class="option" data-value="Governance operator agent; performs privileged operations" onclick="selectAnswer('nomenclature', 8, 'Governance operator agent; performs privileged operations', 'Autonomous entity operating within Sky\'s framework')">Governance operator agent; performs privileged operations</div>
+                  
+                    <div class="option" data-value="Legal entity associated with a Prime" onclick="selectAnswer('nomenclature', 8, 'Legal entity associated with a Prime', 'Autonomous entity operating within Sky\'s framework')">Legal entity associated with a Prime</div>
+                  
+                    <div class="option" data-value="Group of Executors responsible for Sky Core operations" onclick="selectAnswer('nomenclature', 8, 'Group of Executors responsible for Sky Core operations', 'Autonomous entity operating within Sky\'s framework')">Group of Executors responsible for Sky Core operations</div>
+                  
+                    <div class="option" data-value="Autonomous entity operating within Sky&#39;s framework" onclick="selectAnswer('nomenclature', 8, 'Autonomous entity operating within Sky\'s framework', 'Autonomous entity operating within Sky\'s framework')">Autonomous entity operating within Sky's framework</div>
+                  
+                
+              </div>
+            </div>
+          
+            <div class="question" id="q-nomenclature-9">
+              <div class="question-text">
+                <span class="question-num">Q10.</span> What is "Core Halos"?
+              </div>
+              <div class="options">
+                
+                  
+                    <div class="option" data-value="Governance operator agent; performs privileged operations" onclick="selectAnswer('nomenclature', 9, 'Governance operator agent; performs privileged operations', 'Legacy assets (Morpho vaults, Aave pools, SparkLend, etc.) standardized as Halo Units under Core Cou...')">Governance operator agent; performs privileged operations</div>
+                  
+                    <div class="option" data-value="Group of Executors responsible for Sky Core operations" onclick="selectAnswer('nomenclature', 9, 'Group of Executors responsible for Sky Core operations', 'Legacy assets (Morpho vaults, Aave pools, SparkLend, etc.) standardized as Halo Units under Core Cou...')">Group of Executors responsible for Sky Core operations</div>
+                  
+                    <div class="option" data-value="Legal entity associated with a Prime" onclick="selectAnswer('nomenclature', 9, 'Legal entity associated with a Prime', 'Legacy assets (Morpho vaults, Aave pools, SparkLend, etc.) standardized as Halo Units under Core Cou...')">Legal entity associated with a Prime</div>
+                  
+                    <div class="option" data-value="Legacy assets (Morpho vaults, Aave pools, SparkLend, etc.) standardized as Halo Units under Core Cou..." onclick="selectAnswer('nomenclature', 9, 'Legacy assets (Morpho vaults, Aave pools, SparkLend, etc.) standardized as Halo Units under Core Cou...', 'Legacy assets (Morpho vaults, Aave pools, SparkLend, etc.) standardized as Halo Units under Core Cou...')">Legacy assets (Morpho vaults, Aave pools, SparkLend, etc.) standardized as Halo Units under Core Cou...</div>
+                  
+                
+              </div>
+            </div>
+          
+          
+          <div class="quiz-result" id="result-nomenclature">
+            <h4 id="result-title-nomenclature"></h4>
+            <p id="result-text-nomenclature"></p>
+          </div>
+        </div>
+        
+        <div class="module-nav">
+          <button class="btn btn-outline" onclick="showModule('intro')">← Previous</button>
           <button class="btn" onclick="showModule('whitepaper')">Next Module →</button>
         </div>
       </div>
     
       <div class="module" id="module-whitepaper">
         <div class="module-header">
-          <h2>Module 2: Sky Whitepaper</h2>
+          <h2>Module 3: Sky Whitepaper</h2>
           <p>10 quiz questions • Estimated 15-20 min</p>
         </div>
         
@@ -1494,9 +2342,9 @@
                   
                     <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('whitepaper', 0, 'A temporary measure during the transition period', 'idle stablecoins wanting yield')">A temporary measure during the transition period</div>
                   
-                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('whitepaper', 0, 'A deprecated feature from the old system', 'idle stablecoins wanting yield')">A deprecated feature from the old system</div>
-                  
                     <div class="option" data-value="idle stablecoins wanting yield" onclick="selectAnswer('whitepaper', 0, 'idle stablecoins wanting yield', 'idle stablecoins wanting yield')">idle stablecoins wanting yield</div>
+                  
+                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('whitepaper', 0, 'A deprecated feature from the old system', 'idle stablecoins wanting yield')">A deprecated feature from the old system</div>
                   
                     <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('whitepaper', 0, 'An external integration point for third parties', 'idle stablecoins wanting yield')">An external integration point for third parties</div>
                   
@@ -1511,13 +2359,13 @@
               <div class="options">
                 
                   
-                    <div class="option" data-value="scale, opportunity, profit share" onclick="selectAnswer('whitepaper', 1, 'scale, opportunity, profit share', 'scale, opportunity, profit share')">scale, opportunity, profit share</div>
-                  
                     <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('whitepaper', 1, 'A deprecated feature from the old system', 'scale, opportunity, profit share')">A deprecated feature from the old system</div>
                   
-                    <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('whitepaper', 1, 'A temporary measure during the transition period', 'scale, opportunity, profit share')">A temporary measure during the transition period</div>
+                    <div class="option" data-value="scale, opportunity, profit share" onclick="selectAnswer('whitepaper', 1, 'scale, opportunity, profit share', 'scale, opportunity, profit share')">scale, opportunity, profit share</div>
                   
                     <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('whitepaper', 1, 'An external integration point for third parties', 'scale, opportunity, profit share')">An external integration point for third parties</div>
+                  
+                    <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('whitepaper', 1, 'A temporary measure during the transition period', 'scale, opportunity, profit share')">A temporary measure during the transition period</div>
                   
                 
               </div>
@@ -1532,11 +2380,11 @@
                   
                     <div class="option" data-value="stablecoin business model" onclick="selectAnswer('whitepaper', 2, 'stablecoin business model', 'stablecoin business model')">stablecoin business model</div>
                   
+                    <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('whitepaper', 2, 'A temporary measure during the transition period', 'stablecoin business model')">A temporary measure during the transition period</div>
+                  
                     <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('whitepaper', 2, 'A deprecated feature from the old system', 'stablecoin business model')">A deprecated feature from the old system</div>
                   
                     <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('whitepaper', 2, 'An external integration point for third parties', 'stablecoin business model')">An external integration point for third parties</div>
-                  
-                    <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('whitepaper', 2, 'A temporary measure during the transition period', 'stablecoin business model')">A temporary measure during the transition period</div>
                   
                 
               </div>
@@ -1585,15 +2433,15 @@
               <div class="options">
                 
                   
-                    <div class="option" data-value="stablecoin" onclick="selectAnswer('whitepaper', 6, 'stablecoin', 'stablecoin')">stablecoin</div>
+                    <div class="option" data-value="settlement" onclick="selectAnswer('whitepaper', 6, 'settlement', 'stablecoin')">settlement</div>
+                  
+                    <div class="option" data-value="protocol" onclick="selectAnswer('whitepaper', 6, 'protocol', 'stablecoin')">protocol</div>
                   
                     <div class="option" data-value="governance" onclick="selectAnswer('whitepaper', 6, 'governance', 'stablecoin')">governance</div>
                   
-                    <div class="option" data-value="settlement" onclick="selectAnswer('whitepaper', 6, 'settlement', 'stablecoin')">settlement</div>
-                  
                     <div class="option" data-value="liquidity" onclick="selectAnswer('whitepaper', 6, 'liquidity', 'stablecoin')">liquidity</div>
                   
-                    <div class="option" data-value="protocol" onclick="selectAnswer('whitepaper', 6, 'protocol', 'stablecoin')">protocol</div>
+                    <div class="option" data-value="stablecoin" onclick="selectAnswer('whitepaper', 6, 'stablecoin', 'stablecoin')">stablecoin</div>
                   
                 
               </div>
@@ -1608,13 +2456,13 @@
                   
                     <div class="option" data-value="stablecoins" onclick="selectAnswer('whitepaper', 7, 'stablecoins', 'stablecoins')">stablecoins</div>
                   
-                    <div class="option" data-value="settlement" onclick="selectAnswer('whitepaper', 7, 'settlement', 'stablecoins')">settlement</div>
+                    <div class="option" data-value="liquidity" onclick="selectAnswer('whitepaper', 7, 'liquidity', 'stablecoins')">liquidity</div>
                   
                     <div class="option" data-value="governance" onclick="selectAnswer('whitepaper', 7, 'governance', 'stablecoins')">governance</div>
                   
-                    <div class="option" data-value="liquidity" onclick="selectAnswer('whitepaper', 7, 'liquidity', 'stablecoins')">liquidity</div>
-                  
                     <div class="option" data-value="protocol" onclick="selectAnswer('whitepaper', 7, 'protocol', 'stablecoins')">protocol</div>
+                  
+                    <div class="option" data-value="settlement" onclick="selectAnswer('whitepaper', 7, 'settlement', 'stablecoins')">settlement</div>
                   
                 
               </div>
@@ -1627,13 +2475,13 @@
               <div class="options">
                 
                   
-                    <div class="option" data-value="Manual Override System" onclick="selectAnswer('whitepaper', 8, 'Manual Override System', 'Sky Whitepaper')">Manual Override System</div>
+                    <div class="option" data-value="External Audit Framework" onclick="selectAnswer('whitepaper', 8, 'External Audit Framework', 'Sky Whitepaper')">External Audit Framework</div>
                   
                     <div class="option" data-value="Legacy Migration Protocol" onclick="selectAnswer('whitepaper', 8, 'Legacy Migration Protocol', 'Sky Whitepaper')">Legacy Migration Protocol</div>
                   
-                    <div class="option" data-value="External Audit Framework" onclick="selectAnswer('whitepaper', 8, 'External Audit Framework', 'Sky Whitepaper')">External Audit Framework</div>
-                  
                     <div class="option" data-value="Sky Whitepaper" onclick="selectAnswer('whitepaper', 8, 'Sky Whitepaper', 'Sky Whitepaper')">Sky Whitepaper</div>
+                  
+                    <div class="option" data-value="Manual Override System" onclick="selectAnswer('whitepaper', 8, 'Manual Override System', 'Sky Whitepaper')">Manual Override System</div>
                   
                 
               </div>
@@ -1646,13 +2494,13 @@
               <div class="options">
                 
                   
+                    <div class="option" data-value="To replace the existing governance structure entirely" onclick="selectAnswer('whitepaper', 9, 'To replace the existing governance structure entirely', 'To define and implement sky whitepaper mechanisms for the Sky ecosystem')">To replace the existing governance structure entirely</div>
+                  
                     <div class="option" data-value="To provide backward compatibility with Maker" onclick="selectAnswer('whitepaper', 9, 'To provide backward compatibility with Maker', 'To define and implement sky whitepaper mechanisms for the Sky ecosystem')">To provide backward compatibility with Maker</div>
                   
                     <div class="option" data-value="To enable manual intervention in all operations" onclick="selectAnswer('whitepaper', 9, 'To enable manual intervention in all operations', 'To define and implement sky whitepaper mechanisms for the Sky ecosystem')">To enable manual intervention in all operations</div>
                   
                     <div class="option" data-value="To define and implement sky whitepaper mechanisms for the Sky ecosystem" onclick="selectAnswer('whitepaper', 9, 'To define and implement sky whitepaper mechanisms for the Sky ecosystem', 'To define and implement sky whitepaper mechanisms for the Sky ecosystem')">To define and implement sky whitepaper mechanisms for the Sky ecosystem</div>
-                  
-                    <div class="option" data-value="To replace the existing governance structure entirely" onclick="selectAnswer('whitepaper', 9, 'To replace the existing governance structure entirely', 'To define and implement sky whitepaper mechanisms for the Sky ecosystem')">To replace the existing governance structure entirely</div>
                   
                 
               </div>
@@ -1666,14 +2514,14 @@
         </div>
         
         <div class="module-nav">
-          <button class="btn btn-outline" onclick="showModule('intro')">← Previous</button>
+          <button class="btn btn-outline" onclick="showModule('nomenclature')">← Previous</button>
           <button class="btn" onclick="showModule('risk')">Next Module →</button>
         </div>
       </div>
     
       <div class="module" id="module-risk">
         <div class="module-header">
-          <h2>Module 3: Risk Framework</h2>
+          <h2>Module 4: Risk Framework</h2>
           <p>10 quiz questions • Estimated 15-20 min</p>
         </div>
         
@@ -2049,13 +2897,13 @@ Position Capital = (Matched Portion × Risk Weight) + (Unmatched Portion × FRTB
               <div class="options">
                 
                   
+                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('risk', 0, 'A deprecated feature from the old system', 'Liability duration analysis (Lindy Duration Model), Duration Buckets, structural caps, capacity reservation.')">A deprecated feature from the old system</div>
+                  
                     <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('risk', 0, 'An external integration point for third parties', 'Liability duration analysis (Lindy Duration Model), Duration Buckets, structural caps, capacity reservation.')">An external integration point for third parties</div>
                   
                     <div class="option" data-value="Liability duration analysis (Lindy Duration Model), Duration Buckets, structural caps, capacity reservation." onclick="selectAnswer('risk', 0, 'Liability duration analysis (Lindy Duration Model), Duration Buckets, structural caps, capacity reservation.', 'Liability duration analysis (Lindy Duration Model), Duration Buckets, structural caps, capacity reservation.')">Liability duration analysis (Lindy Duration Model), Duration Buckets, structural caps, capacity reservation.</div>
                   
                     <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('risk', 0, 'A temporary measure during the transition period', 'Liability duration analysis (Lindy Duration Model), Duration Buckets, structural caps, capacity reservation.')">A temporary measure during the transition period</div>
-                  
-                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('risk', 0, 'A deprecated feature from the old system', 'Liability duration analysis (Lindy Duration Model), Duration Buckets, structural caps, capacity reservation.')">A deprecated feature from the old system</div>
                   
                 
               </div>
@@ -2068,13 +2916,13 @@ Position Capital = (Matched Portion × Risk Weight) + (Unmatched Portion × FRTB
               <div class="options">
                 
                   
-                    <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('risk', 1, 'A temporary measure during the transition period', 'Asset characteristics: fundamental risk, drawdown risk, stressed pull-to-par (SPTP).')">A temporary measure during the transition period</div>
+                    <div class="option" data-value="Asset characteristics: fundamental risk, drawdown risk, stressed pull-to-par (SPTP)." onclick="selectAnswer('risk', 1, 'Asset characteristics: fundamental risk, drawdown risk, stressed pull-to-par (SPTP).', 'Asset characteristics: fundamental risk, drawdown risk, stressed pull-to-par (SPTP).')">Asset characteristics: fundamental risk, drawdown risk, stressed pull-to-par (SPTP).</div>
                   
                     <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('risk', 1, 'An external integration point for third parties', 'Asset characteristics: fundamental risk, drawdown risk, stressed pull-to-par (SPTP).')">An external integration point for third parties</div>
                   
-                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('risk', 1, 'A deprecated feature from the old system', 'Asset characteristics: fundamental risk, drawdown risk, stressed pull-to-par (SPTP).')">A deprecated feature from the old system</div>
+                    <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('risk', 1, 'A temporary measure during the transition period', 'Asset characteristics: fundamental risk, drawdown risk, stressed pull-to-par (SPTP).')">A temporary measure during the transition period</div>
                   
-                    <div class="option" data-value="Asset characteristics: fundamental risk, drawdown risk, stressed pull-to-par (SPTP)." onclick="selectAnswer('risk', 1, 'Asset characteristics: fundamental risk, drawdown risk, stressed pull-to-par (SPTP).', 'Asset characteristics: fundamental risk, drawdown risk, stressed pull-to-par (SPTP).')">Asset characteristics: fundamental risk, drawdown risk, stressed pull-to-par (SPTP).</div>
+                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('risk', 1, 'A deprecated feature from the old system', 'Asset characteristics: fundamental risk, drawdown risk, stressed pull-to-par (SPTP).')">A deprecated feature from the old system</div>
                   
                 
               </div>
@@ -2087,11 +2935,11 @@ Position Capital = (Matched Portion × Risk Weight) + (Unmatched Portion × FRTB
               <div class="options">
                 
                   
-                    <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('risk', 2, 'An external integration point for third parties', 'Rate risk vs credit spread risk, duration matching eligibility, matched/unmatched treatment, partial matching.')">An external integration point for third parties</div>
+                    <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('risk', 2, 'A temporary measure during the transition period', 'Rate risk vs credit spread risk, duration matching eligibility, matched/unmatched treatment, partial matching.')">A temporary measure during the transition period</div>
                   
                     <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('risk', 2, 'A deprecated feature from the old system', 'Rate risk vs credit spread risk, duration matching eligibility, matched/unmatched treatment, partial matching.')">A deprecated feature from the old system</div>
                   
-                    <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('risk', 2, 'A temporary measure during the transition period', 'Rate risk vs credit spread risk, duration matching eligibility, matched/unmatched treatment, partial matching.')">A temporary measure during the transition period</div>
+                    <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('risk', 2, 'An external integration point for third parties', 'Rate risk vs credit spread risk, duration matching eligibility, matched/unmatched treatment, partial matching.')">An external integration point for third parties</div>
                   
                     <div class="option" data-value="Rate risk vs credit spread risk, duration matching eligibility, matched/unmatched treatment, partial matching." onclick="selectAnswer('risk', 2, 'Rate risk vs credit spread risk, duration matching eligibility, matched/unmatched treatment, partial matching.', 'Rate risk vs credit spread risk, duration matching eligibility, matched/unmatched treatment, partial matching.')">Rate risk vs credit spread risk, duration matching eligibility, matched/unmatched treatment, partial matching.</div>
                   
@@ -2151,15 +2999,15 @@ Position Capital = (Matched Portion × Risk Weight) + (Unmatched Portion × FRTB
               <div class="options">
                 
                   
-                    <div class="option" data-value="risk" onclick="selectAnswer('risk', 6, 'risk', 'risk')">risk</div>
-                  
-                    <div class="option" data-value="liquidity" onclick="selectAnswer('risk', 6, 'liquidity', 'risk')">liquidity</div>
+                    <div class="option" data-value="settlement" onclick="selectAnswer('risk', 6, 'settlement', 'risk')">settlement</div>
                   
                     <div class="option" data-value="governance" onclick="selectAnswer('risk', 6, 'governance', 'risk')">governance</div>
                   
-                    <div class="option" data-value="settlement" onclick="selectAnswer('risk', 6, 'settlement', 'risk')">settlement</div>
+                    <div class="option" data-value="liquidity" onclick="selectAnswer('risk', 6, 'liquidity', 'risk')">liquidity</div>
                   
                     <div class="option" data-value="protocol" onclick="selectAnswer('risk', 6, 'protocol', 'risk')">protocol</div>
+                  
+                    <div class="option" data-value="risk" onclick="selectAnswer('risk', 6, 'risk', 'risk')">risk</div>
                   
                 
               </div>
@@ -2172,15 +3020,15 @@ Position Capital = (Matched Portion × Risk Weight) + (Unmatched Portion × FRTB
               <div class="options">
                 
                   
-                    <div class="option" data-value="protocol" onclick="selectAnswer('risk', 7, 'protocol', 'risk')">protocol</div>
+                    <div class="option" data-value="settlement" onclick="selectAnswer('risk', 7, 'settlement', 'risk')">settlement</div>
                   
                     <div class="option" data-value="governance" onclick="selectAnswer('risk', 7, 'governance', 'risk')">governance</div>
                   
-                    <div class="option" data-value="risk" onclick="selectAnswer('risk', 7, 'risk', 'risk')">risk</div>
-                  
-                    <div class="option" data-value="settlement" onclick="selectAnswer('risk', 7, 'settlement', 'risk')">settlement</div>
-                  
                     <div class="option" data-value="liquidity" onclick="selectAnswer('risk', 7, 'liquidity', 'risk')">liquidity</div>
+                  
+                    <div class="option" data-value="protocol" onclick="selectAnswer('risk', 7, 'protocol', 'risk')">protocol</div>
+                  
+                    <div class="option" data-value="risk" onclick="selectAnswer('risk', 7, 'risk', 'risk')">risk</div>
                   
                 
               </div>
@@ -2193,15 +3041,15 @@ Position Capital = (Matched Portion × Risk Weight) + (Unmatched Portion × FRTB
               <div class="options">
                 
                   
-                    <div class="option" data-value="governance" onclick="selectAnswer('risk', 8, 'governance', 'asset')">governance</div>
-                  
-                    <div class="option" data-value="settlement" onclick="selectAnswer('risk', 8, 'settlement', 'asset')">settlement</div>
-                  
                     <div class="option" data-value="protocol" onclick="selectAnswer('risk', 8, 'protocol', 'asset')">protocol</div>
+                  
+                    <div class="option" data-value="asset" onclick="selectAnswer('risk', 8, 'asset', 'asset')">asset</div>
+                  
+                    <div class="option" data-value="governance" onclick="selectAnswer('risk', 8, 'governance', 'asset')">governance</div>
                   
                     <div class="option" data-value="liquidity" onclick="selectAnswer('risk', 8, 'liquidity', 'asset')">liquidity</div>
                   
-                    <div class="option" data-value="asset" onclick="selectAnswer('risk', 8, 'asset', 'asset')">asset</div>
+                    <div class="option" data-value="settlement" onclick="selectAnswer('risk', 8, 'settlement', 'asset')">settlement</div>
                   
                 
               </div>
@@ -2214,11 +3062,11 @@ Position Capital = (Matched Portion × Risk Weight) + (Unmatched Portion × FRTB
               <div class="options">
                 
                   
-                    <div class="option" data-value="External Audit Framework" onclick="selectAnswer('risk', 9, 'External Audit Framework', 'Risk Framework')">External Audit Framework</div>
-                  
                     <div class="option" data-value="Risk Framework" onclick="selectAnswer('risk', 9, 'Risk Framework', 'Risk Framework')">Risk Framework</div>
                   
                     <div class="option" data-value="Legacy Migration Protocol" onclick="selectAnswer('risk', 9, 'Legacy Migration Protocol', 'Risk Framework')">Legacy Migration Protocol</div>
+                  
+                    <div class="option" data-value="External Audit Framework" onclick="selectAnswer('risk', 9, 'External Audit Framework', 'Risk Framework')">External Audit Framework</div>
                   
                     <div class="option" data-value="Manual Override System" onclick="selectAnswer('risk', 9, 'Manual Override System', 'Risk Framework')">Manual Override System</div>
                   
@@ -2241,7 +3089,7 @@ Position Capital = (Matched Portion × Risk Weight) + (Unmatched Portion × FRTB
     
       <div class="module" id="module-contracts">
         <div class="module-header">
-          <h2>Module 4: Smart Contracts</h2>
+          <h2>Module 5: Smart Contracts</h2>
           <p>10 quiz questions • Estimated 15-20 min</p>
         </div>
         
@@ -2742,13 +3590,13 @@ Position Capital = (Matched Portion × Risk Weight) + (Unmatched Portion × FRTB
               <div class="options">
                 
                   
-                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('contracts', 0, 'A deprecated feature from the old system', 'same contracts, different configuration')">A deprecated feature from the old system</div>
-                  
-                    <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('contracts', 0, 'A temporary measure during the transition period', 'same contracts, different configuration')">A temporary measure during the transition period</div>
-                  
                     <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('contracts', 0, 'An external integration point for third parties', 'same contracts, different configuration')">An external integration point for third parties</div>
                   
                     <div class="option" data-value="same contracts, different configuration" onclick="selectAnswer('contracts', 0, 'same contracts, different configuration', 'same contracts, different configuration')">same contracts, different configuration</div>
+                  
+                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('contracts', 0, 'A deprecated feature from the old system', 'same contracts, different configuration')">A deprecated feature from the old system</div>
+                  
+                    <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('contracts', 0, 'A temporary measure during the transition period', 'same contracts, different configuration')">A temporary measure during the transition period</div>
                   
                 
               </div>
@@ -2761,13 +3609,13 @@ Position Capital = (Matched Portion × Risk Weight) + (Unmatched Portion × FRTB
               <div class="options">
                 
                   
-                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('contracts', 1, 'A deprecated feature from the old system', 'the primary long-term deployment path (includes both Prime-created Halos and Core Halos)')">A deprecated feature from the old system</div>
+                    <div class="option" data-value="the primary long-term deployment path (includes both Prime-created Halos and Core Halos)" onclick="selectAnswer('contracts', 1, 'the primary long-term deployment path (includes both Prime-created Halos and Core Halos)', 'the primary long-term deployment path (includes both Prime-created Halos and Core Halos)')">the primary long-term deployment path (includes both Prime-created Halos and Core Halos)</div>
                   
                     <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('contracts', 1, 'An external integration point for third parties', 'the primary long-term deployment path (includes both Prime-created Halos and Core Halos)')">An external integration point for third parties</div>
                   
                     <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('contracts', 1, 'A temporary measure during the transition period', 'the primary long-term deployment path (includes both Prime-created Halos and Core Halos)')">A temporary measure during the transition period</div>
                   
-                    <div class="option" data-value="the primary long-term deployment path (includes both Prime-created Halos and Core Halos)" onclick="selectAnswer('contracts', 1, 'the primary long-term deployment path (includes both Prime-created Halos and Core Halos)', 'the primary long-term deployment path (includes both Prime-created Halos and Core Halos)')">the primary long-term deployment path (includes both Prime-created Halos and Core Halos)</div>
+                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('contracts', 1, 'A deprecated feature from the old system', 'the primary long-term deployment path (includes both Prime-created Halos and Core Halos)')">A deprecated feature from the old system</div>
                   
                 
               </div>
@@ -2780,13 +3628,13 @@ Position Capital = (Matched Portion × Risk Weight) + (Unmatched Portion × FRTB
               <div class="options">
                 
                   
+                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('contracts', 2, 'A deprecated feature from the old system', 'legacy DeFi (Morpho vaults, Aave pools, SparkLend) wrapped as Halo Units under Core Council governance')">A deprecated feature from the old system</div>
+                  
                     <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('contracts', 2, 'A temporary measure during the transition period', 'legacy DeFi (Morpho vaults, Aave pools, SparkLend) wrapped as Halo Units under Core Council governance')">A temporary measure during the transition period</div>
                   
                     <div class="option" data-value="legacy DeFi (Morpho vaults, Aave pools, SparkLend) wrapped as Halo Units under Core Council governance" onclick="selectAnswer('contracts', 2, 'legacy DeFi (Morpho vaults, Aave pools, SparkLend) wrapped as Halo Units under Core Council governance', 'legacy DeFi (Morpho vaults, Aave pools, SparkLend) wrapped as Halo Units under Core Council governance')">legacy DeFi (Morpho vaults, Aave pools, SparkLend) wrapped as Halo Units under Core Council governance</div>
                   
                     <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('contracts', 2, 'An external integration point for third parties', 'legacy DeFi (Morpho vaults, Aave pools, SparkLend) wrapped as Halo Units under Core Council governance')">An external integration point for third parties</div>
-                  
-                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('contracts', 2, 'A deprecated feature from the old system', 'legacy DeFi (Morpho vaults, Aave pools, SparkLend) wrapped as Halo Units under Core Council governance')">A deprecated feature from the old system</div>
                   
                 
               </div>
@@ -2835,15 +3683,15 @@ Position Capital = (Matched Portion × Risk Weight) + (Unmatched Portion × FRTB
               <div class="options">
                 
                   
-                    <div class="option" data-value="settlement" onclick="selectAnswer('contracts', 6, 'settlement', 'feeds')">settlement</div>
-                  
                     <div class="option" data-value="feeds" onclick="selectAnswer('contracts', 6, 'feeds', 'feeds')">feeds</div>
                   
                     <div class="option" data-value="protocol" onclick="selectAnswer('contracts', 6, 'protocol', 'feeds')">protocol</div>
                   
+                    <div class="option" data-value="liquidity" onclick="selectAnswer('contracts', 6, 'liquidity', 'feeds')">liquidity</div>
+                  
                     <div class="option" data-value="governance" onclick="selectAnswer('contracts', 6, 'governance', 'feeds')">governance</div>
                   
-                    <div class="option" data-value="liquidity" onclick="selectAnswer('contracts', 6, 'liquidity', 'feeds')">liquidity</div>
+                    <div class="option" data-value="settlement" onclick="selectAnswer('contracts', 6, 'settlement', 'feeds')">settlement</div>
                   
                 
               </div>
@@ -2862,9 +3710,9 @@ Position Capital = (Matched Portion × Risk Weight) + (Unmatched Portion × FRTB
                   
                     <div class="option" data-value="protocol" onclick="selectAnswer('contracts', 7, 'protocol', 'same')">protocol</div>
                   
-                    <div class="option" data-value="settlement" onclick="selectAnswer('contracts', 7, 'settlement', 'same')">settlement</div>
-                  
                     <div class="option" data-value="governance" onclick="selectAnswer('contracts', 7, 'governance', 'same')">governance</div>
+                  
+                    <div class="option" data-value="settlement" onclick="selectAnswer('contracts', 7, 'settlement', 'same')">settlement</div>
                   
                 
               </div>
@@ -2879,9 +3727,9 @@ Position Capital = (Matched Portion × Risk Weight) + (Unmatched Portion × FRTB
                   
                     <div class="option" data-value="Legacy Migration Protocol" onclick="selectAnswer('contracts', 8, 'Legacy Migration Protocol', 'Laniakea Upgrade - Architecture Overview')">Legacy Migration Protocol</div>
                   
-                    <div class="option" data-value="Manual Override System" onclick="selectAnswer('contracts', 8, 'Manual Override System', 'Laniakea Upgrade - Architecture Overview')">Manual Override System</div>
-                  
                     <div class="option" data-value="External Audit Framework" onclick="selectAnswer('contracts', 8, 'External Audit Framework', 'Laniakea Upgrade - Architecture Overview')">External Audit Framework</div>
+                  
+                    <div class="option" data-value="Manual Override System" onclick="selectAnswer('contracts', 8, 'Manual Override System', 'Laniakea Upgrade - Architecture Overview')">Manual Override System</div>
                   
                     <div class="option" data-value="Laniakea Upgrade - Architecture Overview" onclick="selectAnswer('contracts', 8, 'Laniakea Upgrade - Architecture Overview', 'Laniakea Upgrade - Architecture Overview')">Laniakea Upgrade - Architecture Overview</div>
                   
@@ -2896,11 +3744,11 @@ Position Capital = (Matched Portion × Risk Weight) + (Unmatched Portion × FRTB
               <div class="options">
                 
                   
-                    <div class="option" data-value="To replace the existing governance structure entirely" onclick="selectAnswer('contracts', 9, 'To replace the existing governance structure entirely', 'To define and implement smart contracts mechanisms for the Sky ecosystem')">To replace the existing governance structure entirely</div>
-                  
                     <div class="option" data-value="To provide backward compatibility with Maker" onclick="selectAnswer('contracts', 9, 'To provide backward compatibility with Maker', 'To define and implement smart contracts mechanisms for the Sky ecosystem')">To provide backward compatibility with Maker</div>
                   
                     <div class="option" data-value="To enable manual intervention in all operations" onclick="selectAnswer('contracts', 9, 'To enable manual intervention in all operations', 'To define and implement smart contracts mechanisms for the Sky ecosystem')">To enable manual intervention in all operations</div>
+                  
+                    <div class="option" data-value="To replace the existing governance structure entirely" onclick="selectAnswer('contracts', 9, 'To replace the existing governance structure entirely', 'To define and implement smart contracts mechanisms for the Sky ecosystem')">To replace the existing governance structure entirely</div>
                   
                     <div class="option" data-value="To define and implement smart contracts mechanisms for the Sky ecosystem" onclick="selectAnswer('contracts', 9, 'To define and implement smart contracts mechanisms for the Sky ecosystem', 'To define and implement smart contracts mechanisms for the Sky ecosystem')">To define and implement smart contracts mechanisms for the Sky ecosystem</div>
                   
@@ -2923,7 +3771,7 @@ Position Capital = (Matched Portion × Risk Weight) + (Unmatched Portion × FRTB
     
       <div class="module" id="module-governance">
         <div class="module-header">
-          <h2>Module 5: Governance & Operations</h2>
+          <h2>Module 6: Governance & Operations</h2>
           <p>10 quiz questions • Estimated 15-20 min</p>
         </div>
         
@@ -3429,13 +4277,13 @@ SLL Deployed Chains: Ethereum, Base, Arbitrum, Unichain, Optimism, Avalanche
               <div class="options">
                 
                   
-                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('governance', 0, 'A deprecated feature from the old system', '** Speculative / architectural concept')">A deprecated feature from the old system</div>
+                    <div class="option" data-value="** Speculative / architectural concept" onclick="selectAnswer('governance', 0, '** Speculative / architectural concept', '** Speculative / architectural concept')">** Speculative / architectural concept</div>
                   
                     <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('governance', 0, 'A temporary measure during the transition period', '** Speculative / architectural concept')">A temporary measure during the transition period</div>
                   
-                    <div class="option" data-value="** Speculative / architectural concept" onclick="selectAnswer('governance', 0, '** Speculative / architectural concept', '** Speculative / architectural concept')">** Speculative / architectural concept</div>
-                  
                     <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('governance', 0, 'An external integration point for third parties', '** Speculative / architectural concept')">An external integration point for third parties</div>
+                  
+                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('governance', 0, 'A deprecated feature from the old system', '** Speculative / architectural concept')">A deprecated feature from the old system</div>
                   
                 
               </div>
@@ -3448,13 +4296,13 @@ SLL Deployed Chains: Ethereum, Base, Arbitrum, Unichain, Optimism, Avalanche
               <div class="options">
                 
                   
+                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('governance', 1, 'A deprecated feature from the old system', 'an embodiment that interacts with the real world to generate value, achieve its purpose, and survive.')">A deprecated feature from the old system</div>
+                  
                     <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('governance', 1, 'An external integration point for third parties', 'an embodiment that interacts with the real world to generate value, achieve its purpose, and survive.')">An external integration point for third parties</div>
                   
                     <div class="option" data-value="an embodiment that interacts with the real world to generate value, achieve its purpose, and survive." onclick="selectAnswer('governance', 1, 'an embodiment that interacts with the real world to generate value, achieve its purpose, and survive.', 'an embodiment that interacts with the real world to generate value, achieve its purpose, and survive.')">an embodiment that interacts with the real world to generate value, achieve its purpose, and survive.</div>
                   
                     <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('governance', 1, 'A temporary measure during the transition period', 'an embodiment that interacts with the real world to generate value, achieve its purpose, and survive.')">A temporary measure during the transition period</div>
-                  
-                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('governance', 1, 'A deprecated feature from the old system', 'an embodiment that interacts with the real world to generate value, achieve its purpose, and survive.')">A deprecated feature from the old system</div>
                   
                 
               </div>
@@ -3467,13 +4315,13 @@ SLL Deployed Chains: Ethereum, Base, Arbitrum, Unichain, Optimism, Avalanche
               <div class="options">
                 
                   
+                    <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('governance', 2, 'An external integration point for third parties', 'Where I Live (Embodied Agent)')">An external integration point for third parties</div>
+                  
                     <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('governance', 2, 'A deprecated feature from the old system', 'Where I Live (Embodied Agent)')">A deprecated feature from the old system</div>
                   
                     <div class="option" data-value="Where I Live (Embodied Agent)" onclick="selectAnswer('governance', 2, 'Where I Live (Embodied Agent)', 'Where I Live (Embodied Agent)')">Where I Live (Embodied Agent)</div>
                   
                     <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('governance', 2, 'A temporary measure during the transition period', 'Where I Live (Embodied Agent)')">A temporary measure during the transition period</div>
-                  
-                    <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('governance', 2, 'An external integration point for third parties', 'Where I Live (Embodied Agent)')">An external integration point for third parties</div>
                   
                 
               </div>
@@ -3522,15 +4370,15 @@ SLL Deployed Chains: Ethereum, Base, Arbitrum, Unichain, Optimism, Avalanche
               <div class="options">
                 
                   
-                    <div class="option" data-value="protocol" onclick="selectAnswer('governance', 6, 'protocol', 'achieve')">protocol</div>
-                  
-                    <div class="option" data-value="governance" onclick="selectAnswer('governance', 6, 'governance', 'achieve')">governance</div>
-                  
                     <div class="option" data-value="liquidity" onclick="selectAnswer('governance', 6, 'liquidity', 'achieve')">liquidity</div>
                   
                     <div class="option" data-value="settlement" onclick="selectAnswer('governance', 6, 'settlement', 'achieve')">settlement</div>
                   
+                    <div class="option" data-value="governance" onclick="selectAnswer('governance', 6, 'governance', 'achieve')">governance</div>
+                  
                     <div class="option" data-value="achieve" onclick="selectAnswer('governance', 6, 'achieve', 'achieve')">achieve</div>
+                  
+                    <div class="option" data-value="protocol" onclick="selectAnswer('governance', 6, 'protocol', 'achieve')">protocol</div>
                   
                 
               </div>
@@ -3543,15 +4391,15 @@ SLL Deployed Chains: Ethereum, Base, Arbitrum, Unichain, Optimism, Avalanche
               <div class="options">
                 
                   
+                    <div class="option" data-value="governance" onclick="selectAnswer('governance', 7, 'governance', 'experience')">governance</div>
+                  
                     <div class="option" data-value="protocol" onclick="selectAnswer('governance', 7, 'protocol', 'experience')">protocol</div>
                   
-                    <div class="option" data-value="experience" onclick="selectAnswer('governance', 7, 'experience', 'experience')">experience</div>
-                  
-                    <div class="option" data-value="governance" onclick="selectAnswer('governance', 7, 'governance', 'experience')">governance</div>
+                    <div class="option" data-value="settlement" onclick="selectAnswer('governance', 7, 'settlement', 'experience')">settlement</div>
                   
                     <div class="option" data-value="liquidity" onclick="selectAnswer('governance', 7, 'liquidity', 'experience')">liquidity</div>
                   
-                    <div class="option" data-value="settlement" onclick="selectAnswer('governance', 7, 'settlement', 'experience')">settlement</div>
+                    <div class="option" data-value="experience" onclick="selectAnswer('governance', 7, 'experience', 'experience')">experience</div>
                   
                 
               </div>
@@ -3564,13 +4412,13 @@ SLL Deployed Chains: Ethereum, Base, Arbitrum, Unichain, Optimism, Avalanche
               <div class="options">
                 
                   
-                    <div class="option" data-value="Manual Override System" onclick="selectAnswer('governance', 8, 'Manual Override System', 'The Actuator\'s Perspective')">Manual Override System</div>
-                  
-                    <div class="option" data-value="Legacy Migration Protocol" onclick="selectAnswer('governance', 8, 'Legacy Migration Protocol', 'The Actuator\'s Perspective')">Legacy Migration Protocol</div>
+                    <div class="option" data-value="The Actuator&#39;s Perspective" onclick="selectAnswer('governance', 8, 'The Actuator\'s Perspective', 'The Actuator\'s Perspective')">The Actuator's Perspective</div>
                   
                     <div class="option" data-value="External Audit Framework" onclick="selectAnswer('governance', 8, 'External Audit Framework', 'The Actuator\'s Perspective')">External Audit Framework</div>
                   
-                    <div class="option" data-value="The Actuator&#39;s Perspective" onclick="selectAnswer('governance', 8, 'The Actuator\'s Perspective', 'The Actuator\'s Perspective')">The Actuator's Perspective</div>
+                    <div class="option" data-value="Legacy Migration Protocol" onclick="selectAnswer('governance', 8, 'Legacy Migration Protocol', 'The Actuator\'s Perspective')">Legacy Migration Protocol</div>
+                  
+                    <div class="option" data-value="Manual Override System" onclick="selectAnswer('governance', 8, 'Manual Override System', 'The Actuator\'s Perspective')">Manual Override System</div>
                   
                 
               </div>
@@ -3583,13 +4431,13 @@ SLL Deployed Chains: Ethereum, Base, Arbitrum, Unichain, Optimism, Avalanche
               <div class="options">
                 
                   
-                    <div class="option" data-value="To define and implement governance &amp; operations mechanisms for the Sky ecosystem" onclick="selectAnswer('governance', 9, 'To define and implement governance & operations mechanisms for the Sky ecosystem', 'To define and implement governance & operations mechanisms for the Sky ecosystem')">To define and implement governance & operations mechanisms for the Sky ecosystem</div>
-                  
-                    <div class="option" data-value="To replace the existing governance structure entirely" onclick="selectAnswer('governance', 9, 'To replace the existing governance structure entirely', 'To define and implement governance & operations mechanisms for the Sky ecosystem')">To replace the existing governance structure entirely</div>
-                  
                     <div class="option" data-value="To provide backward compatibility with Maker" onclick="selectAnswer('governance', 9, 'To provide backward compatibility with Maker', 'To define and implement governance & operations mechanisms for the Sky ecosystem')">To provide backward compatibility with Maker</div>
                   
                     <div class="option" data-value="To enable manual intervention in all operations" onclick="selectAnswer('governance', 9, 'To enable manual intervention in all operations', 'To define and implement governance & operations mechanisms for the Sky ecosystem')">To enable manual intervention in all operations</div>
+                  
+                    <div class="option" data-value="To replace the existing governance structure entirely" onclick="selectAnswer('governance', 9, 'To replace the existing governance structure entirely', 'To define and implement governance & operations mechanisms for the Sky ecosystem')">To replace the existing governance structure entirely</div>
+                  
+                    <div class="option" data-value="To define and implement governance &amp; operations mechanisms for the Sky ecosystem" onclick="selectAnswer('governance', 9, 'To define and implement governance & operations mechanisms for the Sky ecosystem', 'To define and implement governance & operations mechanisms for the Sky ecosystem')">To define and implement governance & operations mechanisms for the Sky ecosystem</div>
                   
                 
               </div>
@@ -3610,7 +4458,7 @@ SLL Deployed Chains: Ethereum, Base, Arbitrum, Unichain, Optimism, Avalanche
     
       <div class="module" id="module-legal">
         <div class="module-header">
-          <h2>Module 6: Legal & Trading</h2>
+          <h2>Module 7: Legal & Trading</h2>
           <p>10 quiz questions • Estimated 15-20 min</p>
         </div>
         
@@ -4072,13 +4920,13 @@ SLL Deployed Chains: Ethereum, Base, Arbitrum, Unichain, Optimism, Avalanche
               <div class="options">
                 
                   
-                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('legal', 0, 'A deprecated feature from the old system', 'only addresses with valid attestations from those networks can receive the token.')">A deprecated feature from the old system</div>
-                  
                     <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('legal', 0, 'A temporary measure during the transition period', 'only addresses with valid attestations from those networks can receive the token.')">A temporary measure during the transition period</div>
                   
-                    <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('legal', 0, 'An external integration point for third parties', 'only addresses with valid attestations from those networks can receive the token.')">An external integration point for third parties</div>
-                  
                     <div class="option" data-value="only addresses with valid attestations from those networks can receive the token." onclick="selectAnswer('legal', 0, 'only addresses with valid attestations from those networks can receive the token.', 'only addresses with valid attestations from those networks can receive the token.')">only addresses with valid attestations from those networks can receive the token.</div>
+                  
+                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('legal', 0, 'A deprecated feature from the old system', 'only addresses with valid attestations from those networks can receive the token.')">A deprecated feature from the old system</div>
+                  
+                    <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('legal', 0, 'An external integration point for third parties', 'only addresses with valid attestations from those networks can receive the token.')">An external integration point for third parties</div>
                   
                 
               </div>
@@ -4091,13 +4939,13 @@ SLL Deployed Chains: Ethereum, Base, Arbitrum, Unichain, Optimism, Avalanche
               <div class="options">
                 
                   
-                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('legal', 1, 'A deprecated feature from the old system', 'identity business only, no capital deployment')">A deprecated feature from the old system</div>
-                  
                     <div class="option" data-value="identity business only, no capital deployment" onclick="selectAnswer('legal', 1, 'identity business only, no capital deployment', 'identity business only, no capital deployment')">identity business only, no capital deployment</div>
+                  
+                    <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('legal', 1, 'An external integration point for third parties', 'identity business only, no capital deployment')">An external integration point for third parties</div>
                   
                     <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('legal', 1, 'A temporary measure during the transition period', 'identity business only, no capital deployment')">A temporary measure during the transition period</div>
                   
-                    <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('legal', 1, 'An external integration point for third parties', 'identity business only, no capital deployment')">An external integration point for third parties</div>
+                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('legal', 1, 'A deprecated feature from the old system', 'identity business only, no capital deployment')">A deprecated feature from the old system</div>
                   
                 
               </div>
@@ -4112,11 +4960,11 @@ SLL Deployed Chains: Ethereum, Base, Arbitrum, Unichain, Optimism, Avalanche
                   
                     <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('legal', 2, 'A temporary measure during the transition period', 'from DeFi positions to private credit to tokenized real-world assets. For many of these products:')">A temporary measure during the transition period</div>
                   
-                    <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('legal', 2, 'An external integration point for third parties', 'from DeFi positions to private credit to tokenized real-world assets. For many of these products:')">An external integration point for third parties</div>
-                  
                     <div class="option" data-value="from DeFi positions to private credit to tokenized real-world assets. For many of these products:" onclick="selectAnswer('legal', 2, 'from DeFi positions to private credit to tokenized real-world assets. For many of these products:', 'from DeFi positions to private credit to tokenized real-world assets. For many of these products:')">from DeFi positions to private credit to tokenized real-world assets. For many of these products:</div>
                   
                     <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('legal', 2, 'A deprecated feature from the old system', 'from DeFi positions to private credit to tokenized real-world assets. For many of these products:')">A deprecated feature from the old system</div>
+                  
+                    <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('legal', 2, 'An external integration point for third parties', 'from DeFi positions to private credit to tokenized real-world assets. For many of these products:')">An external integration point for third parties</div>
                   
                 
               </div>
@@ -4165,15 +5013,15 @@ SLL Deployed Chains: Ethereum, Base, Arbitrum, Unichain, Optimism, Avalanche
               <div class="options">
                 
                   
-                    <div class="option" data-value="liquidity" onclick="selectAnswer('legal', 6, 'liquidity', 'Networks')">liquidity</div>
+                    <div class="option" data-value="governance" onclick="selectAnswer('legal', 6, 'governance', 'Networks')">governance</div>
                   
                     <div class="option" data-value="Networks" onclick="selectAnswer('legal', 6, 'Networks', 'Networks')">Networks</div>
                   
                     <div class="option" data-value="settlement" onclick="selectAnswer('legal', 6, 'settlement', 'Networks')">settlement</div>
                   
-                    <div class="option" data-value="governance" onclick="selectAnswer('legal', 6, 'governance', 'Networks')">governance</div>
-                  
                     <div class="option" data-value="protocol" onclick="selectAnswer('legal', 6, 'protocol', 'Networks')">protocol</div>
+                  
+                    <div class="option" data-value="liquidity" onclick="selectAnswer('legal', 6, 'liquidity', 'Networks')">liquidity</div>
                   
                 
               </div>
@@ -4186,15 +5034,15 @@ SLL Deployed Chains: Ethereum, Base, Arbitrum, Unichain, Optimism, Avalanche
               <div class="options">
                 
                   
-                    <div class="option" data-value="simple" onclick="selectAnswer('legal', 7, 'simple', 'simple')">simple</div>
-                  
                     <div class="option" data-value="protocol" onclick="selectAnswer('legal', 7, 'protocol', 'simple')">protocol</div>
-                  
-                    <div class="option" data-value="liquidity" onclick="selectAnswer('legal', 7, 'liquidity', 'simple')">liquidity</div>
                   
                     <div class="option" data-value="governance" onclick="selectAnswer('legal', 7, 'governance', 'simple')">governance</div>
                   
+                    <div class="option" data-value="simple" onclick="selectAnswer('legal', 7, 'simple', 'simple')">simple</div>
+                  
                     <div class="option" data-value="settlement" onclick="selectAnswer('legal', 7, 'settlement', 'simple')">settlement</div>
+                  
+                    <div class="option" data-value="liquidity" onclick="selectAnswer('legal', 7, 'liquidity', 'simple')">liquidity</div>
                   
                 
               </div>
@@ -4207,13 +5055,13 @@ SLL Deployed Chains: Ethereum, Base, Arbitrum, Unichain, Optimism, Avalanche
               <div class="options">
                 
                   
-                    <div class="option" data-value="liquidity" onclick="selectAnswer('legal', 8, 'liquidity', 'business')">liquidity</div>
+                    <div class="option" data-value="governance" onclick="selectAnswer('legal', 8, 'governance', 'business')">governance</div>
                   
                     <div class="option" data-value="business" onclick="selectAnswer('legal', 8, 'business', 'business')">business</div>
                   
-                    <div class="option" data-value="governance" onclick="selectAnswer('legal', 8, 'governance', 'business')">governance</div>
-                  
                     <div class="option" data-value="protocol" onclick="selectAnswer('legal', 8, 'protocol', 'business')">protocol</div>
+                  
+                    <div class="option" data-value="liquidity" onclick="selectAnswer('legal', 8, 'liquidity', 'business')">liquidity</div>
                   
                     <div class="option" data-value="settlement" onclick="selectAnswer('legal', 8, 'settlement', 'business')">settlement</div>
                   
@@ -4228,13 +5076,13 @@ SLL Deployed Chains: Ethereum, Base, Arbitrum, Unichain, Optimism, Avalanche
               <div class="options">
                 
                   
-                    <div class="option" data-value="External Audit Framework" onclick="selectAnswer('legal', 9, 'External Audit Framework', 'Identity Network')">External Audit Framework</div>
-                  
                     <div class="option" data-value="Identity Network" onclick="selectAnswer('legal', 9, 'Identity Network', 'Identity Network')">Identity Network</div>
                   
-                    <div class="option" data-value="Manual Override System" onclick="selectAnswer('legal', 9, 'Manual Override System', 'Identity Network')">Manual Override System</div>
+                    <div class="option" data-value="External Audit Framework" onclick="selectAnswer('legal', 9, 'External Audit Framework', 'Identity Network')">External Audit Framework</div>
                   
                     <div class="option" data-value="Legacy Migration Protocol" onclick="selectAnswer('legal', 9, 'Legacy Migration Protocol', 'Identity Network')">Legacy Migration Protocol</div>
+                  
+                    <div class="option" data-value="Manual Override System" onclick="selectAnswer('legal', 9, 'Manual Override System', 'Identity Network')">Manual Override System</div>
                   
                 
               </div>
@@ -4255,7 +5103,7 @@ SLL Deployed Chains: Ethereum, Base, Arbitrum, Unichain, Optimism, Avalanche
     
       <div class="module" id="module-forecast">
         <div class="module-header">
-          <h2>Module 7: Forecast Model</h2>
+          <h2>Module 8: Forecast Model</h2>
           <p>10 quiz questions • Estimated 15-20 min</p>
         </div>
         
@@ -4717,13 +5565,13 @@ def aggregate_active_agents(
               <div class="options">
                 
                   
-                    <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('forecast', 1, 'An external integration point for third parties', '** `1/12` (monthly portion of annual rate)')">An external integration point for third parties</div>
-                  
-                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('forecast', 1, 'A deprecated feature from the old system', '** `1/12` (monthly portion of annual rate)')">A deprecated feature from the old system</div>
+                    <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('forecast', 1, 'A temporary measure during the transition period', '** `1/12` (monthly portion of annual rate)')">A temporary measure during the transition period</div>
                   
                     <div class="option" data-value="** `1/12` (monthly portion of annual rate)" onclick="selectAnswer('forecast', 1, '** `1/12` (monthly portion of annual rate)', '** `1/12` (monthly portion of annual rate)')">** `1/12` (monthly portion of annual rate)</div>
                   
-                    <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('forecast', 1, 'A temporary measure during the transition period', '** `1/12` (monthly portion of annual rate)')">A temporary measure during the transition period</div>
+                    <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('forecast', 1, 'An external integration point for third parties', '** `1/12` (monthly portion of annual rate)')">An external integration point for third parties</div>
+                  
+                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('forecast', 1, 'A deprecated feature from the old system', '** `1/12` (monthly portion of annual rate)')">A deprecated feature from the old system</div>
                   
                 
               </div>
@@ -4736,11 +5584,11 @@ def aggregate_active_agents(
               <div class="options">
                 
                   
-                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('forecast', 2, 'A deprecated feature from the old system', '** Binary — active if `current_month >= launch_month`')">A deprecated feature from the old system</div>
-                  
                     <div class="option" data-value="** Binary — active if `current_month &gt;= launch_month`" onclick="selectAnswer('forecast', 2, '** Binary — active if `current_month >= launch_month`', '** Binary — active if `current_month >= launch_month`')">** Binary — active if `current_month >= launch_month`</div>
                   
                     <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('forecast', 2, 'An external integration point for third parties', '** Binary — active if `current_month >= launch_month`')">An external integration point for third parties</div>
+                  
+                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('forecast', 2, 'A deprecated feature from the old system', '** Binary — active if `current_month >= launch_month`')">A deprecated feature from the old system</div>
                   
                     <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('forecast', 2, 'A temporary measure during the transition period', '** Binary — active if `current_month >= launch_month`')">A temporary measure during the transition period</div>
                   
@@ -4791,15 +5639,15 @@ def aggregate_active_agents(
               <div class="options">
                 
                   
-                    <div class="option" data-value="liquidity" onclick="selectAnswer('forecast', 6, 'liquidity', 'portion')">liquidity</div>
-                  
-                    <div class="option" data-value="protocol" onclick="selectAnswer('forecast', 6, 'protocol', 'portion')">protocol</div>
+                    <div class="option" data-value="governance" onclick="selectAnswer('forecast', 6, 'governance', 'portion')">governance</div>
                   
                     <div class="option" data-value="settlement" onclick="selectAnswer('forecast', 6, 'settlement', 'portion')">settlement</div>
                   
-                    <div class="option" data-value="portion" onclick="selectAnswer('forecast', 6, 'portion', 'portion')">portion</div>
+                    <div class="option" data-value="protocol" onclick="selectAnswer('forecast', 6, 'protocol', 'portion')">protocol</div>
                   
-                    <div class="option" data-value="governance" onclick="selectAnswer('forecast', 6, 'governance', 'portion')">governance</div>
+                    <div class="option" data-value="liquidity" onclick="selectAnswer('forecast', 6, 'liquidity', 'portion')">liquidity</div>
+                  
+                    <div class="option" data-value="portion" onclick="selectAnswer('forecast', 6, 'portion', 'portion')">portion</div>
                   
                 
               </div>
@@ -4812,15 +5660,15 @@ def aggregate_active_agents(
               <div class="options">
                 
                   
-                    <div class="option" data-value="protocol" onclick="selectAnswer('forecast', 7, 'protocol', 'active')">protocol</div>
-                  
                     <div class="option" data-value="governance" onclick="selectAnswer('forecast', 7, 'governance', 'active')">governance</div>
-                  
-                    <div class="option" data-value="settlement" onclick="selectAnswer('forecast', 7, 'settlement', 'active')">settlement</div>
                   
                     <div class="option" data-value="liquidity" onclick="selectAnswer('forecast', 7, 'liquidity', 'active')">liquidity</div>
                   
                     <div class="option" data-value="active" onclick="selectAnswer('forecast', 7, 'active', 'active')">active</div>
+                  
+                    <div class="option" data-value="protocol" onclick="selectAnswer('forecast', 7, 'protocol', 'active')">protocol</div>
+                  
+                    <div class="option" data-value="settlement" onclick="selectAnswer('forecast', 7, 'settlement', 'active')">settlement</div>
                   
                 
               </div>
@@ -4833,13 +5681,13 @@ def aggregate_active_agents(
               <div class="options">
                 
                   
-                    <div class="option" data-value="settlement" onclick="selectAnswer('forecast', 8, 'settlement', 'still')">settlement</div>
+                    <div class="option" data-value="protocol" onclick="selectAnswer('forecast', 8, 'protocol', 'still')">protocol</div>
                   
                     <div class="option" data-value="governance" onclick="selectAnswer('forecast', 8, 'governance', 'still')">governance</div>
                   
                     <div class="option" data-value="liquidity" onclick="selectAnswer('forecast', 8, 'liquidity', 'still')">liquidity</div>
                   
-                    <div class="option" data-value="protocol" onclick="selectAnswer('forecast', 8, 'protocol', 'still')">protocol</div>
+                    <div class="option" data-value="settlement" onclick="selectAnswer('forecast', 8, 'settlement', 'still')">settlement</div>
                   
                     <div class="option" data-value="still" onclick="selectAnswer('forecast', 8, 'still', 'still')">still</div>
                   
@@ -4886,7 +5734,7 @@ def aggregate_active_agents(
   </div>
   
   <script>
-    const moduleQuestions = [{"id":"intro","count":10},{"id":"whitepaper","count":10},{"id":"risk","count":10},{"id":"contracts","count":10},{"id":"governance","count":10},{"id":"legal","count":10},{"id":"forecast","count":10}];
+    const moduleQuestions = [{"id":"intro","count":10},{"id":"nomenclature","count":10},{"id":"whitepaper","count":10},{"id":"risk","count":10},{"id":"contracts","count":10},{"id":"governance","count":10},{"id":"legal","count":10},{"id":"forecast","count":10}];
     const state = {
       answers: {},
       correct: {},
