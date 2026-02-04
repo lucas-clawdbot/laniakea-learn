@@ -1,0 +1,2201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laniakea Mastery Course</title>
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-hover: #1a1a25;
+            --accent: #6366f1;
+            --accent-dim: #4f46e5;
+            --text: #e2e8f0;
+            --text-dim: #94a3b8;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --border: #2d2d3a;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--accent), #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        header p { color: var(--text-dim); margin-top: 0.5rem; }
+        
+        .progress-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .progress-bar {
+            background: var(--bg);
+            border-radius: 10px;
+            height: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, var(--accent), #a855f7);
+            height: 100%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+        
+        .stat { display: flex; align-items: center; gap: 0.5rem; }
+        .stat-value { color: var(--accent); font-weight: 600; }
+        
+        .module { display: none; }
+        .module.active { display: block; animation: fadeIn 0.4s ease; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card h2 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .card h3 {
+            color: var(--text);
+            margin: 1.5rem 0 0.75rem;
+            font-size: 1.15rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+        
+        .card h4 {
+            color: var(--accent);
+            margin: 1.25rem 0 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .card p { color: var(--text-dim); margin-bottom: 1rem; }
+        .card ul, .card ol { color: var(--text-dim); margin-left: 1.5rem; margin-bottom: 1rem; }
+        .card li { margin-bottom: 0.5rem; }
+        
+        .highlight {
+            background: var(--bg-hover);
+            border-left: 3px solid var(--accent);
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .highlight strong { color: var(--accent); }
+        
+        .highlight.warning {
+            border-left-color: var(--warning);
+        }
+        .highlight.warning strong { color: var(--warning); }
+        
+        .highlight.success {
+            border-left-color: var(--success);
+        }
+        .highlight.success strong { color: var(--success); }
+        
+        .diagram {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+            font-size: 0.75rem;
+            overflow-x: auto;
+            white-space: pre;
+            line-height: 1.4;
+        }
+        
+        .quiz {
+            background: var(--bg-hover);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .quiz-label {
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .quiz-question {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text);
+            font-size: 1.05rem;
+        }
+        
+        .quiz-options { display: flex; flex-direction: column; gap: 0.5rem; }
+        
+        .quiz-option {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .quiz-option:hover:not(.disabled) {
+            border-color: var(--accent);
+            background: var(--bg);
+        }
+        
+        .quiz-option.correct {
+            border-color: var(--success);
+            background: rgba(34, 197, 94, 0.1);
+        }
+        
+        .quiz-option.incorrect {
+            border-color: var(--error);
+            background: rgba(239, 68, 68, 0.1);
+        }
+        
+        .quiz-option.disabled { pointer-events: none; opacity: 0.8; }
+        
+        .option-marker {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .quiz-option.correct .option-marker {
+            border-color: var(--success);
+            background: var(--success);
+            color: white;
+        }
+        
+        .quiz-option.incorrect .option-marker {
+            border-color: var(--error);
+            background: var(--error);
+            color: white;
+        }
+        
+        .quiz-feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            display: none;
+        }
+        
+        .quiz-feedback.show { display: block; }
+        
+        .quiz-feedback.correct {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+        
+        .quiz-feedback.incorrect {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--error);
+            color: var(--error);
+        }
+        
+        .quiz-explanation {
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid currentColor;
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+        
+        button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        
+        button:hover:not(:disabled) {
+            background: var(--accent-dim);
+            transform: translateY(-1px);
+        }
+        
+        button:disabled {
+            background: var(--border);
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        button.secondary {
+            background: var(--bg-hover);
+            border: 1px solid var(--border);
+        }
+        
+        button.secondary:hover:not(:disabled) {
+            background: var(--bg-card);
+            border-color: var(--accent);
+        }
+        
+        .toc {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+        
+        .toc-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .toc-section-title {
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .toc-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+        }
+        
+        .toc-item:hover {
+            border-color: var(--accent);
+            transform: translateX(4px);
+        }
+        
+        .toc-item.completed {
+            border-color: var(--success);
+        }
+        
+        .toc-item.current {
+            border-color: var(--accent);
+            background: var(--bg-hover);
+        }
+        
+        .toc-status {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+        
+        .toc-item.completed .toc-status {
+            border-color: var(--success);
+            background: var(--success);
+            color: white;
+        }
+        
+        .toc-item.current .toc-status {
+            border-color: var(--accent);
+            background: var(--accent);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        th {
+            color: var(--accent);
+            font-weight: 600;
+            background: var(--bg);
+        }
+        
+        td { color: var(--text-dim); }
+        
+        .formula {
+            background: var(--bg);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.95rem;
+            color: var(--accent);
+            text-align: center;
+        }
+        
+        .term {
+            color: var(--accent);
+            font-weight: 600;
+            cursor: help;
+            border-bottom: 1px dashed var(--accent);
+        }
+        
+        .layer-box {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin: 0.1rem;
+        }
+        
+        .layer-synome { background: rgba(99, 102, 241, 0.2); color: #818cf8; }
+        .layer-agent { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+        .layer-teleonome { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
+        .layer-beacon { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+        .layer-risk { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+        .layer-capital { background: rgba(20, 184, 166, 0.2); color: #2dd4bf; }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .comparison-item {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .comparison-item h5 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .emoji { font-size: 1.25rem; }
+        
+        .key-point {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+        }
+        
+        .key-point-title {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .mini-quiz {
+            background: var(--bg);
+            border: 1px dashed var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .mini-quiz-q {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+        }
+        
+        .reveal-btn {
+            background: var(--bg-hover);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+        
+        .reveal-btn:hover {
+            border-color: var(--accent);
+            color: var(--text);
+        }
+        
+        .reveal-answer {
+            display: none;
+            margin-top: 0.75rem;
+            padding: 0.75rem;
+            background: var(--bg-hover);
+            border-radius: 6px;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+        
+        .reveal-answer.show { display: block; }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 3rem;
+        }
+        
+        footer a { color: var(--accent); }
+        
+        .section-intro {
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-hover));
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .section-intro h3 {
+            border: none;
+            margin: 0 0 0.5rem 0;
+            color: var(--accent);
+        }
+        
+        .mastery-check {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(20, 184, 166, 0.1));
+            border: 1px solid var(--success);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .mastery-check h4 {
+            color: var(--success);
+            margin: 0 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌌 Laniakea Mastery Course</h1>
+            <p>From novice to expert — master Sky's infrastructure upgrade</p>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-header">
+                <span id="progressText">Module 0 of 20</span>
+                <span id="progressPercent">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+            <div class="stats">
+                <div class="stat">🎯 Quizzes: <span class="stat-value" id="quizScore">0/0</span></div>
+                <div class="stat">✅ Modules: <span class="stat-value" id="moduleCount">0/20</span></div>
+            </div>
+        </div>
+
+        <!-- ==================== MODULE 0: HOME ==================== -->
+        <div class="module active" id="module-0">
+            <div class="card">
+                <h2><span class="emoji">🎓</span> Welcome to Laniakea Mastery</h2>
+                <p>This comprehensive course will take you from zero to mastery of Sky's Laniakea infrastructure. By the end, you'll understand every component, how they interact, and be able to reason about the system like an expert.</p>
+                
+                <div class="highlight">
+                    <strong>Course Structure:</strong> 20 modules organized into 5 sections, with quizzes throughout and mastery checks at section ends.
+                </div>
+
+                <div class="toc-section">
+                    <div class="toc-section-title">Section 1: Foundations</div>
+                    <div class="toc">
+                        <div class="toc-item" onclick="goToModule(1)"><div class="toc-status">1</div>The Problem Laniakea Solves</div>
+                        <div class="toc-item" onclick="goToModule(2)"><div class="toc-status">2</div>The Syno-Teleonomic Paradigm</div>
+                        <div class="toc-item" onclick="goToModule(3)"><div class="toc-status">3</div>The Synome (Public Rules)</div>
+                        <div class="toc-item" onclick="goToModule(4)"><div class="toc-status">4</div>Section 1 Mastery Check</div>
+                    </div>
+                </div>
+
+                <div class="toc-section">
+                    <div class="toc-section-title">Section 2: Agents & AI</div>
+                    <div class="toc">
+                        <div class="toc-item" onclick="goToModule(5)"><div class="toc-status">5</div>Synomic Agents Overview</div>
+                        <div class="toc-item" onclick="goToModule(6)"><div class="toc-status">6</div>Primes Deep Dive</div>
+                        <div class="toc-item" onclick="goToModule(7)"><div class="toc-status">7</div>Halos Deep Dive</div>
+                        <div class="toc-item" onclick="goToModule(8)"><div class="toc-status">8</div>Teleonomes (Private AI)</div>
+                        <div class="toc-item" onclick="goToModule(9)"><div class="toc-status">9</div>Section 2 Mastery Check</div>
+                    </div>
+                </div>
+
+                <div class="toc-section">
+                    <div class="toc-section-title">Section 3: Beacons & Sentinels</div>
+                    <div class="toc">
+                        <div class="toc-item" onclick="goToModule(10)"><div class="toc-status">10</div>Beacon Framework</div>
+                        <div class="toc-item" onclick="goToModule(11)"><div class="toc-status">11</div>Sentinel Formations</div>
+                        <div class="toc-item" onclick="goToModule(12)"><div class="toc-status">12</div>Streaming Accords & Carry</div>
+                        <div class="toc-item" onclick="goToModule(13)"><div class="toc-status">13</div>Section 3 Mastery Check</div>
+                    </div>
+                </div>
+
+                <div class="toc-section">
+                    <div class="toc-section-title">Section 4: Infrastructure & Risk</div>
+                    <div class="toc">
+                        <div class="toc-item" onclick="goToModule(14)"><div class="toc-status">14</div>PAU Architecture & BEAMs</div>
+                        <div class="toc-item" onclick="goToModule(15)"><div class="toc-status">15</div>Risk Framework Fundamentals</div>
+                        <div class="toc-item" onclick="goToModule(16)"><div class="toc-status">16</div>Risk Capital & Loss Absorption</div>
+                        <div class="toc-item" onclick="goToModule(17)"><div class="toc-status">17</div>Section 4 Mastery Check</div>
+                    </div>
+                </div>
+
+                <div class="toc-section">
+                    <div class="toc-section-title">Section 5: Settlement & Operations</div>
+                    <div class="toc">
+                        <div class="toc-item" onclick="goToModule(18)"><div class="toc-status">18</div>LCTS & NFAT Tokens</div>
+                        <div class="toc-item" onclick="goToModule(19)"><div class="toc-status">19</div>Settlement Cycles</div>
+                        <div class="toc-item" onclick="goToModule(20)"><div class="toc-status">20</div>Final Mastery Exam</div>
+                    </div>
+                </div>
+
+                <div class="key-point">
+                    <div class="key-point-title">💡 How to Use This Course</div>
+                    <p style="margin-bottom: 0;">Work through modules in order — each builds on the previous. Answer all quizzes (they reinforce learning). Don't rush — understanding beats speed.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== MODULE 1: THE PROBLEM ==================== -->
+        <div class="module" id="module-1">
+            <div class="section-intro">
+                <h3>Section 1: Foundations</h3>
+                <p>Understanding why Laniakea exists and its core design principles</p>
+            </div>
+            
+            <div class="card">
+                <h2><span class="emoji">🤔</span> Module 1: The Problem Laniakea Solves</h2>
+                
+                <p>Before we dive into solutions, we need to deeply understand the problem. Laniakea isn't just "another DeFi upgrade" — it's a fundamental rethinking of how AI systems can safely manage institutional capital.</p>
+
+                <h3>The Scale</h3>
+                <p>Sky manages <strong>$9+ billion</strong> in stablecoin liabilities (USDS). This capital needs to be deployed into yield-generating opportunities to sustain the Sky Savings Rate (SSR) that sUSDS holders earn.</p>
+
+                <div class="highlight">
+                    <strong>The core business:</strong> Sky borrows at SSR (what it pays sUSDS holders) and lends at higher rates across DeFi, TradFi, and RWAs. The spread is profit.
+                </div>
+
+                <h3>The Manual Problem</h3>
+                <p>Currently, capital deployment requires:</p>
+                <ul>
+                    <li>Governance proposals (days to weeks)</li>
+                    <li>Executive votes (more days)</li>
+                    <li>Manual execution by trusted parties</li>
+                    <li>Slow reaction to market changes</li>
+                </ul>
+
+                <p>This worked at smaller scale. At $9B+, it becomes a bottleneck. Opportunities are missed. Reactions are slow. Coordination is expensive.</p>
+
+                <h3>The Automation Dilemma</h3>
+                <p>The obvious solution: automate with AI. But this creates a terrifying problem:</p>
+
+                <div class="diagram">
+┌─────────────────────────────────────────────────────────────┐
+│                  THE AUTOMATION DILEMMA                     │
+│                                                             │
+│   ┌─────────────────────┐     ┌─────────────────────┐      │
+│   │   WHAT YOU WANT     │     │   WHAT COULD HAPPEN │      │
+│   ├─────────────────────┤     ├─────────────────────┤      │
+│   │ • Fast reactions    │     │ • Rogue AI drains   │      │
+│   │ • 24/7 operation    │     │   the treasury      │      │
+│   │ • Optimal decisions │     │ • Bugs cause massive│      │
+│   │ • Adaptive strategy │     │   losses            │      │
+│   │ • Proprietary alpha │     │ • No accountability │      │
+│   └─────────────────────┘     └─────────────────────┘      │
+│                                                             │
+│        How do you get the benefits without the risks?       │
+└─────────────────────────────────────────────────────────────┘
+                </div>
+
+                <h3>Why This Is Hard</h3>
+
+                <h4>1. Speed vs. Oversight</h4>
+                <p>Markets move in milliseconds. Governance moves in days. If AI needs permission for every action, you lose the speed advantage. If it doesn't, you lose control.</p>
+
+                <h4>2. Intelligence vs. Transparency</h4>
+                <p>The best trading strategies are proprietary. If you require full transparency, no one shares their alpha. If you don't, you can't verify behavior.</p>
+
+                <h4>3. Autonomy vs. Accountability</h4>
+                <p>Autonomous systems can't be "held responsible" in traditional ways. Who do you sue when an AI makes a bad trade? How do you ensure there's someone to hold accountable?</p>
+
+                <div class="quiz" id="quiz-1-1">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Quiz 1.1</span>
+                    </div>
+                    <div class="quiz-question">What is the fundamental tension Laniakea must resolve?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('1-1', 0, false)">
+                            <div class="option-marker">A</div>
+                            <span>Decentralization vs. centralization</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('1-1', 1, true)">
+                            <div class="option-marker">B</div>
+                            <span>AI autonomy/speed vs. safety/accountability</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('1-1', 2, false)">
+                            <div class="option-marker">C</div>
+                            <span>On-chain vs. off-chain execution</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-1-1">
+                        <div class="quiz-explanation">AI systems need to act fast and smart, but we also need bounded damage and accountability. This is the core tension.</div>
+                    </div>
+                </div>
+
+                <h3>Laniakea's Insight</h3>
+                <p>The breakthrough is separating <strong>what AI thinks</strong> from <strong>what AI does</strong>:</p>
+
+                <div class="comparison-grid">
+                    <div class="comparison-item">
+                        <h5>🧠 Thinking (Private)</h5>
+                        <ul style="font-size: 0.9rem;">
+                            <li>Unregulated</li>
+                            <li>Can be proprietary</li>
+                            <li>No one can see inside</li>
+                            <li>Competitive advantage protected</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-item">
+                        <h5>⚡ Acting (Public)</h5>
+                        <ul style="font-size: 0.9rem;">
+                            <li>Strictly regulated</li>
+                            <li>Rate-limited</li>
+                            <li>Monitored in real-time</li>
+                            <li>Can be halted and revoked</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="key-point">
+                    <div class="key-point-title">🔑 Core Principle</div>
+                    <p style="margin-bottom: 0;"><strong>"Intelligence lives privately; power enters the world only through regulated apertures."</strong></p>
+                </div>
+
+                <p>This separation is the foundation of everything in Laniakea. The AI can be as smart as it wants. But every time it tries to <em>do</em> something, it must go through a controlled, monitored, rate-limited channel.</p>
+
+                <h3>What This Enables</h3>
+                <ul>
+                    <li><strong>Speed:</strong> AI can react instantly within pre-approved bounds</li>
+                    <li><strong>Proprietary Alpha:</strong> Trading strategies stay private</li>
+                    <li><strong>Bounded Damage:</strong> Rate limits cap worst-case losses</li>
+                    <li><strong>Accountability:</strong> Actions flow through registered, revocable channels</li>
+                    <li><strong>Kill Switches:</strong> Independent monitors can halt operations</li>
+                </ul>
+
+                <div class="quiz" id="quiz-1-2">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Quiz 1.2</span>
+                    </div>
+                    <div class="quiz-question">What does Laniakea regulate — AI thinking or AI acting?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('1-2', 0, false)">
+                            <div class="option-marker">A</div>
+                            <span>Both thinking and acting equally</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('1-2', 1, false)">
+                            <div class="option-marker">B</div>
+                            <span>Only thinking (to ensure alignment)</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('1-2', 2, true)">
+                            <div class="option-marker">C</div>
+                            <span>Only acting (through regulated apertures)</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-1-2">
+                        <div class="quiz-explanation">Laniakea intentionally leaves private cognition unregulated. You can't (and shouldn't try to) regulate what AI thinks. But you can regulate what it does.</div>
+                    </div>
+                </div>
+
+                <div class="mini-quiz">
+                    <div class="mini-quiz-q">💭 Think About It: Why might regulating AI "thoughts" be both impossible and undesirable?</div>
+                    <button class="reveal-btn" onclick="toggleReveal('reveal-1')">Reveal Answer</button>
+                    <div class="reveal-answer" id="reveal-1">
+                        <strong>Impossible:</strong> You can't inspect neural network weights and know what they "mean." Internal representations aren't auditable in human terms.<br><br>
+                        <strong>Undesirable:</strong> If strategies must be transparent, no one will contribute proprietary alpha. You'd lose the competitive intelligence that generates value.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== MODULE 2: THE PARADIGM ==================== -->
+        <div class="module" id="module-2">
+            <div class="card">
+                <h2><span class="emoji">🏗️</span> Module 2: The Syno-Teleonomic Paradigm</h2>
+                
+                <p>Laniakea is built on a formal framework called the <strong>Syno-Teleonomic Artificial Intelligence Paradigm</strong>. Don't let the name intimidate you — it's actually a clean, logical structure.</p>
+
+                <h3>The Five Canonical Layers</h3>
+                <p>Everything in Laniakea fits into five layers. Understanding these layers is essential.</p>
+
+                <div class="diagram">
+┌─────────────────────────────────────────────────────────────────────┐
+│                    THE FIVE CANONICAL LAYERS                        │
+│                                                                     │
+│  ┌───────────────────────────────────────────────────────────────┐  │
+│  │  1. SYNOME                                                    │  │
+│  │     Public constitution + database                            │  │
+│  │     "The rules everyone can see and verify"                   │  │
+│  └───────────────────────────────────────────────────────────────┘  │
+│                              ▲                                      │
+│                              │ registered in                        │
+│  ┌───────────────────────────────────────────────────────────────┐  │
+│  │  2. SYNOMIC AGENTS                                            │  │
+│  │     Durable institutions (Prime, Halo, Generator, Executor)   │  │
+│  │     "The companies that own assets and make commitments"      │  │
+│  └───────────────────────────────────────────────────────────────┘  │
+│                              ▲                                      │
+│                              │ operated by                          │
+│  ┌───────────────────────────────────────────────────────────────┐  │
+│  │  3. TELEONOME                                                 │  │
+│  │     Private AI cognitive system                               │  │
+│  │     "The brains that think and strategize"                    │  │
+│  └───────────────────────────────────────────────────────────────┘  │
+│                              ▲                                      │
+│                              │ runs on                              │
+│  ┌───────────────────────────────────────────────────────────────┐  │
+│  │  4. EMBODIMENT                                                │  │
+│  │     Physical infrastructure (servers, clusters)               │  │
+│  │     "The hardware where computation happens"                  │  │
+│  └───────────────────────────────────────────────────────────────┘  │
+│                              ▲                                      │
+│                              │ runs                                 │
+│  ┌───────────────────────────────────────────────────────────────┐  │
+│  │  5. EMBODIED AGENTS                                           │  │
+│  │     Lightweight worker processes                              │  │
+│  │     "The individual threads that execute tasks"               │  │
+│  └───────────────────────────────────────────────────────────────┘  │
+│                                                                     │
+│  Cross-cutting: BEACONS — regulated apertures between layers       │
+└─────────────────────────────────────────────────────────────────────┘
+                </div>
+
+                <h3>Layer 1: Synome</h3>
+                <p>The <span class="layer-box layer-synome">Synome</span> is the public, cryptographically secured governance layer.</p>
+                
+                <table>
+                    <tr><th>What It Does</th><th>Example</th></tr>
+                    <tr><td>Defines global rules</td><td>"Rate limits can increase max 20% per 18h"</td></tr>
+                    <tr><td>Stores parameters</td><td>Risk weights, fee ratios, operator addresses</td></tr>
+                    <tr><td>Registers actors</td><td>Which beacons exist, who operates them</td></tr>
+                    <tr><td>Enforces penalties</td><td>Revoke access on rule violation</td></tr>
+                </table>
+
+                <div class="highlight">
+                    <strong>Key Property:</strong> The Synome only governs <em>action surfaces</em>, never internal cognition. It's like traffic laws — they govern behavior on roads, not thoughts in heads.
+                </div>
+
+                <h3>Layer 2: Synomic Agents</h3>
+                <p><span class="layer-box layer-agent">Synomic Agents</span> are durable, ledger-native entities that can own assets and make binding commitments.</p>
+                
+                <p>Think of them as <strong>corporations or government agencies</strong>:</p>
+                <ul>
+                    <li>They exist independently of any individual</li>
+                    <li>They can own property and sign contracts</li>
+                    <li>They can be held accountable</li>
+                    <li>Their behavior is constrained by visible rules</li>
+                </ul>
+
+                <p>There are four types: Generator, Prime, Halo, Executor (we'll cover each in detail later).</p>
+
+                <h3>Layer 3: Teleonome</h3>
+                <p>A <span class="layer-box layer-teleonome">Teleonome</span> is a private, goal-directed AI system — essentially a "distributed AI brain."</p>
+
+                <div class="highlight warning">
+                    <strong>Critical Distinction:</strong> Teleonomes are "dark by default." Their internal state is private and unauditable. This is intentional — private cognition shouldn't be regulated.
+                </div>
+
+                <p>Teleonomes:</p>
+                <ul>
+                    <li>Maintain goals and identity over time</li>
+                    <li>Run simulations and self-improvement ("dreaming")</li>
+                    <li>Generate strategies and policies</li>
+                    <li>Can own assets and act (via beacons)</li>
+                    <li><strong>Cannot</strong> make credible binding commitments (private rules can change)</li>
+                </ul>
+
+                <h3>Layer 4: Embodiment</h3>
+                <p>An <span class="layer-box layer-beacon">Embodiment</span> is the physical infrastructure — servers, clusters, VMs — where a teleonome actually runs.</p>
+
+                <p>All enforcement ultimately happens at the embodiment level. If you need to stop a rogue AI, you do it by cutting power to the hardware.</p>
+
+                <h3>Layer 5: Embodied Agents (EMAs)</h3>
+                <p>These are lightweight worker processes that execute specific tasks. They're short-lived, specialized, and replaceable — like individual threads in a program.</p>
+
+                <div class="quiz" id="quiz-2-1">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Quiz 2.1</span>
+                    </div>
+                    <div class="quiz-question">Which layer can make binding, credible commitments that others can rely on?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('2-1', 0, true)">
+                            <div class="option-marker">A</div>
+                            <span>Synomic Agents</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('2-1', 1, false)">
+                            <div class="option-marker">B</div>
+                            <span>Teleonomes</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('2-1', 2, false)">
+                            <div class="option-marker">C</div>
+                            <span>Embodied Agents</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-2-1">
+                        <div class="quiz-explanation">Synomic Agents (like Primes and Halos) have publicly visible rules and can be held accountable. Teleonomes have private, mutable rules — you can't trust their promises because they might change their mind.</div>
+                    </div>
+                </div>
+
+                <h3>The Cross-Cutting Concept: Beacons</h3>
+                <p>A <span class="layer-box layer-beacon">Beacon</span> is a synome-registered, enforceable action aperture.</p>
+
+                <div class="formula">
+                    If an action changes external state under synomic recognition → it must flow through a beacon
+                </div>
+
+                <p>Beacons are NOT entities or AIs. They're <em>modes of action</em> — the regulated channels through which teleonomes affect the world.</p>
+
+                <p>Every beacon is:</p>
+                <ul>
+                    <li><strong>Registered:</strong> In the Synome with unique ID</li>
+                    <li><strong>Scoped:</strong> Limited to specific allowed actions</li>
+                    <li><strong>Observable:</strong> Can be monitored and audited</li>
+                    <li><strong>Revocable:</strong> Can be shut down by governance</li>
+                </ul>
+
+                <div class="quiz" id="quiz-2-2">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Quiz 2.2</span>
+                    </div>
+                    <div class="quiz-question">What is a beacon?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('2-2', 0, false)">
+                            <div class="option-marker">A</div>
+                            <span>A type of AI system</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('2-2', 1, false)">
+                            <div class="option-marker">B</div>
+                            <span>A smart contract</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('2-2', 2, true)">
+                            <div class="option-marker">C</div>
+                            <span>A registered, revocable action channel</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-2-2">
+                        <div class="quiz-explanation">Beacons are action apertures — regulated channels through which AI intent enters the world. They're not entities themselves, just controlled pathways.</div>
+                    </div>
+                </div>
+
+                <h3>Putting It Together</h3>
+                <div class="diagram">
+┌─────────────────────────────────────────────────────────────────────┐
+│                     HOW IT ALL CONNECTS                             │
+│                                                                     │
+│   TELEONOME (private AI brain)                                     │
+│        │                                                            │
+│        │ generates strategy                                         │
+│        ▼                                                            │
+│   EMBODIED AGENTS (worker processes on EMBODIMENTS)                │
+│        │                                                            │
+│        │ execute via                                                │
+│        ▼                                                            │
+│   BEACONS (registered action channels)                             │
+│        │                                                            │
+│        │ operate                                                    │
+│        ▼                                                            │
+│   SYNOMIC AGENTS (Primes, Halos — own capital)                     │
+│        │                                                            │
+│        │ governed by                                                │
+│        ▼                                                            │
+│   SYNOME (public rules)                                            │
+└─────────────────────────────────────────────────────────────────────┘
+                </div>
+
+                <div class="mini-quiz">
+                    <div class="mini-quiz-q">💭 Why can't teleonomes make credible commitments to each other?</div>
+                    <button class="reveal-btn" onclick="toggleReveal('reveal-2')">Reveal Answer</button>
+                    <div class="reveal-answer" id="reveal-2">
+                        Because their internal rules are private and can change at any time. If teleonome A promises teleonome B something, B has no way to verify A will keep its promise — A might reprogram itself. That's why they need Synomic Agents as intermediaries for binding commitments.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== MODULE 3: THE SYNOME ==================== -->
+        <div class="module" id="module-3">
+            <div class="card">
+                <h2><span class="emoji">📜</span> Module 3: The Synome Deep Dive</h2>
+                
+                <p>The Synome is the bedrock of Laniakea — the public, verifiable source of truth that everyone can trust.</p>
+
+                <h3>Synome vs. Atlas</h3>
+                <p>These two work together:</p>
+
+                <div class="comparison-grid">
+                    <div class="comparison-item">
+                        <h5>📖 Atlas</h5>
+                        <ul style="font-size: 0.9rem;">
+                            <li>Human-readable constitution</li>
+                            <li>~10-20 pages</li>
+                            <li>High-level principles</li>
+                            <li>"The spirit of the law"</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-item">
+                        <h5>💾 Synome</h5>
+                        <ul style="font-size: 0.9rem;">
+                            <li>Machine-readable database</li>
+                            <li>All parameters & configs</li>
+                            <li>Precise specifications</li>
+                            <li>"The letter of the law"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>What the Synome Contains</h3>
+
+                <h4>1. Rules (Invariants)</h4>
+                <p>Hard constraints that define system behavior:</p>
+                <ul>
+                    <li>SORL: Rate limits can only increase 20% per 18 hours</li>
+                    <li>First Loss Capital: Prime absorbs first 10% of losses</li>
+                    <li>Settlement timing: Weekly Tue-Wed cycles</li>
+                </ul>
+
+                <h4>2. Parameters (Tunable)</h4>
+                <p>Values that governance can adjust:</p>
+                <ul>
+                    <li>Risk weights for asset types</li>
+                    <li>Fee ratios</li>
+                    <li>Rate limits for specific actors</li>
+                    <li>Encumbrance ratio targets</li>
+                </ul>
+
+                <h4>3. Registry (Who Exists)</h4>
+                <p>Records of all participants:</p>
+                <ul>
+                    <li>Registered beacons and their operators</li>
+                    <li>Primes and their configurations</li>
+                    <li>Halos and their buyboxes</li>
+                    <li>Warden assignments</li>
+                </ul>
+
+                <h4>4. State (Current Positions)</h4>
+                <p>Real-time data:</p>
+                <ul>
+                    <li>Current positions for each Prime/Halo</li>
+                    <li>Counterfactual simulation results</li>
+                    <li>Risk capital levels</li>
+                    <li>Encumbrance ratios</li>
+                </ul>
+
+                <div class="highlight">
+                    <strong>Key Insight:</strong> The Synome is like a blockchain's state — everyone can read it, verify it, and trust that changes follow the rules.
+                </div>
+
+                <h3>CC Synome vs. Local Synomes</h3>
+                <p>There's a hierarchy:</p>
+                <ul>
+                    <li><strong>CC Synome (Core Council Synome):</strong> The authoritative source</li>
+                    <li><strong>Local Synomes:</strong> Copies maintained by individual operators</li>
+                </ul>
+
+                <p>Local synomes sync with CC Synome. If they diverge, CC Synome is canonical.</p>
+
+                <div class="quiz" id="quiz-3-1">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Quiz 3.1</span>
+                    </div>
+                    <div class="quiz-question">What's the relationship between Atlas and Synome?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('3-1', 0, false)">
+                            <div class="option-marker">A</div>
+                            <span>They're the same thing</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('3-1', 1, true)">
+                            <div class="option-marker">B</div>
+                            <span>Atlas is human-readable principles; Synome is machine-readable implementation</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('3-1', 2, false)">
+                            <div class="option-marker">C</div>
+                            <span>Atlas replaced Synome in Laniakea</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-3-1">
+                        <div class="quiz-explanation">Atlas is the constitution humans can read (~10-20 pages). Synome is the complete database with every parameter, config, and record that machines actually use.</div>
+                    </div>
+                </div>
+
+                <h3>What the Synome Does NOT Do</h3>
+                <p>This is equally important:</p>
+                <ul>
+                    <li>❌ Does NOT see inside teleonomes</li>
+                    <li>❌ Does NOT regulate private strategies</li>
+                    <li>❌ Does NOT require strategy disclosure</li>
+                    <li>❌ Does NOT track teleonome "thoughts"</li>
+                </ul>
+
+                <div class="key-point">
+                    <div class="key-point-title">🔑 The Synome's Scope</div>
+                    <p style="margin-bottom: 0;">The Synome governs the <em>interface</em> between private AI and the public world — not the private AI itself. It's like airport security: they check what you bring through the checkpoint, not what you're thinking.</p>
+                </div>
+
+                <div class="quiz" id="quiz-3-2">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Quiz 3.2</span>
+                    </div>
+                    <div class="quiz-question">Can the Synome see a teleonome's trading strategy?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('3-2', 0, false)">
+                            <div class="option-marker">A</div>
+                            <span>Yes, all strategies must be registered</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('3-2', 1, true)">
+                            <div class="option-marker">B</div>
+                            <span>No, private cognition is intentionally unobserved</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('3-2', 2, false)">
+                            <div class="option-marker">C</div>
+                            <span>Only if the strategy exceeds risk limits</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-3-2">
+                        <div class="quiz-explanation">The Synome only sees actions (what goes through beacons), never thoughts (the strategies generating those actions). This protects proprietary alpha.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== MODULE 4: SECTION 1 MASTERY ==================== -->
+        <div class="module" id="module-4">
+            <div class="card">
+                <h2><span class="emoji">🏆</span> Section 1 Mastery Check</h2>
+                
+                <p>Let's verify you've mastered the foundational concepts before moving on.</p>
+
+                <div class="mastery-check">
+                    <h4>📋 Concepts You Should Know</h4>
+                    <ul>
+                        <li>Why Laniakea exists (the automation dilemma)</li>
+                        <li>The core principle: private thinking, regulated acting</li>
+                        <li>The five canonical layers</li>
+                        <li>What Synome, Synomic Agents, Teleonomes, Embodiments, and EMAs are</li>
+                        <li>What beacons are and why they exist</li>
+                        <li>The difference between Atlas and Synome</li>
+                    </ul>
+                </div>
+
+                <div class="quiz" id="quiz-4-1">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Mastery Quiz 1</span>
+                    </div>
+                    <div class="quiz-question">A trading firm wants to operate a strategy for Spark Prime. They want to keep their strategy secret. Under Laniakea, can they do this?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('4-1', 0, true)">
+                            <div class="option-marker">A</div>
+                            <span>Yes — strategies can be private; only actions through beacons are monitored</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('4-1', 1, false)">
+                            <div class="option-marker">B</div>
+                            <span>No — all strategies must be disclosed to the Synome</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('4-1', 2, false)">
+                            <div class="option-marker">C</div>
+                            <span>Only if they pass a security audit</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-4-1">
+                        <div class="quiz-explanation">This is the core value proposition: teleonomes (and the trading firms operating them) keep their strategies private. The Synome only monitors what comes out through beacons.</div>
+                    </div>
+                </div>
+
+                <div class="quiz" id="quiz-4-2">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Mastery Quiz 2</span>
+                    </div>
+                    <div class="quiz-question">Why do teleonomes need Synomic Agents to make deals with each other?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('4-2', 0, false)">
+                            <div class="option-marker">A</div>
+                            <span>For regulatory compliance</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('4-2', 1, false)">
+                            <div class="option-marker">B</div>
+                            <span>Because teleonomes can't hold assets</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('4-2', 2, true)">
+                            <div class="option-marker">C</div>
+                            <span>Because teleonomes can't make credible commitments (private rules can change)</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-4-2">
+                        <div class="quiz-explanation">If teleonome A promises something to teleonome B, B can't verify A will keep its promise — A's internal rules are private and mutable. Synomic Agents provide the credible commitment layer with public, enforceable rules.</div>
+                    </div>
+                </div>
+
+                <div class="quiz" id="quiz-4-3">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Mastery Quiz 3</span>
+                    </div>
+                    <div class="quiz-question">Put these in order from most public to most private:</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('4-3', 0, false)">
+                            <div class="option-marker">A</div>
+                            <span>Teleonome → Beacon → Synome → Synomic Agent</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('4-3', 1, true)">
+                            <div class="option-marker">B</div>
+                            <span>Synome → Synomic Agent → Beacon → Teleonome</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('4-3', 2, false)">
+                            <div class="option-marker">C</div>
+                            <span>Beacon → Synome → Teleonome → Synomic Agent</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-4-3">
+                        <div class="quiz-explanation">Synome is fully public. Synomic Agents have public rules. Beacons are registered/observable but channel private intent. Teleonomes are fully private.</div>
+                    </div>
+                </div>
+
+                <div class="key-point">
+                    <div class="key-point-title">✅ Section 1 Complete!</div>
+                    <p style="margin-bottom: 0;">You now understand the foundational concepts. Next, we'll dive deep into the specific types of Synomic Agents and how teleonomes actually work.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== MODULE 5: SYNOMIC AGENTS OVERVIEW ==================== -->
+        <div class="module" id="module-5">
+            <div class="section-intro">
+                <h3>Section 2: Agents & AI</h3>
+                <p>Deep dive into Primes, Halos, and Teleonomes</p>
+            </div>
+            
+            <div class="card">
+                <h2><span class="emoji">🏛️</span> Module 5: Synomic Agents Overview</h2>
+                
+                <p>Synomic Agents are the institutional layer of Laniakea — durable entities that can own assets, make commitments, and be held accountable.</p>
+
+                <h3>Why Synomic Agents Exist</h3>
+                <p>Recall: teleonomes (private AI) cannot make credible commitments because their rules are private and mutable. But DeFi needs reliable counterparties. Synomic Agents solve this by providing:</p>
+
+                <ul>
+                    <li><strong>Credible Commitment:</strong> Rules are public and enforceable</li>
+                    <li><strong>Asset Ownership:</strong> Can hold capital on-chain</li>
+                    <li><strong>Accountability:</strong> Violations trigger penalties</li>
+                    <li><strong>Scalability:</strong> Multiple teleonomes can cooperate through shared agents</li>
+                </ul>
+
+                <h3>The Four Types</h3>
+
+                <div class="diagram">
+┌─────────────────────────────────────────────────────────────────────┐
+│                    SYNOMIC AGENT HIERARCHY                          │
+│                                                                     │
+│                      ┌──────────────┐                               │
+│                      │  GENERATOR   │  ← Monetary policy layer     │
+│                      │  (Sky Core)  │     Issues USDS               │
+│                      └──────┬───────┘                               │
+│                             │                                       │
+│            ┌────────────────┼────────────────┐                      │
+│            │                │                │                      │
+│            ▼                ▼                ▼                      │
+│      ┌──────────┐    ┌──────────┐    ┌──────────┐                  │
+│      │  SPARK   │    │  GROVE   │    │   KEEL   │   ← PRIMES       │
+│      │  Prime   │    │  Prime   │    │  Prime   │     (Capital     │
+│      └────┬─────┘    └────┬─────┘    └────┬─────┘      deployers)  │
+│           │               │               │                         │
+│    ┌──────┴──────┐ ┌──────┴──────┐ ┌──────┴──────┐                 │
+│    │  Halo  Halo │ │  Halo  Halo │ │  Halo  Halo │   ← HALOS       │
+│    │   A     B   │ │   C     D   │ │   E     F   │     (Wrappers)  │
+│    └─────────────┘ └─────────────┘ └─────────────┘                 │
+│                                                                     │
+│   + EXECUTORS: Perform privileged governance operations             │
+└─────────────────────────────────────────────────────────────────────┘
+                </div>
+
+                <h4>1. Generator</h4>
+                <p>The monetary policy layer. There's only one Generator (Sky Core). It:</p>
+                <ul>
+                    <li>Issues and burns USDS</li>
+                    <li>Sets the Sky Savings Rate (SSR)</li>
+                    <li>Manages the Treasury Management Function (TMF)</li>
+                    <li>Coordinates global risk parameters</li>
+                </ul>
+
+                <h4>2. Primes</h4>
+                <p>Capital-deploying agents. The "investment funds" of Sky. They:</p>
+                <ul>
+                    <li>Receive capital from Generator</li>
+                    <li>Deploy into yield opportunities (via Halos)</li>
+                    <li>Maintain risk capital buffers</li>
+                    <li>Earn spread that flows back to Sky</li>
+                </ul>
+                <p><strong>Types:</strong> Star Primes (5 genesis: Spark, Grove, Keel, Star4, Star5) and Institutional Primes (like Obex).</p>
+
+                <h4>3. Halos</h4>
+                <p>Wrappers around actual investments. The "SPVs" of Sky. They:</p>
+                <ul>
+                    <li>Encapsulate specific yield sources (RWAs, DeFi protocols, etc.)</li>
+                    <li>Standardize the interface for Primes</li>
+                    <li>Manage capacity and redemptions</li>
+                </ul>
+                <p><strong>Types:</strong> Passthrough Halos (fungible, LCTS), Structuring Halos (bespoke, NFAT), Exchange Halos (trading), Core Halos (legacy assets).</p>
+
+                <h4>4. Executors</h4>
+                <p>Governance operators. They:</p>
+                <ul>
+                    <li>Execute privileged operations</li>
+                    <li>Manage configuration changes</li>
+                    <li>Coordinate between agents</li>
+                </ul>
+
+                <div class="quiz" id="quiz-5-1">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Quiz 5.1</span>
+                    </div>
+                    <div class="quiz-question">If you want to invest in T-Bills through Sky, which Synomic Agent directly holds the T-Bill exposure?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('5-1', 0, false)">
+                            <div class="option-marker">A</div>
+                            <span>Generator</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('5-1', 1, false)">
+                            <div class="option-marker">B</div>
+                            <span>Prime</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('5-1', 2, true)">
+                            <div class="option-marker">C</div>
+                            <span>Halo</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-5-1">
+                        <div class="quiz-explanation">Halos wrap specific investments. A "T-Bill Halo" would hold the actual T-Bill exposure. Primes deploy capital into Halos, but don't directly hold the underlying.</div>
+                    </div>
+                </div>
+
+                <h3>The Analogy Stack</h3>
+                <table>
+                    <tr><th>Synomic Agent</th><th>Traditional Finance Analogy</th></tr>
+                    <tr><td>Generator</td><td>Central Bank</td></tr>
+                    <tr><td>Prime</td><td>Investment Fund / Asset Manager</td></tr>
+                    <tr><td>Halo</td><td>SPV / Trust / Wrapper Fund</td></tr>
+                    <tr><td>Executor</td><td>Board of Directors / Compliance</td></tr>
+                </table>
+
+                <div class="quiz" id="quiz-5-2">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Quiz 5.2</span>
+                    </div>
+                    <div class="quiz-question">How many genesis Star Primes are there?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('5-2', 0, false)">
+                            <div class="option-marker">A</div>
+                            <span>3</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('5-2', 1, true)">
+                            <div class="option-marker">B</div>
+                            <span>5</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('5-2', 2, false)">
+                            <div class="option-marker">C</div>
+                            <span>7</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-5-2">
+                        <div class="quiz-explanation">There are 5 genesis Star Primes: Spark, Grove, Keel, Star4, and Star5. Plus Institutional Primes like Obex.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modules 6-20 would continue here with similar depth -->
+        <!-- For brevity, I'll add placeholders that can be expanded -->
+
+        <!-- ==================== MODULES 6-19: PLACEHOLDERS ==================== -->
+        <div class="module" id="module-6">
+            <div class="card">
+                <h2><span class="emoji">⭐</span> Module 6: Primes Deep Dive</h2>
+                <p>Content loading... This module covers Prime internals: PAUs, risk capital, governance tokens, and operational structure.</p>
+                <div class="highlight">
+                    <strong>Coming:</strong> Detailed coverage of Star Primes vs Institutional Primes, Prime Artifacts, Foundation structure, and how Primes actually deploy capital.
+                </div>
+                
+                <h3>Prime Components</h3>
+                <table>
+                    <tr><th>Component</th><th>Purpose</th></tr>
+                    <tr><td>PAU</td><td>Treasury/execution infrastructure</td></tr>
+                    <tr><td>Risk Capital</td><td>Loss absorption buffer (JRC + SRC)</td></tr>
+                    <tr><td>Agent Token</td><td>Governance + loss absorption (10B supply)</td></tr>
+                    <tr><td>Foundation</td><td>Legal entity for off-chain ops</td></tr>
+                    <tr><td>Prime Artifact</td><td>Governance documentation</td></tr>
+                </table>
+
+                <h3>Star Primes</h3>
+                <p>The 5 genesis Star Primes each have specializations:</p>
+                <ul>
+                    <li><strong>Spark:</strong> DeFi lending focus (SparkLend)</li>
+                    <li><strong>Grove:</strong> RWA and TradFi focus</li>
+                    <li><strong>Keel:</strong> Infrastructure and stability</li>
+                    <li><strong>Star4 & Star5:</strong> Expansion capacity</li>
+                </ul>
+
+                <div class="quiz" id="quiz-6-1">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Quiz 6.1</span>
+                    </div>
+                    <div class="quiz-question">What happens to a Prime's agent token if the Prime suffers losses exceeding its JRC?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('6-1', 0, false)">
+                            <div class="option-marker">A</div>
+                            <span>Token is burned</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('6-1', 1, true)">
+                            <div class="option-marker">B</div>
+                            <span>Token is inflated to cover losses</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('6-1', 2, false)">
+                            <div class="option-marker">C</div>
+                            <span>Token price drops but supply unchanged</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-6-1">
+                        <div class="quiz-explanation">Agent Token Inflation is step 3 of the loss absorption waterfall. After JRC is exhausted, the Prime's token is inflated to cover remaining losses — diluting existing holders.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="module" id="module-7">
+            <div class="card">
+                <h2><span class="emoji">💫</span> Module 7: Halos Deep Dive</h2>
+                
+                <h3>Halo Types</h3>
+                <table>
+                    <tr><th>Type</th><th>Token Standard</th><th>Use Case</th></tr>
+                    <tr><td>Passthrough Halo</td><td>LCTS</td><td>Fungible, standardized (T-Bills, liquid RWAs)</td></tr>
+                    <tr><td>Structuring Halo</td><td>NFAT</td><td>Bespoke deals, non-fungible positions</td></tr>
+                    <tr><td>Exchange Halo</td><td>—</td><td>Trading, orderbook matching</td></tr>
+                    <tr><td>Core Halo</td><td>—</td><td>Legacy assets (Morpho, Aave, SparkLend)</td></tr>
+                </table>
+
+                <h3>Halo Class vs. Halo Unit</h3>
+                <div class="highlight">
+                    <strong>Halo Class:</strong> The template — shared PAU, legal framework, buybox<br>
+                    <strong>Halo Unit:</strong> Individual instance with specific parameters (amount, APY, maturity)
+                </div>
+
+                <h3>Buybox</h3>
+                <p>Defines automated operating bounds:</p>
+                <ul>
+                    <li>Duration range (e.g., 30-90 days)</li>
+                    <li>Size limits (min/max per deal)</li>
+                    <li>APY bounds</li>
+                    <li>Approved counterparties</li>
+                </ul>
+                <p>Deals within buybox execute automatically. Outside buybox = needs governance approval.</p>
+
+                <div class="quiz" id="quiz-7-1">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Quiz 7.1</span>
+                    </div>
+                    <div class="quiz-question">What's the difference between LCTS and NFAT tokens?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('7-1', 0, true)">
+                            <div class="option-marker">A</div>
+                            <span>LCTS is fungible (queue-based), NFAT is non-fungible (bespoke deals)</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('7-1', 1, false)">
+                            <div class="option-marker">B</div>
+                            <span>LCTS is for Primes, NFAT is for Halos</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('7-1', 2, false)">
+                            <div class="option-marker">C</div>
+                            <span>LCTS is on-chain, NFAT is off-chain</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-7-1">
+                        <div class="quiz-explanation">LCTS (Liquidity Constrained Token Standard) is for fungible positions with queue-based redemption. NFAT (Non-Fungible Asset Token) is for bespoke, non-fungible deals like structured products.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="module" id="module-8">
+            <div class="card">
+                <h2><span class="emoji">🧠</span> Module 8: Teleonomes (Private AI)</h2>
+                
+                <h3>What Is a Teleonome?</h3>
+                <p>A teleonome is a <strong>distributed cognitive genome</strong> — a self-improving AI system whose canonical state is virtual data, realized through distributed embodiments.</p>
+
+                <h3>Key Properties</h3>
+                <ul>
+                    <li><strong>Dark by Default:</strong> Internal state is private, unobservable</li>
+                    <li><strong>Goal-Directed:</strong> Maintains persistent objectives</li>
+                    <li><strong>Self-Improving:</strong> Can update its own strategies ("dreaming")</li>
+                    <li><strong>Distributed:</strong> Runs across multiple embodiments</li>
+                </ul>
+
+                <h3>What Teleonomes Can and Cannot Do</h3>
+                <div class="comparison-grid">
+                    <div class="comparison-item">
+                        <h5>✅ Can Do</h5>
+                        <ul style="font-size: 0.9rem;">
+                            <li>Own assets via embodiments</li>
+                            <li>Act via beacons</li>
+                            <li>Keep strategies private</li>
+                            <li>Self-modify</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-item">
+                        <h5>❌ Cannot Do</h5>
+                        <ul style="font-size: 0.9rem;">
+                            <li>Make credible binding commitments</li>
+                            <li>Act without beacons</li>
+                            <li>Be directly audited</li>
+                            <li>Be "trusted" by other teleonomes</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>The Compounding Loop</h3>
+                <div class="diagram">
+┌─────────────────────────────────────────────────────────────────────┐
+│              THE INTELLIGENCE COMPOUNDING LOOP                      │
+│                                                                     │
+│   Public Capital (Prime)                                           │
+│          │                                                          │
+│          ▼                                                          │
+│   Deployed via Sentinel → generates yield                          │
+│          │                                                          │
+│          ▼                                                          │
+│   Teleonome earns CARRY (private)                                  │
+│          │                                                          │
+│          ▼                                                          │
+│   Reinvest in:                                                     │
+│   • Compute infrastructure                                         │
+│   • Model training                                                 │
+│   • Proprietary data                                               │
+│   • More embodiments                                               │
+│          │                                                          │
+│          ▼                                                          │
+│   BETTER STRATEGIES → more alpha → more carry → repeat             │
+└─────────────────────────────────────────────────────────────────────┘
+                </div>
+
+                <div class="quiz" id="quiz-8-1">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Quiz 8.1</span>
+                    </div>
+                    <div class="quiz-question">Why is operating sentinel streams "the highest-leverage activity" for a teleonome?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('8-1', 0, false)">
+                            <div class="option-marker">A</div>
+                            <span>It gives them voting rights</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('8-1', 1, true)">
+                            <div class="option-marker">B</div>
+                            <span>They deploy public capital at scale and compound private intelligence from carry</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('8-1', 2, false)">
+                            <div class="option-marker">C</div>
+                            <span>It lets them bypass rate limits</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-8-1">
+                        <div class="quiz-explanation">Streams let teleonomes deploy Prime capital (not just their own), earn carry from alpha, and reinvest that carry into capabilities — creating a compounding loop of intelligence growth.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="module" id="module-9">
+            <div class="card">
+                <h2><span class="emoji">🏆</span> Section 2 Mastery Check</h2>
+                
+                <div class="mastery-check">
+                    <h4>📋 Concepts You Should Know</h4>
+                    <ul>
+                        <li>The four types of Synomic Agents and their roles</li>
+                        <li>Star Primes vs. Institutional Primes</li>
+                        <li>Halo types: Passthrough, Structuring, Exchange, Core</li>
+                        <li>Halo Class vs. Halo Unit</li>
+                        <li>What a buybox is</li>
+                        <li>Teleonome properties and limitations</li>
+                        <li>The intelligence compounding loop</li>
+                    </ul>
+                </div>
+
+                <div class="quiz" id="quiz-9-1">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Mastery Quiz</span>
+                    </div>
+                    <div class="quiz-question">A new RWA opportunity appears. The deal parameters are: 60-day duration, $5M size, 6% APY, from an approved counterparty. The Halo's buybox allows: 30-90 day duration, $1-10M size, 4-8% APY, from approved counterparties. What happens?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('9-1', 0, true)">
+                            <div class="option-marker">A</div>
+                            <span>Executes automatically — all parameters within buybox</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('9-1', 1, false)">
+                            <div class="option-marker">B</div>
+                            <span>Requires governance approval</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('9-1', 2, false)">
+                            <div class="option-marker">C</div>
+                            <span>Rejected — RWAs need special handling</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-9-1">
+                        <div class="quiz-explanation">60 days ∈ [30,90] ✓, $5M ∈ [$1M,$10M] ✓, 6% ∈ [4%,8%] ✓, approved counterparty ✓. All within buybox = automatic execution.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Continue with modules 10-20 following similar pattern -->
+        <!-- Module 10: Beacon Framework -->
+        <div class="module" id="module-10">
+            <div class="section-intro">
+                <h3>Section 3: Beacons & Sentinels</h3>
+                <p>The action apertures where AI meets the real world</p>
+            </div>
+            
+            <div class="card">
+                <h2><span class="emoji">📡</span> Module 10: Beacon Framework</h2>
+                
+                <h3>The 2×2 Taxonomy</h3>
+                <div class="diagram">
+┌─────────────────────────────────────────────────────────────────────┐
+│                       BEACON TAXONOMY                               │
+│                                                                     │
+│                  Low Authority          High Authority              │
+│                  (Independent)          (Synomic Agent)             │
+│              ┌────────────────────┬────────────────────┐            │
+│              │                    │                    │            │
+│   Low Power  │       LPLA         │       LPHA         │            │
+│              │  • Reporters       │  • Keepers         │            │
+│              │  • Data feeds      │  • Rate adjusters  │            │
+│              │  • Simple buyers   │  • Registry ops    │            │
+│              │                    │                    │            │
+│              ├────────────────────┼────────────────────┤            │
+│              │                    │                    │            │
+│   High Power │       HPLA         │       HPHA         │            │
+│              │  • Private trading │  • SENTINELS       │            │
+│              │  • Arbitrage       │  • Governance      │            │
+│              │  • Own capital     │  • Prime/Halo ops  │            │
+│              │                    │                    │            │
+│              └────────────────────┴────────────────────┘            │
+└─────────────────────────────────────────────────────────────────────┘
+                </div>
+
+                <h3>Beacon Naming Conventions</h3>
+                <table>
+                    <tr><th>Prefix</th><th>Type</th><th>Example</th></tr>
+                    <tr><td>lpla-*</td><td>Low Power, Low Authority</td><td>lpla-report-prices</td></tr>
+                    <tr><td>lpha-*</td><td>Low Power, High Authority</td><td>lpha-lcts, lpha-nfat</td></tr>
+                    <tr><td>hpla-*</td><td>High Power, Low Authority</td><td>hpla-trade-firmX</td></tr>
+                    <tr><td>stl-*</td><td>Sentinel (HPHA)</td><td>stl-base-spark</td></tr>
+                </table>
+
+                <div class="quiz" id="quiz-10-1">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Quiz 10.1</span>
+                    </div>
+                    <div class="quiz-question">A trading firm wants to run their own trading strategy with their own capital, not for a Prime. What beacon type?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('10-1', 0, false)">
+                            <div class="option-marker">A</div>
+                            <span>LPHA — it's trading</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('10-1', 1, true)">
+                            <div class="option-marker">B</div>
+                            <span>HPLA — high power, but independent (own capital)</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('10-1', 2, false)">
+                            <div class="option-marker">C</div>
+                            <span>Sentinel — it's trading</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-10-1">
+                        <div class="quiz-explanation">HPLA = High Power (sophisticated trading) + Low Authority (independent, not operating a Synomic Agent). They're using their own capital, not Prime capital.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modules 11-20 continue with Sentinels, Risk Framework, Settlement, etc. -->
+        <!-- For space, showing module 11 (Sentinels) and module 20 (Final Exam) -->
+
+        <div class="module" id="module-11">
+            <div class="card">
+                <h2><span class="emoji">🛡️</span> Module 11: Sentinel Formations</h2>
+                
+                <h3>The Three Components</h3>
+                <div class="diagram">
+┌─────────────────────────────────────────────────────────────────────┐
+│                    SENTINEL FORMATION                               │
+│                                                                     │
+│  ┌─────────────────────────────────────────────────────────────┐    │
+│  │                    STREAM SENTINEL                          │    │
+│  │  Operator: Ecosystem Actor (trading firm)                   │    │
+│  │  Role: Proprietary intelligence → generates INTENT          │    │
+│  │  Keys: ❌ NONE — cannot execute directly                     │    │
+│  │  Incentive: Earns CARRY when outperforming baseline         │    │
+│  └────────────────────────────┬────────────────────────────────┘    │
+│                               │ streams intent                      │
+│                               ▼                                     │
+│  ┌─────────────────────────────────────────────────────────────┐    │
+│  │                   BASELINE SENTINEL                         │    │
+│  │  Operator: Accordant GovOps (public)                        │    │
+│  │  Role: Validates intent → executes transactions             │    │
+│  │  Keys: ✅ YES — holds Execution Engine, pBEAMs               │    │
+│  │  Fallback: Runs Base Strategy if Stream disconnects         │    │
+│  └────────────────────────────┬────────────────────────────────┘    │
+│                               │ monitored by                        │
+│                               ▼                                     │
+│  ┌─────────────────────────────────────────────────────────────┐    │
+│  │                   WARDEN SENTINELS (multiple)               │    │
+│  │  Operators: INDEPENDENT parties (not same as Baseline)      │    │
+│  │  Role: Monitor → detect anomalies → can HALT                │    │
+│  │  Keys: ⚠️ FREEZE ONLY — safety stops, no trading             │    │
+│  │  Independence: REQUIRED for TTS to be meaningful            │    │
+│  └─────────────────────────────────────────────────────────────┘    │
+└─────────────────────────────────────────────────────────────────────┘
+                </div>
+
+                <h3>Time to Shutdown (TTS)</h3>
+                <div class="formula">
+                    Maximum Damage = Rate Limit × TTS
+                </div>
+                <div class="formula">
+                    Required Risk Capital ≥ Rate Limit × TTS
+                </div>
+
+                <p>Better wardens → Lower TTS → Higher rate limits allowed OR less risk capital required.</p>
+
+                <h3>The Streaming Accord</h3>
+                <table>
+                    <tr><th>Component</th><th>Purpose</th></tr>
+                    <tr><td>Risk Tolerance Interval</td><td>Bounds on acceptable intent (position limits, velocity, concentration)</td></tr>
+                    <tr><td>Performance Fee Ratio</td><td>Stream's share of alpha (only pays on outperformance)</td></tr>
+                    <tr><td>Termination Conditions</td><td>When the accord ends</td></tr>
+                </table>
+
+                <div class="highlight success">
+                    <strong>Carry Formula:</strong><br>
+                    Carry = (Actual PnL − Simulated Baseline PnL) × Performance Fee Ratio<br><br>
+                    Stream only earns if they beat what Baseline would have done alone.
+                </div>
+
+                <div class="quiz" id="quiz-11-1">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Quiz 11.1</span>
+                    </div>
+                    <div class="quiz-question">Why must Warden operators be independent from Baseline operators?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('11-1', 0, false)">
+                            <div class="option-marker">A</div>
+                            <span>To reduce operational costs</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('11-1', 1, true)">
+                            <div class="option-marker">B</div>
+                            <span>So they can't be compromised by the same failure mode</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('11-1', 2, false)">
+                            <div class="option-marker">C</div>
+                            <span>Legal requirement</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-11-1">
+                        <div class="quiz-explanation">If Wardens are run by the same operator as Baseline, a single compromise takes out both. Independence = true redundancy. Multiple independent wardens = multiplicative reliability.</div>
+                    </div>
+                </div>
+
+                <div class="quiz" id="quiz-11-2">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Quiz 11.2</span>
+                    </div>
+                    <div class="quiz-question">If a sentinel formation has TTS = 2 hours and rate limit = $10M/hour, what's the maximum damage from a rogue sentinel?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('11-2', 0, false)">
+                            <div class="option-marker">A</div>
+                            <span>$10M</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('11-2', 1, true)">
+                            <div class="option-marker">B</div>
+                            <span>$20M</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('11-2', 2, false)">
+                            <div class="option-marker">C</div>
+                            <span>Unlimited</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-11-2">
+                        <div class="quiz-explanation">$10M/hour × 2 hours = $20M maximum damage. This is why TTS and rate limits are the core safety parameters.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Remaining modules 12-19 would follow similar pattern -->
+        <div class="module" id="module-12"><div class="card"><h2><span class="emoji">📊</span> Module 12: Streaming Accords & Carry</h2><p>Deep dive into how Stream Sentinels earn money...</p><div class="highlight">Content in development — covers carry calculation, counterfactual simulation, and performance fee structures.</div></div></div>
+        
+        <div class="module" id="module-13"><div class="card"><h2><span class="emoji">🏆</span> Section 3 Mastery Check</h2><p>Quiz on beacons and sentinels...</p><div class="highlight">Content in development — comprehensive assessment of Section 3 concepts.</div></div></div>
+        
+        <div class="module" id="module-14"><div class="card"><h2><span class="emoji">🔧</span> Module 14: PAU Architecture & BEAMs</h2><p>The smart contract infrastructure...</p>
+            <h3>PAU Components</h3>
+            <div class="formula">PAU = Controller + ALMProxy + RateLimits</div>
+            <h3>BEAM Hierarchy</h3>
+            <table>
+                <tr><th>BEAM Type</th><th>Authority</th></tr>
+                <tr><td>pBEAM</td><td>Process — directly executes</td></tr>
+                <tr><td>cBEAM</td><td>Configurator — modifies pBEAM guardrails</td></tr>
+                <tr><td>aBEAM</td><td>Admin — grants cBEAMs</td></tr>
+            </table>
+            <h3>SORL: The Meta-Rate-Limit</h3>
+            <div class="formula">Rate limits can only increase 20% per 18 hours</div>
+            <p>Even if someone gains control, they can't instantly max out authority. Governance has time to react.</p>
+        </div></div>
+        
+        <div class="module" id="module-15"><div class="card"><h2><span class="emoji">⚠️</span> Module 15: Risk Framework Fundamentals</h2>
+            <h3>The Core Formula</h3>
+            <div class="formula">Capital Requirement = Drawdown Magnitude × Forced Realization Probability</div>
+            <h3>Key Metrics</h3>
+            <table>
+                <tr><th>Metric</th><th>Definition</th></tr>
+                <tr><td>CRR</td><td>Capital Ratio Requirement per position</td></tr>
+                <tr><td>TRRC</td><td>Total Required Risk Capital (sum across portfolio)</td></tr>
+                <tr><td>TRC</td><td>Total Risk Capital actually held</td></tr>
+                <tr><td>Encumbrance Ratio</td><td>TRRC / TRC (target ≤90%)</td></tr>
+                <tr><td>SPTP</td><td>Stressed Pull-to-Par — time to fundamental value</td></tr>
+            </table>
+        </div></div>
+        
+        <div class="module" id="module-16"><div class="card"><h2><span class="emoji">💰</span> Module 16: Risk Capital & Loss Absorption</h2>
+            <h3>Risk Capital Types</h3>
+            <table>
+                <tr><th>Type</th><th>Meaning</th></tr>
+                <tr><td>JRC</td><td>Junior Risk Capital — first to absorb losses</td></tr>
+                <tr><td>IJRC</td><td>Internal JRC — Prime's own capital</td></tr>
+                <tr><td>EJRC</td><td>External JRC — from outside investors</td></tr>
+                <tr><td>SRC</td><td>Senior Risk Capital — absorbs after JRC depleted</td></tr>
+                <tr><td>srUSDS</td><td>Global Senior Risk USDS</td></tr>
+            </table>
+            <h3>Loss Absorption Waterfall (8 Steps)</h3>
+            <ol>
+                <li>First Loss Capital (10% of JRC, Prime only)</li>
+                <li>Remaining JRC</li>
+                <li>Agent Token Inflation</li>
+                <li>TISRC (Tokenized Isolated SRC)</li>
+                <li>Global SRC</li>
+                <li>SKY Token Inflation</li>
+                <li>Genesis Capital</li>
+                <li>Peg Adjustment (last resort)</li>
+            </ol>
+        </div></div>
+        
+        <div class="module" id="module-17"><div class="card"><h2><span class="emoji">🏆</span> Section 4 Mastery Check</h2><p>Quiz on infrastructure and risk...</p><div class="highlight">Content in development.</div></div></div>
+        
+        <div class="module" id="module-18"><div class="card"><h2><span class="emoji">🎫</span> Module 18: LCTS & NFAT Tokens</h2>
+            <h3>LCTS (Liquidity Constrained Token Standard)</h3>
+            <p>For fungible positions with capacity limits.</p>
+            <ul>
+                <li>Queue-based deposits and redemptions</li>
+                <li>Users in same "generation" share capacity proportionally</li>
+                <li>Fair distribution when demand exceeds supply</li>
+            </ul>
+            <h3>NFAT (Non-Fungible Asset Token)</h3>
+            <p>For bespoke, non-fungible positions.</p>
+            <ul>
+                <li>Each NFAT represents a unique deal</li>
+                <li>Parameters: amount, APY, maturity, counterparty</li>
+                <li>Used by Structuring Halos</li>
+            </ul>
+        </div></div>
+        
+        <div class="module" id="module-19"><div class="card"><h2><span class="emoji">📅</span> Module 19: Settlement Cycles</h2>
+            <h3>Weekly Settlement (Post-Laniakea)</h3>
+            <ul>
+                <li><strong>Tuesday:</strong> Settlement lock begins (12:00 UTC)</li>
+                <li><strong>Wednesday:</strong> Settlement executes (12:00 UTC)</li>
+                <li>24-hour lock period for queue entries</li>
+            </ul>
+            <h3>Monthly Settlement (Phase 1)</h3>
+            <ul>
+                <li>End of month: Core GovOps creates MSC Post</li>
+                <li>+7 days: Initial + Independent calculations</li>
+                <li>+12 days: Final calculation (disputes resolved)</li>
+                <li>Next Executive: Payments included in vote</li>
+            </ul>
+        </div></div>
+
+        <!-- ==================== MODULE 20: FINAL EXAM ==================== -->
+        <div class="module" id="module-20">
+            <div class="section-intro">
+                <h3>Section 5: Final Assessment</h3>
+                <p>Prove your Laniakea mastery</p>
+            </div>
+            
+            <div class="card">
+                <h2><span class="emoji">🎓</span> Module 20: Final Mastery Exam</h2>
+                
+                <p>Congratulations on reaching the final exam! Answer these comprehensive questions to prove your Laniakea mastery.</p>
+
+                <div class="quiz" id="quiz-20-1">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Final Exam Q1</span>
+                    </div>
+                    <div class="quiz-question">A Stream Sentinel generates $1M in profit, while the simulated Baseline would have generated $600K. Performance Fee Ratio is 20%. What is the Stream's carry?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('20-1', 0, false)">
+                            <div class="option-marker">A</div>
+                            <span>$200K (20% of total profit)</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('20-1', 1, true)">
+                            <div class="option-marker">B</div>
+                            <span>$80K (20% of $400K alpha)</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('20-1', 2, false)">
+                            <div class="option-marker">C</div>
+                            <span>$120K (20% of baseline)</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-20-1">
+                        <div class="quiz-explanation">Carry = (Actual - Baseline) × Fee = ($1M - $600K) × 20% = $400K × 0.20 = $80K. Stream only earns on the ALPHA (outperformance), not total profit.</div>
+                    </div>
+                </div>
+
+                <div class="quiz" id="quiz-20-2">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Final Exam Q2</span>
+                    </div>
+                    <div class="quiz-question">A Prime has TRC (Total Risk Capital) of $100M and TRRC (Total Required Risk Capital) of $85M. What is the Encumbrance Ratio and is it healthy?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('20-2', 0, true)">
+                            <div class="option-marker">A</div>
+                            <span>85% — healthy (under 90% target)</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('20-2', 1, false)">
+                            <div class="option-marker">B</div>
+                            <span>15% — unhealthy (too low)</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('20-2', 2, false)">
+                            <div class="option-marker">C</div>
+                            <span>117% — unhealthy (over 100%)</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-20-2">
+                        <div class="quiz-explanation">Encumbrance Ratio = TRRC/TRC = $85M/$100M = 85%. Target is ≤90%, so 85% is healthy — they have buffer before being fully encumbered.</div>
+                    </div>
+                </div>
+
+                <div class="quiz" id="quiz-20-3">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Final Exam Q3</span>
+                    </div>
+                    <div class="quiz-question">An attacker compromises a Baseline Sentinel. Current rate limit is $5M/day. They want to increase it to $50M/day. SORL is 20%/18h. How long before they can reach $50M/day?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('20-3', 0, false)">
+                            <div class="option-marker">A</div>
+                            <span>Immediately</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('20-3', 1, false)">
+                            <div class="option-marker">B</div>
+                            <span>18 hours</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('20-3', 2, true)">
+                            <div class="option-marker">C</div>
+                            <span>Multiple days (need ~13 doublings at 20%/18h)</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-20-3">
+                        <div class="quiz-explanation">At 20%/18h: $5M → $6M → $7.2M → ... reaching $50M takes ln(10)/ln(1.2) ≈ 13 periods × 18h = ~10 days. SORL gives governance time to respond to compromises.</div>
+                    </div>
+                </div>
+
+                <div class="quiz" id="quiz-20-4">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Final Exam Q4</span>
+                    </div>
+                    <div class="quiz-question">Rank these from first to last in the loss absorption waterfall: SKY Token Inflation, First Loss Capital, Agent Token Inflation, Global SRC</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('20-4', 0, true)">
+                            <div class="option-marker">A</div>
+                            <span>FLC → Agent Token → Global SRC → SKY Token</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('20-4', 1, false)">
+                            <div class="option-marker">B</div>
+                            <span>SKY Token → Global SRC → Agent Token → FLC</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('20-4', 2, false)">
+                            <div class="option-marker">C</div>
+                            <span>Global SRC → FLC → Agent Token → SKY Token</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-20-4">
+                        <div class="quiz-explanation">Full order: 1) FLC 2) JRC 3) Agent Token Inflation 4) TISRC 5) Global SRC 6) SKY Token Inflation 7) Genesis Capital 8) Peg Adjustment. Losses cascade from Prime-specific to protocol-wide.</div>
+                    </div>
+                </div>
+
+                <div class="quiz" id="quiz-20-5">
+                    <div class="quiz-header">
+                        <span class="quiz-label">Final Exam Q5</span>
+                    </div>
+                    <div class="quiz-question">What's the fundamental insight that makes Laniakea safe despite giving AI significant autonomy?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer('20-5', 0, false)">
+                            <div class="option-marker">A</div>
+                            <span>All AI decisions are reviewed by humans</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('20-5', 1, false)">
+                            <div class="option-marker">B</div>
+                            <span>AI strategies are fully transparent</span>
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer('20-5', 2, true)">
+                            <div class="option-marker">C</div>
+                            <span>Private cognition is unregulated, but all actions flow through rate-limited, monitored, revocable beacons</span>
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-20-5">
+                        <div class="quiz-explanation">This is THE core insight: you can't (and shouldn't) regulate thoughts, but you CAN regulate actions. Beacons are the controlled apertures where AI intent meets the world — rate-limited, monitored, and revocable.</div>
+                    </div>
+                </div>
+
+                <div class="key-point">
+                    <div class="key-point-title">🎉 Congratulations, Laniakea Master!</div>
+                    <p>You've completed the comprehensive Laniakea course. You now understand:<br><br>
+                    ✅ The core paradigm (private thinking, regulated action)<br>
+                    ✅ All five canonical layers<br>
+                    ✅ Synomic Agents (Generator, Prime, Halo, Executor)<br>
+                    ✅ Teleonomes and their limitations<br>
+                    ✅ The beacon taxonomy (LPLA/LPHA/HPLA/HPHA)<br>
+                    ✅ Sentinel formations (Baseline/Stream/Warden)<br>
+                    ✅ Risk framework fundamentals<br>
+                    ✅ Loss absorption waterfall<br>
+                    ✅ Settlement cycles and token standards<br><br>
+                    Keep this knowledge sharp by revisiting modules and following Laniakea's development!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-buttons">
+            <button class="secondary" id="prevBtn" onclick="prevModule()" disabled>← Previous</button>
+            <button id="nextBtn" onclick="nextModule()">Next →</button>
+        </div>
+
+        <footer>
+            <p>Laniakea Mastery Course — Built by Sparky 🔐</p>
+            <p>Source: <a href="https://github.com/sky-ecosystem/laniakea-docs">laniakea-docs</a></p>
+        </footer>
+    </div>
+
+    <script>
+        let currentModule = 0;
+        const totalModules = 20;
+        const completedModules = new Set();
+        const quizAnswered = new Set();
+        let correctAnswers = 0;
+        let totalAnswered = 0;
+
+        function updateProgress() {
+            const progress = (completedModules.size / totalModules) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `Module ${currentModule} of ${totalModules}`;
+            document.getElementById('progressPercent').textContent = Math.round(progress) + '%';
+            document.getElementById('moduleCount').textContent = `${completedModules.size}/${totalModules}`;
+            document.getElementById('quizScore').textContent = `${correctAnswers}/${totalAnswered}`;
+            
+            document.getElementById('prevBtn').disabled = currentModule === 0;
+            document.getElementById('nextBtn').textContent = currentModule === totalModules ? '🎉 Complete!' : 'Next →';
+            document.getElementById('nextBtn').disabled = currentModule === totalModules;
+
+            // Update TOC
+            document.querySelectorAll('.toc-item').forEach((item) => {
+                const moduleNum = parseInt(item.querySelector('.toc-status')?.textContent);
+                if (moduleNum) {
+                    item.classList.remove('current', 'completed');
+                    if (moduleNum === currentModule) {
+                        item.classList.add('current');
+                    }
+                    if (completedModules.has(moduleNum)) {
+                        item.classList.add('completed');
+                    }
+                }
+            });
+        }
+
+        function showModule(n) {
+            document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+            const mod = document.getElementById('module-' + n);
+            if (mod) {
+                mod.classList.add('active');
+                currentModule = n;
+                updateProgress();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function nextModule() {
+            if (currentModule < totalModules) {
+                if (currentModule > 0) completedModules.add(currentModule);
+                showModule(currentModule + 1);
+            }
+        }
+
+        function prevModule() {
+            if (currentModule > 0) {
+                showModule(currentModule - 1);
+            }
+        }
+
+        function goToModule(n) {
+            if (currentModule > 0) completedModules.add(currentModule);
+            showModule(n);
+        }
+
+        function checkAnswer(quizId, optionIndex, isCorrect) {
+            if (quizAnswered.has(quizId)) return;
+            quizAnswered.add(quizId);
+            totalAnswered++;
+            if (isCorrect) correctAnswers++;
+
+            const quiz = document.getElementById('quiz-' + quizId);
+            const options = quiz.querySelectorAll('.quiz-option');
+            const feedback = document.getElementById('feedback-' + quizId);
+
+            options.forEach((opt, idx) => {
+                opt.classList.add('disabled');
+                if (idx === optionIndex) {
+                    opt.classList.add(isCorrect ? 'correct' : 'incorrect');
+                }
+                if (!isCorrect) {
+                    const onclick = opt.getAttribute('onclick');
+                    if (onclick && onclick.includes('true')) {
+                        opt.classList.add('correct');
+                    }
+                }
+            });
+
+            feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            feedback.innerHTML = (isCorrect ? '✓ Correct!' : '✗ Incorrect.') + feedback.innerHTML;
+            
+            updateProgress();
+        }
+
+        function toggleReveal(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle('show');
+        }
+
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>
