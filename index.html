@@ -3683,6 +3683,79 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
 <li><strong>Same contracts, different configuration</strong> — layers differ only in approved targets and rate limit values</li>
 <li><strong>Instant decrease, constrained increase</strong> — losses are reflected immediately via exchange rate haircuts; gains accrue gradually over time</li>
 </ol>
+<h2>diamond-pau</h2>
+<h1>Diamond PAU — Staged Upgrade Architecture</h1>
+<h2>Overview</h2>
+<p>Diamond PAU is the upgraded smart contract architecture that replaces the legacy PAU (Parallelized Allocation Unit) for each Prime. It uses the <strong>EIP-2535 "diamond proxy" pattern</strong> — modular pieces called <em>facets</em> that can be added, removed, or upgraded independently. This eliminates the need to redeploy the entire ALM Controller when adding a new allocation target.</p>
+<p><strong>Status:</strong> In Progress (January 1 – May 31, 2026) | <strong>Initiative:</strong> Phase 1 / Sub-initiative 1.1 | <strong>Type:</strong> Smart Contracts</p>
+<hr>
+<h2>Technical Context</h2>
+<ul>
+<li>The upgrade happens in <strong>three stages</strong>: libraries → external contracts → generic dispatcher</li>
+<li><strong>Configurator-unit will only work with Diamond PAU</strong>, not legacy controllers</li>
+<li><strong>Position data stays in ALMProxy</strong> — no interface change for integrations</li>
+</ul>
+<h2>Available Facets</h2>
+<ul>
+<li><code>NfatDepositFacet</code> — deposit into NFAT queues</li>
+<li><code>NfatWithdrawFacet</code> — withdraw before deal execution</li>
+<li>All facets related to existing integrations for Grove, Obex, and Spark</li>
+</ul>
+<h2>Acceptance Criteria</h2>
+<ul>
+<li>Diamond PAU Stage 3 double-audited</li>
+<li>Diamond PAU deployed for Spark, Grove, and Obex</li>
+</ul>
+<hr>
+<h2>Staged Upgrade Approach</h2>
+<p>The upgrade is performed from the <code>spark-alm-controller v1.10.0</code> production release commit across three stages, each independently audited.</p>
+<h3>Stage 1 — Library Refactor + Codebase Unification</h3>
+<p><em>Code: L &nbsp;|&nbsp; Tests: XS &nbsp;|&nbsp; Deployment: S</em></p>
+<p>Refactor all existing controller logic into external libraries without changing behaviour. Consolidate diverging logic from Grove into a single shared codebase so that Obex, Grove, and Spark all consume the same controller. The repo will be renamed to something neutral (e.g., <code>sky-pau</code>).</p>
+<ul>
+<li>Manually diff each library against the audited code within each repo</li>
+<li>Manually review each library to ensure all logic is correct</li>
+<li>Minimal test changes (limited to initial configuration)</li>
+</ul>
+<h3>Stage 2 — Libraries → Delegatecall "Facet-Like" Contracts + Registrar</h3>
+<p><em>Code: M &nbsp;|&nbsp; Tests: S &nbsp;|&nbsp; Deployment: L</em></p>
+<p>Convert Stage 1 libraries into standalone logic contracts; controller manually <code>delegatecall</code>s into them. All storage references move into a centralised <strong>Registrar</strong> contract per Star, enabling state to persist across upgrades (no state migrations). PAU becomes: Controller + RateLimits + ALMProxy + Registrar. Unifies constructors across Stars and between Mainnet/Foreign Controllers.</p>
+<h3>Stage 3 — Diamond Standard Dispatch</h3>
+<p><em>Code: M &nbsp;|&nbsp; Tests: S &nbsp;|&nbsp; Deployment: L</em></p>
+<p>Replace manual <code>delegatecall</code> wiring with Diamond-standard selector routing in the controller. Stage 2 logic contracts become official facets (reused; no redeployment needed just for dispatch change). Each Star configures only the subset of facets its PAU requires.</p>
+<h2>Why This Approach</h2>
+<ul>
+<li><strong>Does not block product development</strong> — new integrations and business-driven functionality can be added throughout the upgrade</li>
+<li><strong>Preserves existing testing infrastructure</strong> — the SLL test suite is comprehensive and battle-tested; used to assert behavioural equivalence at every stage</li>
+<li><strong>Planner logic remains unchanged</strong> — no parallel systems to coordinate</li>
+</ul>
+<hr>
+<h2>Launch Timeline</h2>
+<table>
+<thead><tr><th>Version</th><th>Stage</th><th>Description</th><th>Audit</th></tr></thead>
+<tbody>
+<tr>
+<td><strong>v1.11</strong></td>
+<td>Stage 1</td>
+<td>Library refactor + unify codebase (Spark first, then all Stars)</td>
+<td>March 2</td>
+</tr>
+<tr>
+<td><strong>v1.12</strong></td>
+<td>Stage 2</td>
+<td>Libraries → delegatecall facet-like contracts + ParameterRegistry storage migration</td>
+<td>April</td>
+</tr>
+<tr>
+<td><strong>v1.13</strong></td>
+<td>Stage 3</td>
+<td>Diamond-standard dispatch — selector routing replaces manual wiring; facets reused from Stage 2</td>
+<td>May</td>
+</tr>
+</tbody>
+</table>
+<p><em>Sequence begins after Spark ships controller v1.10 (already on roadmap, headed into the Feb 2 audit).</em></p>
+<hr>
 <h2>configurator-unit</h2>
 <h1>Configurator Unit — Business Requirements</h1>
 <h2>Executive Summary</h2>
@@ -3788,20 +3861,13 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
           
             <div class="question" id="q-contracts-1">
               <div class="question-text">
-                <span class="question-num">Q2.</span> What is | [configurator-unit.md](configurator-unit.md) | Governance layer for PAUs?
+                <span class="question-num">Q2.</span> Diamond PAU replaces the legacy ALM Controller using EIP-2535. What is the primary benefit of this modular facet architecture?
               </div>
               <div class="options">
-                
-                  
-                    <div class="option" data-value="aBEAM/cBEAM hierarchy, SORL, BEAMTimeLock mechanics |" onclick="selectAnswer('contracts', 1, 'aBEAM/cBEAM hierarchy, SORL, BEAMTimeLock mechanics |', 'aBEAM/cBEAM hierarchy, SORL, BEAMTimeLock mechanics |')">aBEAM/cBEAM hierarchy, SORL, BEAMTimeLock mechanics |</div>
-                  
-                    <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('contracts', 1, 'An external integration point for third parties', 'aBEAM/cBEAM hierarchy, SORL, BEAMTimeLock mechanics |')">An external integration point for third parties</div>
-                  
-                    <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('contracts', 1, 'A temporary measure during the transition period', 'aBEAM/cBEAM hierarchy, SORL, BEAMTimeLock mechanics |')">A temporary measure during the transition period</div>
-                  
-                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('contracts', 1, 'A deprecated feature from the old system', 'aBEAM/cBEAM hierarchy, SORL, BEAMTimeLock mechanics |')">A deprecated feature from the old system</div>
-                  
-                
+                  <div class="option" data-value="Facets can be added, removed, or upgraded independently — no full controller redeploy needed for new allocation targets" onclick="selectAnswer('contracts', 1, 'Facets can be added, removed, or upgraded independently — no full controller redeploy needed for new allocation targets', 'Facets can be added, removed, or upgraded independently — no full controller redeploy needed for new allocation targets')">Facets can be added, removed, or upgraded independently — no full controller redeploy needed for new allocation targets</div>
+                  <div class="option" data-value="It replaces ALMProxy with a unified custody contract, reducing gas costs" onclick="selectAnswer('contracts', 1, 'It replaces ALMProxy with a unified custody contract, reducing gas costs', 'Facets can be added, removed, or upgraded independently — no full controller redeploy needed for new allocation targets')">It replaces ALMProxy with a unified custody contract, reducing gas costs</div>
+                  <div class="option" data-value="It removes the need for rate limits by enforcing constraints at the facet level" onclick="selectAnswer('contracts', 1, 'It removes the need for rate limits by enforcing constraints at the facet level', 'Facets can be added, removed, or upgraded independently — no full controller redeploy needed for new allocation targets')">It removes the need for rate limits by enforcing constraints at the facet level</div>
+                  <div class="option" data-value="Each Star deploys a unique Diamond contract with no shared codebase" onclick="selectAnswer('contracts', 1, 'Each Star deploys a unique Diamond contract with no shared codebase', 'Facets can be added, removed, or upgraded independently — no full controller redeploy needed for new allocation targets')">Each Star deploys a unique Diamond contract with no shared codebase</div>
               </div>
             </div>
           
