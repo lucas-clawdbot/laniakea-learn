@@ -3319,6 +3319,10 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
 <td><a href="rate-limit-attacks.md">rate-limit-attacks.md</a></td>
 <td>Rate limit attack vectors (configuration theft, rate climbing) and IRL/SORL parameter calibration</td>
 </tr>
+<tr>
+<td><a href="weeth-integration.md">weeth-integration.md</a></td>
+<td>WEETHModule architecture — EtherFi weETH integration, NFT-based withdrawal flow, ETH→WETH conversion</td>
+</tr>
 </tbody></table>
 <h2>Related</h2>
 <ul>
@@ -3832,6 +3836,30 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
 </code></pre>
 
         </div>
+
+        <div class="content-section">
+          <h2>weETH Integration — WEETHModule</h2>
+<p><em>Released February 2026 — spark-alm-controller v1.10+</em></p>
+<p>The <strong>WEETHModule</strong> enables the ALM system to deposit ETH into EtherFi's liquid staking protocol and hold yield-bearing <strong>weETH</strong> (wrapped eETH). A dedicated intermediary contract is required because EtherFi's withdrawal flow uses NFTs — not direct ETH returns.</p>
+<h3>The Problem</h3>
+<p>When requesting a withdrawal from EtherFi, the protocol mints a <code>WithdrawRequestNFT</code> to the caller rather than returning ETH directly. The standard <code>ALMProxy</code> cannot safely hold NFTs or execute the downstream claim-and-convert workflow.</p>
+<h3>How WEETHModule Works</h3>
+<ol>
+<li><strong>Deposit:</strong> ALMProxy sends WETH → WEETHModule wraps to weETH → deposits into EtherFi LiquidityPool</li>
+<li><strong>Withdrawal request:</strong> WEETHModule calls EtherFi and receives the <code>WithdrawRequestNFT</code></li>
+<li><strong>Claim:</strong> Once finalized, WEETHModule claims raw ETH, wraps to WETH, and returns to ALMProxy</li>
+</ol>
+<table>
+<thead><tr><th>Contract</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td><code>weETH</code></td><td>Yield-bearing ERC-20 token (wrapped eETH)</td></tr>
+<tr><td><code>eETH</code></td><td>EtherFi's underlying liquid staking token</td></tr>
+<tr><td><code>LiquidityPool</code></td><td>EtherFi core — handles deposits and withdrawal requests</td></tr>
+<tr><td><code>WithdrawRequestNFT</code></td><td>NFT representing a pending withdrawal; minted to the requester</td></tr>
+<tr><td><code>WEETHModule</code></td><td>ALM intermediary — NFT holder, ETH→WETH converter, bridge to ALMProxy</td></tr>
+</tbody>
+</table>
+        </div>
         
         <div class="quiz-section">
           <h3>Module Quiz (10 Questions)</h3>
@@ -3873,20 +3901,13 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
           
             <div class="question" id="q-contracts-2">
               <div class="question-text">
-                <span class="question-num">Q3.</span> What is | [lcts.md](lcts.md) | Liquidity Constrained Token Standard?
+                <span class="question-num">Q3.</span> Why does the ALM system use a dedicated WEETHModule for EtherFi (weETH) withdrawals rather than routing directly through the ALMProxy?
               </div>
               <div class="options">
-                
-                  
-                    <div class="option" data-value="A temporary measure during the transition period" onclick="selectAnswer('contracts', 2, 'A temporary measure during the transition period', 'queue-based token conversion with generation model |')">A temporary measure during the transition period</div>
-                  
-                    <div class="option" data-value="A deprecated feature from the old system" onclick="selectAnswer('contracts', 2, 'A deprecated feature from the old system', 'queue-based token conversion with generation model |')">A deprecated feature from the old system</div>
-                  
-                    <div class="option" data-value="queue-based token conversion with generation model |" onclick="selectAnswer('contracts', 2, 'queue-based token conversion with generation model |', 'queue-based token conversion with generation model |')">queue-based token conversion with generation model |</div>
-                  
-                    <div class="option" data-value="An external integration point for third parties" onclick="selectAnswer('contracts', 2, 'An external integration point for third parties', 'queue-based token conversion with generation model |')">An external integration point for third parties</div>
-                  
-                
+                  <div class="option" data-value="EtherFi returns a WithdrawRequestNFT instead of ETH directly — ALMProxy cannot safely hold NFTs or execute the claim-and-convert workflow" onclick="selectAnswer('contracts', 2, 'EtherFi returns a WithdrawRequestNFT instead of ETH directly — ALMProxy cannot safely hold NFTs or execute the claim-and-convert workflow', 'EtherFi returns a WithdrawRequestNFT instead of ETH directly — ALMProxy cannot safely hold NFTs or execute the claim-and-convert workflow')">EtherFi returns a WithdrawRequestNFT instead of ETH directly — ALMProxy cannot safely hold NFTs or execute the claim-and-convert workflow</div>
+                  <div class="option" data-value="weETH is not ERC-20 compliant and requires a custom adapter for ALM compatibility" onclick="selectAnswer('contracts', 2, 'weETH is not ERC-20 compliant and requires a custom adapter for ALM compatibility', 'EtherFi returns a WithdrawRequestNFT instead of ETH directly — ALMProxy cannot safely hold NFTs or execute the claim-and-convert workflow')">weETH is not ERC-20 compliant and requires a custom adapter for ALM compatibility</div>
+                  <div class="option" data-value="EtherFi enforces a protocol-level whitelist that the ALMProxy contract address cannot satisfy" onclick="selectAnswer('contracts', 2, 'EtherFi enforces a protocol-level whitelist that the ALMProxy contract address cannot satisfy', 'EtherFi returns a WithdrawRequestNFT instead of ETH directly — ALMProxy cannot safely hold NFTs or execute the claim-and-convert workflow')">EtherFi enforces a protocol-level whitelist that the ALMProxy contract address cannot satisfy</div>
+                  <div class="option" data-value="The WEETHModule acts as a Diamond facet to route weETH calls through the PAU dispatcher" onclick="selectAnswer('contracts', 2, 'The WEETHModule acts as a Diamond facet to route weETH calls through the PAU dispatcher', 'EtherFi returns a WithdrawRequestNFT instead of ETH directly — ALMProxy cannot safely hold NFTs or execute the claim-and-convert workflow')">The WEETHModule acts as a Diamond facet to route weETH calls through the PAU dispatcher</div>
               </div>
             </div>
           
@@ -3991,20 +4012,13 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
           
             <div class="question" id="q-contracts-9">
               <div class="question-text">
-                <span class="question-num">Q10.</span> Which of these is a major component of the Smart Contracts?
+                <span class="question-num">Q10.</span> The February 26 2026 Spark Ethereum spell onboards Paxos as a new integration. Which asset pairs does it enable for the Spark Liquidity Layer?
               </div>
               <div class="options">
-                
-                  
-                    <div class="option" data-value="Smart Contracts" onclick="selectAnswer('contracts', 9, 'Smart Contracts', 'Smart Contracts')">Smart Contracts</div>
-                  
-                    <div class="option" data-value="Manual Override System" onclick="selectAnswer('contracts', 9, 'Manual Override System', 'Smart Contracts')">Manual Override System</div>
-                  
-                    <div class="option" data-value="Legacy Migration Protocol" onclick="selectAnswer('contracts', 9, 'Legacy Migration Protocol', 'Smart Contracts')">Legacy Migration Protocol</div>
-                  
-                    <div class="option" data-value="External Audit Framework" onclick="selectAnswer('contracts', 9, 'External Audit Framework', 'Smart Contracts')">External Audit Framework</div>
-                  
-                
+                  <div class="option" data-value="USDC ↔ PYUSD and PYUSD ↔ USDG, with rate limits set via LIMIT_ASSET_TRANSFER keys" onclick="selectAnswer('contracts', 9, 'USDC ↔ PYUSD and PYUSD ↔ USDG, with rate limits set via LIMIT_ASSET_TRANSFER keys', 'USDC ↔ PYUSD and PYUSD ↔ USDG, with rate limits set via LIMIT_ASSET_TRANSFER keys')">USDC ↔ PYUSD and PYUSD ↔ USDG, with rate limits set via LIMIT_ASSET_TRANSFER keys</div>
+                  <div class="option" data-value="USDS ↔ PYUSD only, via a new LIMIT_PAXOS_SWAP rate limit key" onclick="selectAnswer('contracts', 9, 'USDS ↔ PYUSD only, via a new LIMIT_PAXOS_SWAP rate limit key', 'USDC ↔ PYUSD and PYUSD ↔ USDG, with rate limits set via LIMIT_ASSET_TRANSFER keys')">USDS ↔ PYUSD only, via a new LIMIT_PAXOS_SWAP rate limit key</div>
+                  <div class="option" data-value="ETH ↔ PYUSD routed through the WEETHModule and a Paxos OTC bridge" onclick="selectAnswer('contracts', 9, 'ETH ↔ PYUSD routed through the WEETHModule and a Paxos OTC bridge', 'USDC ↔ PYUSD and PYUSD ↔ USDG, with rate limits set via LIMIT_ASSET_TRANSFER keys')">ETH ↔ PYUSD routed through the WEETHModule and a Paxos OTC bridge</div>
+                  <div class="option" data-value="USDC ↔ PYUSD only, deployed as a new Diamond PAU facet" onclick="selectAnswer('contracts', 9, 'USDC ↔ PYUSD only, deployed as a new Diamond PAU facet', 'USDC ↔ PYUSD and PYUSD ↔ USDG, with rate limits set via LIMIT_ASSET_TRANSFER keys')">USDC ↔ PYUSD only, deployed as a new Diamond PAU facet</div>
               </div>
             </div>
           
@@ -4465,6 +4479,37 @@ stay in their narrative docs.</p>
 <li>Beacons are apertures, not minds — they externalize intent, they don&#39;t have it</li>
 </ul>
 
+        </div>
+
+        <div class="content-section">
+          <h2>🗳️ Live Protocol Update — Feb 26, 2026 Spark Spell</h2>
+<p><em>Proposal: <a href="https://forum.sky.money/t/february-26-2026-proposed-changes-to-spark-for-upcoming-spell/27719">sky.money forum</a> · Vote passed via Snapshot</em></p>
+<p>The February 26 2026 Ethereum spell executes five categories of changes to the Spark protocol:</p>
+<h3>1. Treasury Transfers (Exec)</h3>
+<ul>
+<li><strong>Foundation Grant (March):</strong> 1,100,000 USDS → Spark Foundation multisig</li>
+<li><strong>SPK Buybacks (Feb 2026):</strong> 571,957 USDS → ALM Ops multisig for buyback execution</li>
+</ul>
+<h3>2. USDT Rate Limit Increases</h3>
+<table>
+<thead><tr><th>Integration</th><th>New Max</th><th>Slope</th></tr></thead>
+<tbody>
+<tr><td>SparkLend USDT</td><td>250M USDT</td><td>2B/day</td></tr>
+<tr><td>Aave Core USDT</td><td>10M USDT</td><td>1B/day</td></tr>
+<tr><td>Maple syrupUSDT (deposit)</td><td>25M USDT</td><td>100M/day</td></tr>
+<tr><td>Maple syrupUSDT (redeem)</td><td>50M USDT</td><td>500M/day</td></tr>
+</tbody>
+</table>
+<h3>3. Paxos Integration (PYUSD)</h3>
+<p>New OTC-style asset transfer routes onboarded via <code>LIMIT_ASSET_TRANSFER</code> rate limit keys:</p>
+<ul>
+<li>USDC → PYUSD (max 5M, slope 50M/day)</li>
+<li>PYUSD → USDC (max 5M, slope 200M/day)</li>
+<li>PYUSD → USDG (max 5M, slope 50M/day)</li>
+<li>USDG → PYUSD (max 5M, slope 100M/day)</li>
+</ul>
+<h3>4. Morpho v2 USDT Vault</h3>
+<p>New <strong>Spark Blue Chip USDT Vault</strong> (<code>sparkUSDTbc</code>) onboarded to the Spark Liquidity Layer: 50M max deposit, 1B/day slope.</p>
         </div>
         
         <div class="quiz-section">
