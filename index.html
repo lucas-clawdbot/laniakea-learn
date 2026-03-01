@@ -3275,7 +3275,7 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
       <div class="module" id="module-contracts">
         <div class="module-header">
           <h2>Module 5: Smart Contracts</h2>
-          <p>10 quiz questions • Estimated 15-20 min</p>
+          <p>11 quiz questions • Estimated 15-20 min</p>
         </div>
         
         <div class="content-section">
@@ -3322,6 +3322,10 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
 <tr>
 <td><a href="weeth-integration.md">weeth-integration.md</a></td>
 <td>WEETHModule architecture — EtherFi weETH integration, NFT-based withdrawal flow, ETH→WETH conversion</td>
+</tr>
+<tr>
+<td><a href="usdc-vault-l2.md">usdc-vault-l2.md</a></td>
+<td>UsdcVaultL2 — ERC-4626 USDC vault for L2 (Base/Arbitrum/Unichain/Optimism), PSM3 integration, escape hatch via exit()</td>
 </tr>
 </tbody></table>
 <h2>Related</h2>
@@ -3860,11 +3864,44 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
 </tbody>
 </table>
         </div>
+
+        <div class="content-section">
+          <h2>L2 USDC Vault — UsdcVaultL2</h2>
+<p><em>Published March 2026 — spark-vaults</em></p>
+<p>The <strong>UsdcVaultL2</strong> is an ERC-4626-compliant tokenized vault for USDC on L2 chains (Base, Arbitrum, Unichain, Optimism). It accepts USDC deposits, converts them to yield-bearing sUSDS via <strong>PSM3</strong>, and returns USDC on redemption — passing the Sky savings rate yield through to depositors.</p>
+<h3>How It Works</h3>
+<ol>
+<li><strong>Deposit:</strong> User deposits USDC → vault calls PSM3 <code>swapExactIn(USDC → sUSDS)</code> → vault mints ERC-4626 shares to depositor</li>
+<li><strong>Yield:</strong> sUSDS appreciates via Sky's savings rate; shares gain value over time via PSM3 rate provider</li>
+<li><strong>Redeem:</strong> Vault burns shares → calls PSM3 <code>swapExactIn(sUSDS → USDC)</code> → returns USDC to user</li>
+<li><strong>Escape hatch:</strong> If PSM3 USDC liquidity is insufficient, users call <code>exit()</code> to receive sUSDS directly (bypasses conversion)</li>
+</ol>
+<h3>L2 vs. Mainnet</h3>
+<table>
+<thead><tr><th>Feature</th><th>Mainnet UsdcVault</th><th>UsdcVaultL2</th></tr></thead>
+<tbody>
+<tr><td>PSM Integration</td><td>LitePSM (USDC ↔ USDS)</td><td>PSM3 (USDC ↔ sUSDS direct)</td></tr>
+<tr><td>Yield Mechanism</td><td>USDS deposited into sUSDS</td><td>Conversion rate from PSM3 rate provider</td></tr>
+<tr><td>sUSDS getter</td><td>Exposed on vault</td><td>Omitted — read via PSM3 rate provider</td></tr>
+<tr><td>Deployment</td><td>Mainnet</td><td>Base, Arbitrum, Unichain, Optimism</td></tr>
+<tr><td>Upgradeability</td><td>UUPS (ERC-1967)</td><td>UUPS (ERC-1967)</td></tr>
+</tbody>
+</table>
+<h3>Key Contracts</h3>
+<table>
+<thead><tr><th>Contract</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td><code>UsdcVaultL2</code></td><td>ERC-4626 vault — accepts USDC, holds sUSDS exposure via PSM3 swaps; UUPS upgradeable</td></tr>
+<tr><td><code>PSM3</code></td><td>L2 Peg Stability Module — USDC ↔ sUSDS swaps at oracle rate; provides rateProvider</td></tr>
+<tr><td><code>UsdcVaultL2Deploy</code></td><td>Deploy library — creates UUPS proxy + implementation, transfers ownership to multisig</td></tr>
+</tbody>
+</table>
+        </div>
         
         <div class="quiz-section">
-          <h3>Module Quiz (10 Questions)</h3>
+          <h3>Module Quiz (11 Questions)</h3>
           <div class="quiz-progress" id="quiz-progress-contracts">
-            <div class="quiz-dot" data-q="0"></div><div class="quiz-dot" data-q="1"></div><div class="quiz-dot" data-q="2"></div><div class="quiz-dot" data-q="3"></div><div class="quiz-dot" data-q="4"></div><div class="quiz-dot" data-q="5"></div><div class="quiz-dot" data-q="6"></div><div class="quiz-dot" data-q="7"></div><div class="quiz-dot" data-q="8"></div><div class="quiz-dot" data-q="9"></div>
+            <div class="quiz-dot" data-q="0"></div><div class="quiz-dot" data-q="1"></div><div class="quiz-dot" data-q="2"></div><div class="quiz-dot" data-q="3"></div><div class="quiz-dot" data-q="4"></div><div class="quiz-dot" data-q="5"></div><div class="quiz-dot" data-q="6"></div><div class="quiz-dot" data-q="7"></div><div class="quiz-dot" data-q="8"></div><div class="quiz-dot" data-q="9"></div><div class="quiz-dot" data-q="10"></div>
           </div>
           
           
@@ -4019,6 +4056,18 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
                   <div class="option" data-value="USDS ↔ PYUSD only, via a new LIMIT_PAXOS_SWAP rate limit key" onclick="selectAnswer('contracts', 9, 'USDS ↔ PYUSD only, via a new LIMIT_PAXOS_SWAP rate limit key', 'USDC ↔ PYUSD and PYUSD ↔ USDG, with rate limits set via LIMIT_ASSET_TRANSFER keys')">USDS ↔ PYUSD only, via a new LIMIT_PAXOS_SWAP rate limit key</div>
                   <div class="option" data-value="ETH ↔ PYUSD routed through the WEETHModule and a Paxos OTC bridge" onclick="selectAnswer('contracts', 9, 'ETH ↔ PYUSD routed through the WEETHModule and a Paxos OTC bridge', 'USDC ↔ PYUSD and PYUSD ↔ USDG, with rate limits set via LIMIT_ASSET_TRANSFER keys')">ETH ↔ PYUSD routed through the WEETHModule and a Paxos OTC bridge</div>
                   <div class="option" data-value="USDC ↔ PYUSD only, deployed as a new Diamond PAU facet" onclick="selectAnswer('contracts', 9, 'USDC ↔ PYUSD only, deployed as a new Diamond PAU facet', 'USDC ↔ PYUSD and PYUSD ↔ USDG, with rate limits set via LIMIT_ASSET_TRANSFER keys')">USDC ↔ PYUSD only, deployed as a new Diamond PAU facet</div>
+              </div>
+            </div>
+          
+            <div class="question" id="q-contracts-10">
+              <div class="question-text">
+                <span class="question-num">Q11.</span> The UsdcVaultL2 integrates with PSM3 on L2 chains for USDC ↔ sUSDS swaps. What escape hatch does it provide if PSM3 USDC liquidity is insufficient for a redemption?
+              </div>
+              <div class="options">
+                  <div class="option" data-value="Users can call exit() to receive sUSDS directly, bypassing the PSM3 USDC conversion" onclick="selectAnswer('contracts', 10, 'Users can call exit() to receive sUSDS directly, bypassing the PSM3 USDC conversion', 'Users can call exit() to receive sUSDS directly, bypassing the PSM3 USDC conversion')">Users can call <code>exit()</code> to receive sUSDS directly, bypassing the PSM3 USDC conversion</div>
+                  <div class="option" data-value="The vault automatically routes to the mainnet LitePSM via cross-chain bridge fallback" onclick="selectAnswer('contracts', 10, 'The vault automatically routes to the mainnet LitePSM via cross-chain bridge fallback', 'Users can call exit() to receive sUSDS directly, bypassing the PSM3 USDC conversion')">The vault automatically routes to mainnet LitePSM via cross-chain bridge fallback</div>
+                  <div class="option" data-value="Redemptions queue in LCTS until PSM3 liquidity is restored" onclick="selectAnswer('contracts', 10, 'Redemptions queue in LCTS until PSM3 liquidity is restored', 'Users can call exit() to receive sUSDS directly, bypassing the PSM3 USDC conversion')">Redemptions queue in LCTS until PSM3 liquidity is restored</div>
+                  <div class="option" data-value="The Guardian invokes an emergency drain returning USDC from the ALMProxy reserve" onclick="selectAnswer('contracts', 10, 'The Guardian invokes an emergency drain returning USDC from the ALMProxy reserve', 'Users can call exit() to receive sUSDS directly, bypassing the PSM3 USDC conversion')">The Guardian invokes an emergency drain returning USDC from the ALMProxy reserve</div>
               </div>
             </div>
           
