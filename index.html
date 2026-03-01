@@ -3275,7 +3275,7 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
       <div class="module" id="module-contracts">
         <div class="module-header">
           <h2>Module 5: Smart Contracts</h2>
-          <p>12 quiz questions • Estimated 15-20 min</p>
+          <p>13 quiz questions • Estimated 15-20 min</p>
         </div>
         
         <div class="content-section">
@@ -3326,6 +3326,10 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
 <tr>
 <td><a href="usdc-vault-l2.md">usdc-vault-l2.md</a></td>
 <td>UsdcVaultL2 — ERC-4626 USDC vault for L2 (Base/Arbitrum/Unichain/Optimism), PSM3 integration, escape hatch via exit()</td>
+</tr>
+<tr>
+<td><a href="spark-address-registry">spark-address-registry</a></td>
+<td>Canonical on-chain address registry — CCTP v2 migration (unified messenger), treasury multisig additions (DEV-1211)</td>
 </tr>
 </tbody></table>
 <h2>Related</h2>
@@ -3920,11 +3924,35 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
 </tbody>
 </table>
         </div>
+
+        <div class="content-section">
+          <h2>Cross-Chain Infrastructure: CCTP v2 Migration</h2>
+<p><em>spark-address-registry — Feb 27 2026</em></p>
+<p>Circle's <strong>Cross-Chain Transfer Protocol v2 (CCTP v2)</strong> was adopted across all Spark-supported chains on Feb 27. The migration standardizes the <code>CCTP_TOKEN_MESSENGER</code> address to a single unified contract across every supported chain, replacing the previous per-chain v1 addresses.</p>
+<h3>What Changed</h3>
+<table>
+<thead><tr><th>Chain</th><th>CCTP v1 Address</th><th>CCTP v2 Address</th></tr></thead>
+<tbody>
+<tr><td>Ethereum</td><td><code>0xBd3fa8...F3155</code></td><td rowspan="6"><code>0x28b5a0e9C621a5BadaA536219b3a228C8168cf5d</code> (unified)</td></tr>
+<tr><td>Arbitrum</td><td><code>0x19330d...e08A</code></td></tr>
+<tr><td>Base</td><td><code>0x1682Ae...8962</code></td></tr>
+<tr><td>Optimism</td><td><code>0x2B4069...528f</code></td></tr>
+<tr><td>Unichain</td><td><code>0x4e744b...762</code></td></tr>
+<tr><td>Avalanche</td><td><code>0x6B25532...982</code></td></tr>
+</tbody>
+</table>
+<h3>Significance for Laniakea</h3>
+<ul>
+<li><strong>Foreign Layer:</strong> Prime → Foreign Prime cross-chain transfers that use CCTP now route through the v2 messenger. The <code>spark-address-registry</code> is the canonical source of contract addresses for all ALM controller deployments — this update affects any spell or deploy script that references <code>CCTP_TOKEN_MESSENGER</code></li>
+<li><strong>Unified surface:</strong> A single v2 address across chains simplifies auditing and reduces configuration drift — operators no longer need to track per-chain v1 addresses</li>
+<li><strong>CCTP v2 improvements:</strong> v2 supports faster finality (< 5s on supported chains) and improved programmability via <em>hooks</em> for atomic cross-chain operations</li>
+</ul>
+        </div>
         
         <div class="quiz-section">
-          <h3>Module Quiz (12 Questions)</h3>
+          <h3>Module Quiz (13 Questions)</h3>
           <div class="quiz-progress" id="quiz-progress-contracts">
-            <div class="quiz-dot" data-q="0"></div><div class="quiz-dot" data-q="1"></div><div class="quiz-dot" data-q="2"></div><div class="quiz-dot" data-q="3"></div><div class="quiz-dot" data-q="4"></div><div class="quiz-dot" data-q="5"></div><div class="quiz-dot" data-q="6"></div><div class="quiz-dot" data-q="7"></div><div class="quiz-dot" data-q="8"></div><div class="quiz-dot" data-q="9"></div><div class="quiz-dot" data-q="10"></div><div class="quiz-dot" data-q="11"></div>
+            <div class="quiz-dot" data-q="0"></div><div class="quiz-dot" data-q="1"></div><div class="quiz-dot" data-q="2"></div><div class="quiz-dot" data-q="3"></div><div class="quiz-dot" data-q="4"></div><div class="quiz-dot" data-q="5"></div><div class="quiz-dot" data-q="6"></div><div class="quiz-dot" data-q="7"></div><div class="quiz-dot" data-q="8"></div><div class="quiz-dot" data-q="9"></div><div class="quiz-dot" data-q="10"></div><div class="quiz-dot" data-q="11"></div><div class="quiz-dot" data-q="12"></div>
           </div>
           
           
@@ -4103,6 +4131,18 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
                   <div class="option" data-value="0 means no slippage allowed (exact price match required), matching standard DeFi convention" onclick="selectAnswer('contracts', 11, '0 means no slippage allowed (exact price match required), matching standard DeFi convention', '0 means the integration is disabled — so uninitialized integrations fail safe (revert) rather than accepting swaps at any price')"><code>0</code> means no slippage allowed (exact price match required), matching standard DeFi convention</div>
                   <div class="option" data-value="0 means 100% slippage tolerance — the integration accepts any price as a permissive fallback" onclick="selectAnswer('contracts', 11, '0 means 100% slippage tolerance — the integration accepts any price as a permissive fallback', '0 means the integration is disabled — so uninitialized integrations fail safe (revert) rather than accepting swaps at any price')"><code>0</code> means 100% slippage tolerance — the integration accepts any price as a permissive fallback</div>
                   <div class="option" data-value="0 is not a valid slippage value; the controller reverts at deployment if any slot is unset" onclick="selectAnswer('contracts', 11, '0 is not a valid slippage value; the controller reverts at deployment if any slot is unset', '0 means the integration is disabled — so uninitialized integrations fail safe (revert) rather than accepting swaps at any price')"><code>0</code> is not a valid slippage value; the controller reverts at deployment if any slot is unset</div>
+              </div>
+            </div>
+
+            <div class="question" id="q-contracts-12">
+              <div class="question-text">
+                <span class="question-num">Q13.</span> After the Feb 27 2026 CCTP v2 migration, what is notable about the <code>CCTP_TOKEN_MESSENGER</code> address in the Spark address registry?
+              </div>
+              <div class="options">
+                  <div class="option" data-value="It is now a single unified address across all supported chains (Ethereum, Arbitrum, Base, Optimism, Unichain, Avalanche)" onclick="selectAnswer('contracts', 12, 'It is now a single unified address across all supported chains (Ethereum, Arbitrum, Base, Optimism, Unichain, Avalanche)', 'It is now a single unified address across all supported chains (Ethereum, Arbitrum, Base, Optimism, Unichain, Avalanche)')">It is now a single unified address across all supported chains (Ethereum, Arbitrum, Base, Optimism, Unichain, Avalanche)</div>
+                  <div class="option" data-value="Each chain now has a unique v2 address derived from a deterministic deployment factory" onclick="selectAnswer('contracts', 12, 'Each chain now has a unique v2 address derived from a deterministic deployment factory', 'It is now a single unified address across all supported chains (Ethereum, Arbitrum, Base, Optimism, Unichain, Avalanche)')">Each chain now has a unique v2 address derived from a deterministic deployment factory</div>
+                  <div class="option" data-value="CCTP v2 replaces the token messenger with a direct LayerZero endpoint for all Spark chains" onclick="selectAnswer('contracts', 12, 'CCTP v2 replaces the token messenger with a direct LayerZero endpoint for all Spark chains', 'It is now a single unified address across all supported chains (Ethereum, Arbitrum, Base, Optimism, Unichain, Avalanche)')">CCTP v2 replaces the token messenger with a direct LayerZero endpoint for all Spark chains</div>
+                  <div class="option" data-value="The messenger address is now set to address(0) on all chains, as CCTP is being deprecated in favour of native bridges" onclick="selectAnswer('contracts', 12, 'The messenger address is now set to address(0) on all chains, as CCTP is being deprecated in favour of native bridges', 'It is now a single unified address across all supported chains (Ethereum, Arbitrum, Base, Optimism, Unichain, Avalanche)')">The messenger address is set to <code>address(0)</code> on all chains, as CCTP is being deprecated in favour of native bridges</div>
               </div>
             </div>
           
@@ -4594,6 +4634,19 @@ stay in their narrative docs.</p>
 </ul>
 <h3>4. Morpho v2 USDT Vault</h3>
 <p>New <strong>Spark Blue Chip USDT Vault</strong> (<code>sparkUSDTbc</code>) onboarded to the Spark Liquidity Layer: 50M max deposit, 1B/day slope.</p>
+        </div>
+
+        <div class="content-section">
+          <h2>🏛️ Treasury Multisig Expansion (DEV-1211, Feb 27 2026)</h2>
+<p>Two new treasury multisigs were added to the Spark Ethereum address registry on Feb 27, expanding the protocol's treasury management structure beyond the existing Foundation and Company multisigs:</p>
+<table>
+<thead><tr><th>Multisig</th><th>Address</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td><code>SPARK_LONG_TERM_TREASURY_MULTISIG</code></td><td><code>0x46dce51a...5847</code></td><td>Long-horizon protocol reserves and strategic allocations</td></tr>
+<tr><td><code>SPARK_MID_TERM_TREASURY_MULTISIG</code></td><td><code>0x089693eD...2d6</code></td><td>Medium-term operational treasury for bridge-period spending</td></tr>
+</tbody>
+</table>
+<p>These join the existing <code>SPARK_FOUNDATION_MULTISIG</code> and <code>SPK_COMPANY_MULTISIG</code> in the canonical address registry, giving the protocol distinct custody buckets for different time-horizon treasury flows. Spells may now target these new multisigs for treasury transfers without requiring ad-hoc address inclusion in proposal calldata.</p>
         </div>
         
         <div class="quiz-section">
