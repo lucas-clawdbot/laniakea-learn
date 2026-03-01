@@ -3275,7 +3275,7 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
       <div class="module" id="module-contracts">
         <div class="module-header">
           <h2>Module 5: Smart Contracts</h2>
-          <p>11 quiz questions • Estimated 15-20 min</p>
+          <p>12 quiz questions • Estimated 15-20 min</p>
         </div>
         
         <div class="content-section">
@@ -3863,6 +3863,29 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
 <tr><td><code>WEETHModule</code></td><td>ALM intermediary — NFT holder, ETH→WETH converter, bridge to ALMProxy</td></tr>
 </tbody>
 </table>
+<h3>Withdrawal Slippage Protection (DEV-1251)</h3>
+<p><em>Fix merged Feb 16 2026</em></p>
+<p>The <code>requestWithdrawFromWeETH</code> call accepts a <code>minEETHShares</code> parameter (renamed from <code>minEETHAmount</code>) that guards against cumulative rate slippage across both conversions in the withdrawal path (weETH → eETH → eETH shares). The slippage check uses <code>LiquidityPool.sharesForAmount(eETHAmount) >= minEETHShares</code> — comparing in <em>share</em> terms, not raw token amounts — because EtherFi's share price can drift and share-based comparison provides tighter slippage bounds.</p>
+        </div>
+
+        <div class="content-section">
+          <h2>ALM Max Slippages — Inverse Notation</h2>
+<p><em>Documented Feb 12 2026 — spark-alm-controller README (DEV-1180)</em></p>
+<p>All max slippage values throughout the ALM controller use an <strong>inverse notation</strong> compared to standard DeFi convention. Understanding this is essential for correctly reading and configuring rate-limited integrations.</p>
+<h3>The Convention</h3>
+<table>
+<thead><tr><th>Value</th><th>ALM Controller Meaning</th><th>Standard DeFi Meaning</th></tr></thead>
+<tbody>
+<tr><td><code>0</code></td><td><strong>Integration disabled</strong> (storage default)</td><td>No slippage allowed</td></tr>
+<tr><td><code>0.999e18</code></td><td>Result must be ≥ 99.9% of expected — 0.1% max slippage</td><td>0.1% max slippage</td></tr>
+<tr><td><code>0.995e18</code></td><td>Result must be ≥ 99.5% of expected — 0.5% max slippage</td><td>0.5% max slippage</td></tr>
+<tr><td><code>1e18</code></td><td>No slippage allowed (exact match)</td><td>No slippage allowed</td></tr>
+</tbody>
+</table>
+<h3>Why Inverse?</h3>
+<p>The design is intentional: Solidity storage slots default to <code>0</code>. By making <code>0</code> mean "disabled" rather than "zero slippage allowed", any uninitialized integration automatically fails safe — it reverts rather than accepting any swap at any price. Non-zero values represent the <em>minimum acceptable ratio</em> of actual result to expected result, scaled to <code>1e18</code>.</p>
+<h3>UniswapV4 Example</h3>
+<p>For UniswapV4 stablecoin pools (assumed to be 1:1 pairs like USDC/USDT), a max slippage of <code>0.999e18</code> means the swap output must be at least $0.999 for every $1.00 of input. Any swap priced worse than that ratio reverts.</p>
         </div>
 
         <div class="content-section">
@@ -3899,9 +3922,9 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
         </div>
         
         <div class="quiz-section">
-          <h3>Module Quiz (11 Questions)</h3>
+          <h3>Module Quiz (12 Questions)</h3>
           <div class="quiz-progress" id="quiz-progress-contracts">
-            <div class="quiz-dot" data-q="0"></div><div class="quiz-dot" data-q="1"></div><div class="quiz-dot" data-q="2"></div><div class="quiz-dot" data-q="3"></div><div class="quiz-dot" data-q="4"></div><div class="quiz-dot" data-q="5"></div><div class="quiz-dot" data-q="6"></div><div class="quiz-dot" data-q="7"></div><div class="quiz-dot" data-q="8"></div><div class="quiz-dot" data-q="9"></div><div class="quiz-dot" data-q="10"></div>
+            <div class="quiz-dot" data-q="0"></div><div class="quiz-dot" data-q="1"></div><div class="quiz-dot" data-q="2"></div><div class="quiz-dot" data-q="3"></div><div class="quiz-dot" data-q="4"></div><div class="quiz-dot" data-q="5"></div><div class="quiz-dot" data-q="6"></div><div class="quiz-dot" data-q="7"></div><div class="quiz-dot" data-q="8"></div><div class="quiz-dot" data-q="9"></div><div class="quiz-dot" data-q="10"></div><div class="quiz-dot" data-q="11"></div>
           </div>
           
           
@@ -4068,6 +4091,18 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
                   <div class="option" data-value="The vault automatically routes to the mainnet LitePSM via cross-chain bridge fallback" onclick="selectAnswer('contracts', 10, 'The vault automatically routes to the mainnet LitePSM via cross-chain bridge fallback', 'Users can call exit() to receive sUSDS directly, bypassing the PSM3 USDC conversion')">The vault automatically routes to mainnet LitePSM via cross-chain bridge fallback</div>
                   <div class="option" data-value="Redemptions queue in LCTS until PSM3 liquidity is restored" onclick="selectAnswer('contracts', 10, 'Redemptions queue in LCTS until PSM3 liquidity is restored', 'Users can call exit() to receive sUSDS directly, bypassing the PSM3 USDC conversion')">Redemptions queue in LCTS until PSM3 liquidity is restored</div>
                   <div class="option" data-value="The Guardian invokes an emergency drain returning USDC from the ALMProxy reserve" onclick="selectAnswer('contracts', 10, 'The Guardian invokes an emergency drain returning USDC from the ALMProxy reserve', 'Users can call exit() to receive sUSDS directly, bypassing the PSM3 USDC conversion')">The Guardian invokes an emergency drain returning USDC from the ALMProxy reserve</div>
+              </div>
+            </div>
+
+            <div class="question" id="q-contracts-11">
+              <div class="question-text">
+                <span class="question-num">Q12.</span> In the ALM controller, a max slippage value of <code>0</code> (the Solidity storage default) means what — and why was it designed this way?
+              </div>
+              <div class="options">
+                  <div class="option" data-value="0 means the integration is disabled — so uninitialized integrations fail safe (revert) rather than accepting swaps at any price" onclick="selectAnswer('contracts', 11, '0 means the integration is disabled — so uninitialized integrations fail safe (revert) rather than accepting swaps at any price', '0 means the integration is disabled — so uninitialized integrations fail safe (revert) rather than accepting swaps at any price')"><code>0</code> means the integration is disabled — so uninitialized integrations fail safe (revert) rather than accepting swaps at any price</div>
+                  <div class="option" data-value="0 means no slippage allowed (exact price match required), matching standard DeFi convention" onclick="selectAnswer('contracts', 11, '0 means no slippage allowed (exact price match required), matching standard DeFi convention', '0 means the integration is disabled — so uninitialized integrations fail safe (revert) rather than accepting swaps at any price')"><code>0</code> means no slippage allowed (exact price match required), matching standard DeFi convention</div>
+                  <div class="option" data-value="0 means 100% slippage tolerance — the integration accepts any price as a permissive fallback" onclick="selectAnswer('contracts', 11, '0 means 100% slippage tolerance — the integration accepts any price as a permissive fallback', '0 means the integration is disabled — so uninitialized integrations fail safe (revert) rather than accepting swaps at any price')"><code>0</code> means 100% slippage tolerance — the integration accepts any price as a permissive fallback</div>
+                  <div class="option" data-value="0 is not a valid slippage value; the controller reverts at deployment if any slot is unset" onclick="selectAnswer('contracts', 11, '0 is not a valid slippage value; the controller reverts at deployment if any slot is unset', '0 means the integration is disabled — so uninitialized integrations fail safe (revert) rather than accepting swaps at any price')"><code>0</code> is not a valid slippage value; the controller reverts at deployment if any slot is unset</div>
               </div>
             </div>
           
