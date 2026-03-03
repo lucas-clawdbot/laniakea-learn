@@ -3275,7 +3275,7 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
       <div class="module" id="module-contracts">
         <div class="module-header">
           <h2>Module 5: Smart Contracts</h2>
-          <p>13 quiz questions • Estimated 15-20 min</p>
+          <p>14 quiz questions • Estimated 15-20 min</p>
         </div>
         
         <div class="content-section">
@@ -3949,10 +3949,48 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
 </ul>
         </div>
         
+        <div class="content-section">
+          <h2>Security Audits: v1.10.0 / v1.6.0 / v1.1.0 (Feb 2026)</h2>
+<p><em>Cantina Managed reviews published Mar 2 2026 — spark-alm-controller, sparklend-advanced, sparklend-cap-automator</em></p>
+<p>Three Cantina Managed security reviews (all led by <strong>Christoph Michel</strong> and <strong>M4rio.eth</strong>, February 2026) were published simultaneously. No critical, high, or medium findings across any of the three repos — all identified issues were low or informational.</p>
+
+<h3>spark-alm-controller v1.10.0 (Feb 7–9)</h3>
+<p>8 total findings: <strong>2 Low</strong>, 6 Informational. 5 fixed, 3 acknowledged.</p>
+<ul>
+<li><strong>[Low — Fixed]</strong> <em>Uniswap V4 <code>increaseLiquidity</code>: <code>SETTLE_PAIR</code> → <code>CLOSE_CURRENCY</code></em> — <code>SETTLE_PAIR</code> reverts on positive delta (e.g., from auto-collected fees). <code>CLOSE_CURRENCY</code> is the safe alternative — it takes or settles depending on delta sign. Fixed in commit <code>402bb08c</code>.</li>
+<li><strong>[Low]</strong> <em>Missing slippage protection on weETH withdrawal request</em> — withdraw requests did not enforce a minimum ETH-equivalent output, leaving the ALM proxy exposed to unfavorable exchange rates at redemption time.</li>
+<li><strong>[Info]</strong> <em>EtherFi deposits can leave eETH dust in almProxy</em> — fractional rounding during deposit means small eETH residuals accumulate in the proxy over time.</li>
+<li><strong>[Info]</strong> <em>No minimum weETH withdrawal amount → withdrawal griefing</em> — without a floor, an adversary can spam micro-withdrawal requests to exhaust the rate limit.</li>
+<li><strong>[Info]</strong> <em><code>quoteSend</code> should be proxied through almProxy</em> — <code>quoteOFT</code> is correctly routed through the proxy; <code>quoteSend</code> was not, creating an inconsistency.</li>
+<li><strong>[Info]</strong> <em>Missing explicit ownership check before claiming weETH withdrawal</em> — the contract did not assert claim ownership before executing, relying on downstream revert.</li>
+<li><strong>[Info]</strong> <em>Claim weETH rate limit creates unnecessary bottleneck</em> — applying the rate limit at claim time (rather than at request time) unnecessarily serializes large withdrawals.</li>
+</ul>
+
+<h3>sparklend-advanced v1.6.0 (Feb 4–7)</h3>
+<p>1 total finding: <strong>1 Low — Fixed</strong>.</p>
+<ul>
+<li><strong>[Low — Fixed]</strong> <em>Exchange-rate adapters lack staleness checks for upstream pause/cached-update edge cases</em> — if an upstream oracle pauses or returns a stale cached price, the adapter accepted the value without flagging it. Fix adds staleness bounds to all exchange-rate adapter reads.</li>
+</ul>
+
+<h3>sparklend-cap-automator v1.1.0 (Feb 2–4)</h3>
+<p>2 total findings: 0 Low, 2 Informational. 1 fixed, 1 acknowledged.</p>
+<ul>
+<li><strong>[Info — Acknowledged]</strong> <em>Large depositor can temporarily block deposits by lowering cap before <code>exec()</code></em> — a whale can frontrun the cap-automator's <code>exec()</code> call by depositing to push supply near the new cap, causing the automation to revert. Acknowledged as a theoretical griefing vector with limited economic incentive.</li>
+<li><strong>[Info — Fixed]</strong> <em>Use reserve-configuration decimals to mirror Aave cap math exactly</em> — the automator used hardcoded decimals in cap arithmetic; using the reserve config's actual decimals prevents rounding divergence vs Aave's internal math.</li>
+</ul>
+
+<h3>Takeaways</h3>
+<ul>
+<li>Zero critical/high/medium findings across three concurrent reviews — reflects the maturity of Spark's security posture at this stage of the protocol.</li>
+<li>The weETH-related cluster (slippage, griefing, dust, rate-limit) shows that liquid-staking integrations are the current surface area to watch — they involve async redemption flows that don't fit neatly into standard ERC-20 assumptions.</li>
+<li>The cap-automator griefing finding is acknowledged (not fixed) — understanding this tradeoff is relevant for operators sizing supply caps.</li>
+</ul>
+        </div>
+
         <div class="quiz-section">
-          <h3>Module Quiz (13 Questions)</h3>
+          <h3>Module Quiz (14 Questions)</h3>
           <div class="quiz-progress" id="quiz-progress-contracts">
-            <div class="quiz-dot" data-q="0"></div><div class="quiz-dot" data-q="1"></div><div class="quiz-dot" data-q="2"></div><div class="quiz-dot" data-q="3"></div><div class="quiz-dot" data-q="4"></div><div class="quiz-dot" data-q="5"></div><div class="quiz-dot" data-q="6"></div><div class="quiz-dot" data-q="7"></div><div class="quiz-dot" data-q="8"></div><div class="quiz-dot" data-q="9"></div><div class="quiz-dot" data-q="10"></div><div class="quiz-dot" data-q="11"></div><div class="quiz-dot" data-q="12"></div>
+            <div class="quiz-dot" data-q="0"></div><div class="quiz-dot" data-q="1"></div><div class="quiz-dot" data-q="2"></div><div class="quiz-dot" data-q="3"></div><div class="quiz-dot" data-q="4"></div><div class="quiz-dot" data-q="5"></div><div class="quiz-dot" data-q="6"></div><div class="quiz-dot" data-q="7"></div><div class="quiz-dot" data-q="8"></div><div class="quiz-dot" data-q="9"></div><div class="quiz-dot" data-q="10"></div><div class="quiz-dot" data-q="11"></div><div class="quiz-dot" data-q="12"></div><div class="quiz-dot" data-q="13"></div>
           </div>
           
           
@@ -4143,6 +4181,18 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
                   <div class="option" data-value="Each chain now has a unique v2 address derived from a deterministic deployment factory" onclick="selectAnswer('contracts', 12, 'Each chain now has a unique v2 address derived from a deterministic deployment factory', 'It is now a single unified address across all supported chains (Ethereum, Arbitrum, Base, Optimism, Unichain, Avalanche)')">Each chain now has a unique v2 address derived from a deterministic deployment factory</div>
                   <div class="option" data-value="CCTP v2 replaces the token messenger with a direct LayerZero endpoint for all Spark chains" onclick="selectAnswer('contracts', 12, 'CCTP v2 replaces the token messenger with a direct LayerZero endpoint for all Spark chains', 'It is now a single unified address across all supported chains (Ethereum, Arbitrum, Base, Optimism, Unichain, Avalanche)')">CCTP v2 replaces the token messenger with a direct LayerZero endpoint for all Spark chains</div>
                   <div class="option" data-value="The messenger address is now set to address(0) on all chains, as CCTP is being deprecated in favour of native bridges" onclick="selectAnswer('contracts', 12, 'The messenger address is now set to address(0) on all chains, as CCTP is being deprecated in favour of native bridges', 'It is now a single unified address across all supported chains (Ethereum, Arbitrum, Base, Optimism, Unichain, Avalanche)')">The messenger address is set to <code>address(0)</code> on all chains, as CCTP is being deprecated in favour of native bridges</div>
+              </div>
+            </div>
+
+            <div class="question" id="q-contracts-13">
+              <div class="question-text">
+                <span class="question-num">Q14.</span> In the Feb 2026 Cantina audit of <code>spark-alm-controller</code> v1.10.0, why was the <code>SETTLE_PAIR</code> action in <code>UniswapV4Lib.sol</code> flagged as a Low-risk issue?
+              </div>
+              <div class="options">
+                  <div class="option" data-value="SETTLE_PAIR reverts on positive delta (e.g. from auto-collected fees), whereas CLOSE_CURRENCY safely takes or settles depending on sign" onclick="selectAnswer('contracts', 13, 'SETTLE_PAIR reverts on positive delta (e.g. from auto-collected fees), whereas CLOSE_CURRENCY safely takes or settles depending on sign', 'SETTLE_PAIR reverts on positive delta (e.g. from auto-collected fees), whereas CLOSE_CURRENCY safely takes or settles depending on sign')">SETTLE_PAIR reverts on positive delta (e.g. from auto-collected fees), whereas CLOSE_CURRENCY safely takes or settles depending on sign</div>
+                  <div class="option" data-value="SETTLE_PAIR is deprecated in Uniswap V4 and will be removed in a future upgrade, causing future incompatibility" onclick="selectAnswer('contracts', 13, 'SETTLE_PAIR is deprecated in Uniswap V4 and will be removed in a future upgrade, causing future incompatibility', 'SETTLE_PAIR reverts on positive delta (e.g. from auto-collected fees), whereas CLOSE_CURRENCY safely takes or settles depending on sign')">SETTLE_PAIR is deprecated in Uniswap V4 and will be removed in a future upgrade, causing future incompatibility</div>
+                  <div class="option" data-value="SETTLE_PAIR charges double the gas compared to CLOSE_CURRENCY for liquidity increase operations" onclick="selectAnswer('contracts', 13, 'SETTLE_PAIR charges double the gas compared to CLOSE_CURRENCY for liquidity increase operations', 'SETTLE_PAIR reverts on positive delta (e.g. from auto-collected fees), whereas CLOSE_CURRENCY safely takes or settles depending on sign')">SETTLE_PAIR charges double the gas compared to CLOSE_CURRENCY for liquidity increase operations</div>
+                  <div class="option" data-value="SETTLE_PAIR does not support ERC-20 tokens and only works with native ETH pairs" onclick="selectAnswer('contracts', 13, 'SETTLE_PAIR does not support ERC-20 tokens and only works with native ETH pairs', 'SETTLE_PAIR reverts on positive delta (e.g. from auto-collected fees), whereas CLOSE_CURRENCY safely takes or settles depending on sign')">SETTLE_PAIR does not support ERC-20 tokens and only works with native ETH pairs</div>
               </div>
             </div>
           
