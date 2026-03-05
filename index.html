@@ -3586,7 +3586,7 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
 <li>Receives capital from Generator via ERC4626 vault</li>
 <li>Deploys to:<ul>
 <li><strong>Halo Layer</strong> — the primary long-term deployment path (includes both Prime-created Halos and Core Controlled Agents)</li>
-<li><strong>Core Controlled Agents</strong> — legacy DeFi (Morpho vaults, Aave pools, SparkLend) wrapped as Halo Units under Core Council governance</li>
+<li><strong>Core Controlled Agents</strong> — legacy DeFi (Morpho vaults, Aave pools, SparkLend) wrapped as Halo Units under Core Council governance. As of March 2026, registered Morpho positions span USDC, DAI, USDS, and now <strong>USDT via Morpho V2</strong> (<code>spark-address-registry #81</code>).</li>
 <li><strong>Foreign Primes</strong> — via bridge for cross-chain deployment</li>
 </ul>
 </li>
@@ -3784,6 +3784,7 @@ This document is derived from the Sky Atlas Stability Scope (ALM / ASC / DAB sec
    │
    └──► Core Controlled Agents
         (Morpho, Aave, SparkLend - legacy DeFi wrapped as Halo Units)
+        [Mar 2026: Morpho V2 USDT vault added to address registry — #81]
 </code></pre>
 <p><strong>Note: Risk Capital Tokens</strong></p>
 <p>The diagram above shows the capital deployment flow. Parallel to this, risk capital tokens (srUSDS, TEJRC, TISRC) provide the risk capital that backs deployments:</p>
@@ -5551,7 +5552,7 @@ def aggregate_active_agents(
     
     
     <div class="last-updated">
-      Last updated: 2026-03-05 • Auto-generated from laniakea-docs
+      Last updated: 2026-03-05 (18:00) • Auto-generated from laniakea-docs
     </div>
   </div>
   

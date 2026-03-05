@@ -1,0 +1,6 @@
+file '/Users/clawdbot/projects/laniakea-learn/chunks/audio_000.mp3'
+file '/Users/clawdbot/projects/laniakea-learn/chunks/audio_001.mp3'
+file '/Users/clawdbot/projects/laniakea-learn/chunks/audio_002.mp3'
+file '/Users/clawdbot/projects/laniakea-learn/chunks/audio_003.mp3'
+file '/Users/clawdbot/projects/laniakea-learn/chunks/audio_004.mp3'
+file '/Users/clawdbot/projects/laniakea-learn/chunks/audio_005.mp3'
