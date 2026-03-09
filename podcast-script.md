@@ -97,6 +97,26 @@ Post-Laniakea, governance evolves from direct SKY token executive votes to a lay
 
 Every level needs dual-key authorization — a top-down payload from the layer above and a bottom-up token hat from the level's own holders. SKY holders retain ultimate sovereignty through a graduated freeze mechanism that can escalate to a full override, dismissing the Core Council entirely and reverting to direct SKY holder control.
 
+## Spark Savings Vault Intents (spark-savings-intents)
+
+A new system to handle large withdrawals from Spark Savings Vaults. Problem: when a user wants to redeem millions of USDC from a Spark Savings Vault, the vault may not have enough idle liquidity on hand. A direct `redeem` call reverts — the user is stuck.
+
+Solution: intent-based withdrawals. Users submit a `WithdrawRequest` specifying shares, recipient, and deadline. The ALM Planner (off-chain relayer) monitors `RequestCreated` events, orchestrates vault liquidity (unwinds positions, moves assets in), then calls `fulfill()` to atomically complete the redemption. The intent contract never holds shares or assets — it's pure coordination.
+
+Three actors: **User** (holds vault shares), **SavingsVaultIntents contract** (stores requests, executes fulfillments), **ALM Planner** (off-chain, monitors events, orchestrates capital). Users can have one active request per vault, overwrite or cancel. Fulfillment is all-or-nothing — no partial fills. Race condition protection via `requestId` matching: `fulfill()` validates the stored requestId matches exactly, so stale planner state can't accidentally execute against a modified request. Even a malicious relayer can't cause fund loss — worst case is a request expires unfulfilled. Designed specifically for Spark Vault v2.
+
+## March 12, 2026 Spell (in development — DEV-1330)
+
+A multi-part upgrade currently in the `feat/dev-1330/spell-20260312` branch:
+
+1. **ALM Controller → v1.10:** Full parameter migration — exchange rate limits across all vaults (Morpho, sUSDS, Fluid, sUSDe, Syrup, Arkis) and slippage limits across Curve pools, Aave markets, SparkLend spTokens, and Uniswap v4 pools (PYUSD/USDS, USDT/USDS). New controller address is deployed; old config migrated atomically.
+
+2. **Cap Automator → v1.1:** Risk admin role transferred from old to new Cap Automator. All existing supply cap and borrow cap configs migrated across every SparkLend reserve automatically.
+
+3. **Kill Switch Oracle expansion:** cbBTC/BTC ratio oracle, rETH/ETH ratio oracle, WBTC/BTC Chainlink oracle, and weETH/ETH ratio oracle all added at a 0.95 threshold — meaning a 5%+ de-peg from the underlying triggers the kill switch.
+
+4. **SparkLend sToken migration:** DAI spTokens and USDS spTokens transferred from SubDAO Proxy to ALM Proxy, consolidating treasury management under the ALM infrastructure.
+
 ## Trading Infrastructure
 
 Sky Intents is an intent-based trading system. Users express what they want to trade, Exchange Halos handle price discovery and matching off-chain, and settlement happens on-chain atomically. Trading Halos complement this with always-on AMM liquidity. Prime Intent Vaults isolate trading capital from main treasuries, limiting blast radius if something goes wrong.
