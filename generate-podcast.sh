@@ -52,10 +52,11 @@ for chunk_file in $CHUNK_FILES; do
     
     CHUNK_TEXT=$(cat "$chunk_file")
     
+    JSON_PAYLOAD=$(python3 -c "import json; print(json.dumps({'model': 'tts-1-hd', 'input': open('$chunk_file').read(), 'voice': 'onyx', 'response_format': 'mp3'}))")
     curl -s "https://api.openai.com/v1/audio/speech" \
         -H "Authorization: Bearer $OPENAI_API_KEY" \
         -H "Content-Type: application/json" \
-        -d "$(python3 -c "import json; print(json.dumps({'model': 'tts-1-hd', 'input': open('$chunk_file').read(), 'voice': 'onyx', 'response_format': 'mp3'}))")" \
+        -d "$JSON_PAYLOAD" \
         --output "$out_file"
     
     echo "  -> $out_file ($(wc -c < "$out_file") bytes)"
