@@ -119,6 +119,20 @@ Four parts executed atomically:
 
 4. **SparkLend sToken migration:** DAI spTokens and USDS spTokens transferred from SubDAO Proxy to ALM Proxy, consolidating treasury management under the ALM infrastructure.
 
+## Spark Savings Vault Intents — Audited and Moving to V2
+
+Quick update on the Savings Vault Intents system we covered earlier. As of today, March 12, 2026, the v1.0.0 audits have landed — both Cantina and ChainSecurity have signed off (spark-savings-intents PR #11, DEV-1404). This matters because it clears the path to production deployment. The deployment scripts and initialization contracts also merged yesterday (PR #9, DEV-1334), with mainnet production config committed. So v1.0.0 is audit-complete and deploy-ready.
+
+But the team isn't stopping there. There's a V2 POC in review right now (PR #10, DEV-1335) called **Permissionless Savings Intents**. This is a significant architecture evolution worth understanding.
+
+V1's model: a trusted off-chain ALM Planner monitors requests, orchestrates liquidity, and calls `fulfill()`. The planner has to be the one to execute. V2's model: **anyone** can fulfill a pending request — permissionlessly — as long as the protocol can source the liquidity internally.
+
+How? `SavingsVaultIntentsV2` inherits from V1 and adds a **venue system**. Admin configures a whitelist of liquidity venues per asset, each tagged with a type: ERC4626 vault, Aave market, or PSM. For each vault there's a default venue order. When `permissionlessFulfill()` is called, the contract iterates through venues in order, pulling liquidity from each until the redemption amount is covered — unwinding ERC4626 positions, withdrawing from Aave, or swapping USDS to USDC via PSM. Then it atomically redeems the user's shares.
+
+The security model is elegant: the contract only sources from whitelisted venues via the MainnetController's existing rate-limited interfaces. A malicious caller still can't cause fund loss — they can only complete a valid pending request. Worst case an expired request goes unfulfilled as before.
+
+This effectively removes the off-chain planner as a liveness dependency. Instead of waiting for the relayer to orchestrate, any keeper can trigger fulfillment once the contract knows where to find the liquidity. That's a meaningful reliability improvement for large institutional redemptions.
+
 ## Trading Infrastructure
 
 Sky Intents is an intent-based trading system. Users express what they want to trade, Exchange Halos handle price discovery and matching off-chain, and settlement happens on-chain atomically. Trading Halos complement this with always-on AMM liquidity. Prime Intent Vaults isolate trading capital from main treasuries, limiting blast radius if something goes wrong.

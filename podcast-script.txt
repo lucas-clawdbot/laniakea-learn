@@ -1,103 +1,150 @@
+Laniakea Deep Dive — Podcast Script
+Target: ~20 minutes (~3000 words)
+Voice: Onyx (OpenAI TTS)
+Style: Single host, conversational but authoritative
+
+---
+
 Welcome to the Laniakea deep dive. If you're heading into a Sky Ecosystem offsite and want to sound like you actually read the docs, this is your twenty-minute crash course. Let's get into it.
+
+What is Sky Ecosystem, really?
 
 Let's start with the basics. Sky Ecosystem powers USDS — a large decentralized, yield-generating stablecoin. As of late 2025, we're talking about roughly ten billion dollars in USDS supply, over four hundred million in annualized protocol revenue, and about a hundred and sixty-eight million in annualized profit. This thing grew around eighty-six percent in 2025, outpacing the overall stablecoin market which grew about fifty percent. So it's not just big — it's growing faster than the category.
 
 Sky evolved from MakerDAO, which launched back in 2017 with DAI. Eight years of continuous operation through multiple market cycles — the 2018 bear market, the March 2020 crash where ETH dropped over fifty percent in a single day, the 2022 crypto winter. That track record matters. DAI still works and is convertible one-to-one with USDS.
 
-The revenue model is straightforward. Sky earns a base rate on deployed capital, pays a savings rate to sUSDS holders, and keeps the spread. Revenue comes from collateralized lending, digital asset-backed lending, U.S. Treasuries, private credit like CLO allocations, and delta-neutral strategies. Diversification means they're not dependent on any single market regime, which has historically dampened sensitivity to crypto price cycles.
+The revenue model is straightforward. Sky earns a base rate on deployed capital, pays a savings rate to sUSDS holders, and keeps the spread. Revenue comes from collateralized lending, treasury positions, private credit, and delta-neutral strategies. Diversification means they're not dependent on any single market regime.
 
-Now let's talk tokens. There are three to know.
+The Token System
 
-USDS is the stablecoin — pegged one-to-one to the dollar, overcollateralized by crypto assets, Treasuries, and credit positions, freely transferable, available on Ethereum mainnet plus multiple L2s and L1s via SkyLink. Unlike payment stablecoins that fall under frameworks like the GENIUS Act, USDS is specifically designed for capital formation and yield generation. There are about three hundred billion dollars in stablecoins sitting idle without earning yield right now. That's the market opportunity.
+Three tokens to know. USDS is the stablecoin — pegged one-to-one to the dollar, overcollateralized, freely transferable, available on Ethereum mainnet plus multiple L2s via something called SkyLink. Unlike payment stablecoins, USDS is specifically designed for capital formation and yield generation.
 
-sUSDS is the savings token. It's an ERC-4626 vault. You deposit USDS, get sUSDS back, and the exchange rate increases continuously at the Sky Savings Rate. No lockups, freely redeemable at any time. It even earns yield on other chains through SkyLink. Simple and elegant.
+sUSDS is the savings token — it's an ERC-4626 vault. You deposit USDS, get sUSDS back, and the exchange rate increases continuously at the Sky Savings Rate. No lockups. It even earns yield on other chains.
 
-SKY is the governance token. Fixed supply of 23.46 billion, emissions permanently disabled. The protocol buys back SKY on the open market using profits. Since February 2025, over ninety-two million dollars in buybacks — that's over six percent of total supply purchased. SKY holders get three things: governance participation over all protocol parameters, programmatic profit allocation through those buybacks, and collateral utility — meaning you can use staked SKY as collateral for borrowing USDS while still earning staking rewards. That last one is especially clever because you effectively lower your borrowing costs without sacrificing governance participation or yield.
+SKY is the governance token. There are 23.46 billion total, emissions are permanently disabled, and the protocol buys back SKY on the open market using profits. Since February 2025, over ninety-two million dollars in buybacks — that's over six percent of total supply. SKY holders get three things: governance participation, programmatic profit allocation through those buybacks, and the ability to use staked SKY as collateral for borrowing USDS while still earning staking rewards. That last one is clever — you borrow cheaper without sacrificing governance participation or yield.
 
-Roughly seventy-five to a hundred percent of protocol profits flow to SKY stakers through the buyback mechanism. There's also a deflationary mechanic: about fourteen percent of the original MKR supply was never claimed after the migration, and the SKY backing that unclaimed MKR gets burned one percent per quarter over about twenty-four years.
+Roughly seventy-five to a hundred percent of protocol profits flow to SKY stakers through the buyback mechanism. There's also a deflationary mechanic: about fourteen percent of the original MKR supply was never claimed, and the SKY backing that unclaimed MKR gets burned one percent per quarter over about twenty-four years.
 
-Protocol revenue flows through a five-step waterfall called the Treasury Management Function. Step one takes care of security and maintenance — twenty-one percent during the genesis period, dropping to four to ten percent post-genesis. Step two fills the aggregate backstop capital — a solvency buffer targeting one-and-a-half percent of total supply, filling dynamically based on how far it is from target. Step three funds the Fortification Conserver for legal defense and resilience. Step four powers the Smart Burn Engine — those SKY buybacks. Step five distributes everything remaining to staking rewards. Steps three and four scale up with a hyperbolic net revenue ratio function, so as the protocol earns more, proportionally more goes to burn and legal infrastructure.
+The Treasury Management Function
 
-Now here's where Laniakea really gets interesting — the Agent Network. This is the capital allocation layer sitting between Sky Protocol and actual investments. The flow goes: Sky Protocol, to Synomic Agents called Primes, to investment wrappers called Halos, to end assets.
+Protocol revenue flows through a five-step waterfall called the TMF. Step one: security and maintenance — twenty-one percent during the genesis period, dropping to four to ten percent later. Step two: aggregate backstop capital — a solvency buffer targeting one-and-a-half percent of total supply. Step three: the Fortification Conserver — legal defense and resilience. Step four: the Smart Burn Engine — those SKY buybacks we talked about. Step five: everything left goes to staking rewards. Steps three and four scale up with a hyperbolic function tied to total net revenue, so as the protocol earns more, more goes to burn and legal defense.
 
-Primes are the primary capital deployers. Think of them as governance-approved operators that receive capital from Sky Protocol and deploy it into strategies. Each Prime has its own treasury, its own governance token, and a specialized focus. They bear the business risk, providing their own capital as first-loss protection on assets they deploy. This separates risk-taking from monetary policy.
+The Agent Network — This is Key
 
-Right now there are three operational Star Primes. Spark handles DeFi lending including SparkLend and the Spark Liquidity Layer across six chains. Grove does private credit and CLO allocations. Keel handles ecosystem expansion including Solana deployment and USDS adoption. There's also an Institutional Prime called Obex for incubation. Two more Star Prime slots — Star4 and Star5 — are reserved for future expansion.
+Now here's where Laniakea really gets interesting. The Agent Network is a capital allocation layer sitting between Sky Protocol and actual investments. The flow goes: Sky Protocol, to Primes, to Halos, to end assets.
 
-The beautiful competitive dynamic is that Primes compete for capital allocation based on performance. Better risk-adjusted returns means more capital. This creates market pressure for higher yields, deeper risk specialization, faster innovation, and greater efficiency through shared infrastructure.
+Primes are the primary capital deployers. Think of them as governance-approved operators that receive capital from Sky Protocol and deploy it into strategies. Each Prime has its own treasury, its own governance token, and a specialized focus. Right now there are three operational Star Primes: Spark handles DeFi lending across six chains, Grove does private credit and CLO allocations, and Keel handles ecosystem expansion including Solana. There's also an Institutional Prime called Obex for incubation.
 
-Halos are investment product wrappers created by Primes. Each Halo wraps a specific strategy with standardized interfaces. There are three main types, and this is important to understand.
+The beautiful thing is that Primes compete for capital. The one with the best risk-adjusted returns gets more allocation. This creates market pressure for optimization — better yields, risk specialization, innovation, and efficiency.
 
-Portfolio Halos use LCTS — the Liquidity Constrained Token Standard. It's a queue-based system for capacity-constrained investments. You subscribe assets to a queue, and at daily settlement at sixteen hundred UTC, deposits convert to Halo shares at the current exchange rate. If capacity is constrained, conversion may span multiple settlement cycles. The queue locks during the processing window from thirteen hundred to sixteen hundred UTC for deterministic calculations and fair allocation. This is the natural fit for most real-world investments where you can't just dump unlimited capital in.
+Halos are investment product wrappers created by Primes. Each Halo wraps a specific strategy and provides standardized interfaces. There are three main types.
 
-Term Halos use NFATs — Non-Fungible Allocation Tokens. These represent individual bespoke deals with negotiated terms within defined buyboxes, meaning acceptable parameter ranges. Each position can have different duration, size, and yield. Think six-month, twelve-month, and eighteen-month positions with different yields, all under the same legal framework. NFATs are transferable, can be used as collateral, and can even be wrapped in fungible ERC-20 tokens for secondary markets.
+Portfolio Halos use something called LCTS — Liquidity Constrained Token Standard. It's a queue-based system. You subscribe, wait in a queue, and at daily settlement your deposit converts to Halo shares at the current exchange rate. This handles capacity-constrained strategies where you can't just dump unlimited capital in.
 
-Trading Halos run AMM smart contracts using predeposited USDS to provide instant liquidity for RWA tokens. Users sell tokenized real-world assets for instant USDS at a spread, and the Trading Halo redeems with the underlying issuer over the normal settlement cycle. This turns real-world asset liquidity from days-long redemption into instant settlement.
+Term Halos use NFATs — Non-Fungible Allocation Tokens. These represent individual bespoke deals with negotiated terms. Each position can have different duration, size, and yield. Think six-month, twelve-month, eighteen-month positions with different yields, all under the same legal framework. NFATs are transferable and can be used as collateral.
 
-There are also Special Halos for identity networks handling KYC, Exchange Halos running orderbooks and matching engines, and Staking Halos for Growth Staking. Plus Core Halos that wrap legacy positions like Morpho vaults, Aave pools, and SparkLend under the same risk framework.
+Trading Halos run AMM smart contracts to provide instant liquidity for RWA tokens. Users sell tokenized real-world assets for instant USDS at a spread, and the Trading Halo redeems with the issuer over the normal cycle.
 
-Speaking of Growth Staking — this is a clever incentive mechanism. SKY stakers must also hold growth assets like Agent tokens, risk capital tokens, or sSGA to unlock staking rewards. The more directly an asset contributes to innovation, the less you need. Agent tokens like Prime tokens need just 0.4x the value of your staked SKY. Junior risk capital needs 0.6x. Senior risk capital needs 1.0x. And passive sSGA needs 2.0x. This creates a powerful pull: same capital invested in a Prime token gives you five times the staking factor efficiency compared to holding sSGA. It structurally pushes capital from passive savings into the active innovation layer, and it eliminates mercenary staking because holding SKY alone earns you nothing.
+There are also Special Halos for identity networks, exchanges, and personal growth staking.
 
-Now the risk framework. This is genuinely sophisticated — it's inspired by Basel III banking regulation but adapted for decentralized operation. The core insight is that capital requirements should reflect the maximum loss that could actually be forced to realize, not just mark-to-market volatility.
+Then there are Core Halos — legacy assets like Morpho vaults, Aave pools, and SparkLend positions that get wrapped with the same risk framework and reporting standards as everything else. This is the migration path for existing protocol positions.
 
-There's a two-tier capital structure. Junior Risk Capital, or JRC, absorbs losses first in exchange for higher returns. Senior Risk Capital is protected by the JRC buffer and gets lower but safer returns. Each Prime provides its own JRC from its treasury — direct skin in the game.
+Risk Management — Basel III for DeFi
 
-The loss absorption waterfall is deep. At the Prime level: first, the Prime's own capital absorbs the first ten percent of JRC losses. Then all junior capital shares in. Then the Prime's governance token gets diluted through inflation — and this can cover losses essentially to infinity before touching senior capital. At the system level: senior risk capital absorbs next. Then SKY gets diluted. Nuclear options include genesis capital haircuts and USDS peg adjustment, which should never be reached.
+The risk framework is genuinely sophisticated. It's inspired by Basel III banking regulation but adapted for decentralized operation. The core insight: capital requirements should reflect the maximum loss that could actually be forced to realize, not mark-to-market volatility.
 
-Duration matching is where it gets really clever. Sky tracks how long USDS holders keep their positions using a Lindy model — the longer you've held, the longer you're likely to keep holding. This gives you liability duration data. Assets are then matched using Duration Buckets: if an asset takes a long time to liquidate, measured by something called Stressed Pull-to-Par time, it needs backing from correspondingly long-duration liabilities. Assets whose duration matches available liability capacity only need capital for fundamental risks like credit default. Unmatched assets need additional capital covering potential mark-to-market losses from credit spread widening. And all fixed-rate exposure must be hedged or carry extra capital.
+There's a two-tier capital structure. Junior Risk Capital absorbs losses first in exchange for higher returns. Senior Risk Capital is protected by the JRC buffer and gets lower but safer returns. Each Prime provides its own JRC from its treasury — skin in the game. They lose their own capital first.
 
-There's also a risk capital ingression system — not all external capital counts at face value. It's discounted based on whether the provider is synomic, how long capital is committed, and the Prime's existing composition. A Prime token market cap constraint further limits total leverage. And concentration limits prevent any single correlated risk type from getting too large — anything exceeding a governance-defined category cap requires one hundred percent capitalization.
+The loss absorption waterfall goes deep. At the Prime level: first, the Prime's own capital takes the first ten percent of JRC losses. Then all junior capital shares in. Then the Prime's governance token gets diluted. At the system level: senior risk capital absorbs. Then SKY gets diluted. Nuclear options include genesis capital haircuts and, in absolute extremis, USDS peg adjustment. The idea is you'd never reach those last two.
 
-Let's talk about the smart contract architecture. Every layer uses the same building block: the PAU — Parallelized Allocation Unit. Three components: a Controller as the entry point enforcing rate limits, an ALMProxy that holds custody of funds and executes calls, and RateLimits for linear replenishment rate limits with configurable maximums and slopes. Same contracts everywhere — Generator, Prime, Halo, Foreign — just different configuration. This means no new code for new layers, factories can stamp out identical PAUs, and adding a layer just means deploying more instances.
+Duration matching is clever. Sky tracks how long USDS holders actually keep their positions using a Lindy model — the longer you've held, the longer you're likely to keep holding. This liability duration data determines how much long-duration asset exposure is safe. Assets get matched to liabilities: if an asset takes a long time to liquidate, it needs to be backed by long-duration liabilities. Unmatched assets need extra capital for potential mark-to-market losses.
 
-There are four layers. The Generator layer interfaces with the stablecoin contract and deploys capital via ERC-4626 vaults. The Prime layer receives from Generators and deploys to Halos or bridges to other chains. The Halo layer deploys to RWA strategies and custodians. And the Foreign layer runs identical infrastructure on alt-chains, receiving bridged assets directly.
+There's a risk capital ingression system that determines how much external capital actually counts. Not all capital gets full credit — it's discounted based on whether the provider is synomic, how long the capital is committed, and the Prime's existing composition. This prevents leverage from getting out of hand.
 
-The Diamond PAU pattern uses EIP-2535 diamond proxy architecture — modular and upgradeable. You can add new action facets without full redeployment. Rate limits are the universal control mechanism. Every single capital flow is rate-limited. And here's a key invariant: losses are reflected instantly via exchange rate haircuts, while gains accrue gradually over time.
+Concentration limits prevent overexposure to any single correlated risk type. Anything exceeding a category cap requires one hundred percent capital coverage. And there's operational risk capital on top — covering things like settlement timing exposure and warden economics.
 
-Now, autonomous operations. Laniakea introduces beacons classified on two axes: power and authority. Low Power, Low Authority beacons handle reporting. Low Power, High Authority beacons execute deterministic rules. High Power, Low Authority beacons do trading. And High Power, High Authority beacons are the Sentinels — AI-capable formations.
+The Smart Contract Architecture
 
-Sentinel formations are fascinating. They don't operate as single agents — they're coordinated systems with three components. The Baseline Sentinel is the public autopilot. It's the only entity holding keys to the execution engine. It runs public, auditable code and executes the base strategy. The Stream Sentinel handles data ingestion and signal generation, allowing proprietary intelligence to influence execution without exposing strategies or holding keys. The alpha stays private. And Warden Sentinels provide independent safety oversight — they can halt operations when things go wrong, without being compromised by the same failure modes.
+Every capital flow layer uses the same building block: the PAU — Parallelized Allocation Unit. A PAU has three components: a Controller as the entry point, an ALMProxy that holds funds and executes calls, and RateLimits for linear replenishment rate limits. Same contracts everywhere, just different configuration.
 
-If the Stream disconnects, the Baseline automatically reverts to its base strategy. It continuously simulates "what would we have earned with just the base strategy" for performance comparison. This data plane, control plane, safety plane separation is elegant engineering.
+There are four layers. The Generator layer interfaces with the stablecoin contract. The Prime layer receives capital from Generators and deploys to Halos or bridges to other chains. The Halo layer deploys to RWA strategies and custodians. And the Foreign layer runs identical infrastructure on alt-chains.
 
-The roadmap has eleven phases. Phase zero handles Grove's pre-standardization deployments — acknowledged technical debt that runs concurrently with Phase one. Phase one establishes MVP infrastructure: Diamond PAUs, the Configurator enabling spell-less operations, NFAT infrastructure, and five initial beacons. Phase two formalizes monthly settlement. Phase three transitions to daily settlement with a twenty-one hour active window plus a three hour processing window.
+The Diamond PAU pattern uses EIP-2535 diamond proxy architecture — modular, upgradeable functionality. You can add new action facets without full redeployment. This is the foundation for factory deployment in later phases.
 
-Phase four launches LCTS with srUSDS as the first product — senior risk capital tokens anyone can hold. Before auctions come online, Core Council manually manages the srUSDS rate. This phase also brings the first Money Market Fund Portfolio Halo.
+Rate limits are the universal control mechanism. Every single capital flow is rate-limited with governance-set bounds. Losses are reflected instantly via exchange rate haircuts, while gains accrue gradually.
 
-Phases five through eight build the factory stack. Phase five creates the Halo Factory for automated Halo creation. Phase six deploys the Generator PAU with single-ilk architecture — each collateral type gets its own dedicated PAU. Phase seven adds the Prime Factory. Phase eight completes with the Generator Factory. After this, deploying a new Prime or Halo is a standardized process, not custom development.
+The Beacon Framework and Sentinels
 
-Phase nine activates Sentinel Base and Warden formations plus sealed-bid auctions where Primes compete for senior risk capital capacity and duration-matching reservations. Phase ten brings Sentinel Stream for continuous, AI-driven operations.
+Laniakea introduces autonomous operations through beacons, classified on two axes: power and authority. Low Power, Low Authority beacons do reporting. Low Power, High Authority beacons execute deterministic rules. High Power, Low Authority beacons handle trading. High Power, High Authority beacons are the Sentinels — AI-capable formations.
 
-Finally, governance evolves. Post-Laniakea, the system moves from direct SKY token executive votes to a layered SpellGuard model. Three layers: SpellCore needs a Core Council Guardian vote with a sixteen-of-twenty-four hat. Prime SpellGuard adds a Prime token vote. Halo SpellGuard adds a Halo token vote. Every level needs dual-key authorization — top-down payload from above, bottom-up token hat from its own holders. SKY holders retain ultimate sovereignty through a graduated freeze mechanism that can escalate to a full override, dismissing the Core Council entirely and reverting to direct SKY holder control.
+Phase 1 starts with the simple deterministic beacons. Later phases introduce Sentinel formations with three components: Baseline for execution, Stream for intelligence, and Warden for safety.
 
-Sky Intents rounds out the infrastructure — an intent-based trading system where users express what they want to trade, Exchange Halos handle off-chain price discovery and matching, and settlement happens on-chain atomically. Trading capital sits in isolated Prime Intent Vaults to limit blast radius. Identity Networks provide on-chain KYC registries for regulated products, with restrictions enforced at the token level and flowing automatically through any exchange or protocol.
+The Roadmap
 
-Here's the synthesis. Sky Ecosystem is building what is essentially a decentralized investment bank. The Agent Network creates competitive pressure driving returns higher. The risk framework brings banking-grade discipline to DeFi with Basel III-inspired capital requirements. Growth Staking aligns token holders with ecosystem innovation. The factory system enables rapid, scalable deployment. And the Sentinel network will eventually automate ninety-nine percent of operations while preserving human oversight for the one percent that needs judgment.
+There are eleven phases, zero through ten. Phase zero handles Grove's pre-standardization deployments — acknowledged technical debt. Phase one establishes MVP infrastructure: Diamond PAUs, the Configurator, NFAT infrastructure, and basic beacons. Phase two formalizes monthly settlement. Phase three transitions to daily settlement — a twenty-one hour active window plus a three hour processing window, settling at sixteen hundred UTC every day.
 
-The competitive moat is the combination: eight years of uninterrupted operation, ten billion in USDS supply, a diversified revenue base, and infrastructure that can scale capital deployment across chains and asset classes with institutional-grade risk management.
+Phase four launches LCTS with srUSDS as the first product — senior risk capital tokens that anyone can hold. Before auctions come online, Core Council manually manages the srUSDS rate.
 
-If someone asks you what Laniakea is at the offsite, here's your one-liner: Laniakea is Sky's infrastructure for automated capital deployment at scale, combining Basel III-inspired risk management with autonomous sentinel operations, enabling the protocol to efficiently deploy billions across DeFi, private credit, and real-world assets through a competitive agent network. All within rate-limited, governance-controlled bounds.
+Phases five through eight are the factory phases. Phase five builds the Halo Factory for automated Halo creation. Phase six deploys the Generator PAU with single-ilk architecture. Phase seven adds the Prime Factory. Phase eight completes with the Generator Factory.
 
-Let me leave you with a few things that are likely to come up in conversation at the offsite.
+Phase nine activates Sentinel Base and Warden formations plus sealed-bid auctions where Primes compete for senior risk capital capacity. Phase ten brings Sentinel Stream for continuous operations.
 
-First, the current phase. Sky is in Phase 0 and Phase 1 territory right now, running concurrently. That means Grove is doing its pre-standardization deployments while the broader team builds out Diamond PAUs, the Configurator, and the first beacons. Manual settlement continues. The exciting near-term milestone is Phase 1.5 — the first live Term Halo with end-to-end NFAT flow validated.
+The progression is deliberate: foundational infrastructure first, then factory systems for scale, then full automation with AI-capable Sentinels.
 
-Second, the Diamond PAU refactor that's actively happening. The existing Legacy PAU architecture — Controller plus ALMProxy plus RateLimits — is being migrated to the Diamond proxy pattern. This is the PR-level work happening right now. The Diamond pattern means modular facets that can be added without redeploying the whole contract, plus a path to standardized factory deployment later.
+Governance Transition
 
-Third, the SkyLink infrastructure. This is how USDS and sUSDS maintain full functionality on L2s and other chains. Spark is already live on six chains. CCTP — Circle's Cross-Chain Transfer Protocol — is the mechanism for moving USDC between chains, and the protocol handles splitting large transfers automatically when they exceed per-message burn limits. When you hear people talking about Foreign Controllers or Foreign Primes, that's the alt-chain infrastructure receiving bridged assets.
+Post-Laniakea, governance evolves from direct SKY token executive votes to a layered SpellGuard model. Three layers: SpellCore requires a Core Council Guardian vote with a sixteen-of-twenty-four hat. Prime SpellGuard adds a Prime token vote on top. Halo SpellGuard adds a Halo token vote.
 
-Fourth, the Synome. This is the deep conceptual layer — the governance knowledge base and the formal system that encodes rules and agent directives. It uses something called synlang, an S-expression notation for machine-readable governance encoding. The Synome has five layers: the Synome itself, Synomic Agents, Teleonomes, Embodiments, and Embodied Agents. The smart contract layers — Generator, Prime, Halo, Foreign — all map to Layer 2, the Synomic Agents layer. If the conversation goes philosophical, that's the conceptual framework they're working within.
+Every level needs dual-key authorization — a top-down payload from the layer above and a bottom-up token hat from the level's own holders. SKY holders retain ultimate sovereignty through a graduated freeze mechanism that can escalate to a full override, dismissing the Core Council entirely and reverting to direct SKY holder control.
 
-A sixth thing worth knowing: Spark Savings Vault Intents. This is a new system just documented in the spark-savings-intents repository that solves a real operational problem. When a user wants to withdraw a very large amount from a Spark Savings Vault — think millions of USDC — the vault might not have enough idle liquidity sitting around to process the redemption immediately. A direct on-chain redeem call would just revert, leaving them stuck.
+Spark Savings Vault Intents (spark-savings-intents)
 
-The solution is an intent-based withdrawal mechanism. Instead of calling redeem directly, users submit a withdrawal intent specifying how many shares they want to redeem, who should receive the assets, and a deadline. The ALM Planner — an off-chain relayer system — monitors these intents, orchestrates the necessary liquidity by unwinding positions and moving assets into the vault, and then calls fulfill to atomically complete the redemption. The intent contract never holds any shares or assets itself. It's a pure coordination layer.
+A new system to handle large withdrawals from Spark Savings Vaults. Problem: when a user wants to redeem millions of USDC from a Spark Savings Vault, the vault may not have enough idle liquidity on hand. A direct redeem call reverts — the user is stuck.
 
-Three actors: the user who holds vault shares, the SavingsVaultIntents contract that stores requests and executes fulfillments, and the ALM Planner relayer that monitors events and orchestrates capital. A user can have one active request per vault at a time, can overwrite or cancel requests, and fulfillment is all-or-nothing — no partial fills. There's a clever race condition protection: the fulfill function takes a requestId parameter and validates it matches the stored request, preventing stale planner state from executing against a modified request.
+Solution: intent-based withdrawals. Users submit a WithdrawRequest specifying shares, recipient, and deadline. The ALM Planner (off-chain relayer) monitors RequestCreated events, orchestrates vault liquidity (unwinds positions, moves assets in), then calls fulfill() to atomically complete the redemption. The intent contract never holds shares or assets — it's pure coordination.
 
-Security posture is solid. Even a malicious relayer can't cause fund loss — worst they can do is not fulfill or let requests expire. There's a minimum intent size threshold to prevent spam. And the contract is designed specifically for Spark Vault v2. This is the plumbing that makes large institutional withdrawals work cleanly in the Laniakea context.
+Three actors: User (holds vault shares), SavingsVaultIntents contract (stores requests, executes fulfillments), ALM Planner (off-chain, monitors events, orchestrates capital). Users can have one active request per vault, overwrite or cancel. Fulfillment is all-or-nothing — no partial fills. Race condition protection via requestId matching: fulfill() validates the stored requestId matches exactly, so stale planner state can't accidentally execute against a modified request. Even a malicious relayer can't cause fund loss — worst case is a request expires unfulfilled. Designed specifically for Spark Vault v2.
 
-Update: the March 12th spell has now executed. It's live on mainnet as of today. Four parts went through atomically. The Mainnet Controller is now version 1.10, deployed at a new address, with full parameter migration of exchange rate limits and slippage limits across all vaults, Curve pools, Aave markets, SparkLend spTokens, and Uniswap v4 pools. The Morpho V2 USDT vault was also included with a wider exchange rate allowance than standard vaults. The Cap Automator is now version 1.1 — the risk admin role transferred cleanly, and all supply cap and borrow cap configurations were migrated automatically. The Kill Switch Oracle now covers cbBTC, rETH, WBTC via Chainlink, and weETH — all at the 0.95 threshold, meaning a 5 percent de-peg triggers automatically. And the SparkLend DAI and USDS spTokens have moved from SubDAO Proxy to ALM Proxy, consolidating treasury management under the ALM infrastructure. Both new contract addresses are now registered in the address registry — the new controller and the new cap automator are the canonical references going forward.
+March 12, 2026 Spell (DEV-1330) — Now Live
 
-And fifth, the numbers that matter. Nine-point-nine billion USDS supply. Four hundred thirty-five million annualized revenue. One hundred sixty-eight million annualized profit. Ninety-two million in SKY buybacks since February 2025. Eighty-six percent supply growth in 2025. These are the stats that frame why this infrastructure investment makes sense — you need industrial-grade plumbing when you're moving this much capital.
+This spell merged and executed on March 12, 2026 (spark-spells PR #160). The address registry has been updated with the new deployed contracts: new ALM Controller at 0x5c46Fc65855c0C7465a1EA85EEA0B24B601502D3 and new Cap Automator at 0x4C1341636721b8B687647920B2E9481f3AB1F2eE (spark-address-registry PR #82).
 
-That's your twenty-minute deep dive on Laniakea. You've got the big picture, the technical architecture, the risk framework, and the roadmap. Go make it count at the offsite.
+Four parts executed atomically:
+
+1. ALM Controller → v1.10: Full parameter migration — exchange rate limits across all vaults (Morpho, sUSDS, Fluid, sUSDe, Syrup, Arkis) and slippage limits across Curve pools, Aave markets, SparkLend spTokens, and Uniswap v4 pools (PYUSD/USDS, USDT/USDS). New controller 0x5c46Fc65855c0C7465a1EA85EEA0B24B601502D3 is live; old config migrated atomically. Notably includes the new Morpho V2 USDT vault at a 1,000,000x exchange rate allowance (wider than the standard 10x for typical ERC4626 vaults).
+
+2. Cap Automator → v1.1: Risk admin role transferred from old to new Cap Automator 0x4C1341636721b8B687647920B2E9481f3AB1F2eE. All existing supply cap and borrow cap configs migrated across every SparkLend reserve automatically.
+
+3. Kill Switch Oracle expansion: cbBTC/BTC ratio oracle, rETH/ETH ratio oracle, WBTC/BTC Chainlink oracle, and weETH/ETH ratio oracle all added at a 0.95 threshold — meaning a 5%+ de-peg from the underlying triggers the kill switch.
+
+4. SparkLend sToken migration: DAI spTokens and USDS spTokens transferred from SubDAO Proxy to ALM Proxy, consolidating treasury management under the ALM infrastructure.
+
+Spark Savings Vault Intents — Audited and Moving to V2
+
+Quick update on the Savings Vault Intents system we covered earlier. As of today, March 12, 2026, the v1.0.0 audits have landed — both Cantina and ChainSecurity have signed off (spark-savings-intents PR #11, DEV-1404). This matters because it clears the path to production deployment. The deployment scripts and initialization contracts also merged yesterday (PR #9, DEV-1334), with mainnet production config committed. So v1.0.0 is audit-complete and deploy-ready.
+
+But the team isn't stopping there. There's a V2 POC in review right now (PR #10, DEV-1335) called Permissionless Savings Intents. This is a significant architecture evolution worth understanding.
+
+V1's model: a trusted off-chain ALM Planner monitors requests, orchestrates liquidity, and calls fulfill(). The planner has to be the one to execute. V2's model: anyone can fulfill a pending request — permissionlessly — as long as the protocol can source the liquidity internally.
+
+How? SavingsVaultIntentsV2 inherits from V1 and adds a venue system. Admin configures a whitelist of liquidity venues per asset, each tagged with a type: ERC4626 vault, Aave market, or PSM. For each vault there's a default venue order. When permissionlessFulfill() is called, the contract iterates through venues in order, pulling liquidity from each until the redemption amount is covered — unwinding ERC4626 positions, withdrawing from Aave, or swapping USDS to USDC via PSM. Then it atomically redeems the user's shares.
+
+The security model is elegant: the contract only sources from whitelisted venues via the MainnetController's existing rate-limited interfaces. A malicious caller still can't cause fund loss — they can only complete a valid pending request. Worst case an expired request goes unfulfilled as before.
+
+This effectively removes the off-chain planner as a liveness dependency. Instead of waiting for the relayer to orchestrate, any keeper can trigger fulfillment once the contract knows where to find the liquidity. That's a meaningful reliability improvement for large institutional redemptions.
+
+Trading Infrastructure
+
+Sky Intents is an intent-based trading system. Users express what they want to trade, Exchange Halos handle price discovery and matching off-chain, and settlement happens on-chain atomically. Trading Halos complement this with always-on AMM liquidity. Prime Intent Vaults isolate trading capital from main treasuries, limiting blast radius if something goes wrong.
+
+Identity Networks handle regulated products — on-chain registries of KYC-verified addresses. Token issuers configure which networks their tokens accept, and restrictions flow through automatically to any exchange or protocol using those tokens.
+
+Why This Matters
+
+Here's the synthesis. Sky Ecosystem is building what is essentially a decentralized investment bank. The Agent Network creates competitive pressure that should drive returns higher. The risk framework brings banking-grade discipline to DeFi. The factory system means rapid scalable deployment of new products. And the Sentinel network will eventually automate ninety-nine percent of operations.
+
+The competitive moat is the combination: eight years of uninterrupted operation, ten billion in USDS supply, a diversified revenue base, and now infrastructure that can scale capital deployment across chains and asset classes with institutional-grade risk management.
+
+If someone asks you what Laniakea is, the one-liner is: it's Sky's infrastructure for automated capital deployment at scale, combining Basel III-inspired risk management with autonomous beacon and sentinel operations, enabling the protocol to efficiently deploy billions across DeFi, private credit, and real-world assets through a competitive agent network.
+
+That's your twenty-minute deep dive. Go make it count at the offsite.
