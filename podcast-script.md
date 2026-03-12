@@ -105,13 +105,15 @@ Solution: intent-based withdrawals. Users submit a `WithdrawRequest` specifying 
 
 Three actors: **User** (holds vault shares), **SavingsVaultIntents contract** (stores requests, executes fulfillments), **ALM Planner** (off-chain, monitors events, orchestrates capital). Users can have one active request per vault, overwrite or cancel. Fulfillment is all-or-nothing — no partial fills. Race condition protection via `requestId` matching: `fulfill()` validates the stored requestId matches exactly, so stale planner state can't accidentally execute against a modified request. Even a malicious relayer can't cause fund loss — worst case is a request expires unfulfilled. Designed specifically for Spark Vault v2.
 
-## March 12, 2026 Spell (in development — DEV-1330)
+## March 12, 2026 Spell (DEV-1330) — Now Live
 
-A multi-part upgrade currently in the `feat/dev-1330/spell-20260312` branch:
+This spell merged and executed on March 12, 2026 (spark-spells PR #160). The address registry has been updated with the new deployed contracts: new ALM Controller at `0x5c46Fc65855c0C7465a1EA85EEA0B24B601502D3` and new Cap Automator at `0x4C1341636721b8B687647920B2E9481f3AB1F2eE` (spark-address-registry PR #82).
 
-1. **ALM Controller → v1.10:** Full parameter migration — exchange rate limits across all vaults (Morpho, sUSDS, Fluid, sUSDe, Syrup, Arkis) and slippage limits across Curve pools, Aave markets, SparkLend spTokens, and Uniswap v4 pools (PYUSD/USDS, USDT/USDS). New controller address is deployed; old config migrated atomically.
+Four parts executed atomically:
 
-2. **Cap Automator → v1.1:** Risk admin role transferred from old to new Cap Automator. All existing supply cap and borrow cap configs migrated across every SparkLend reserve automatically.
+1. **ALM Controller → v1.10:** Full parameter migration — exchange rate limits across all vaults (Morpho, sUSDS, Fluid, sUSDe, Syrup, Arkis) and slippage limits across Curve pools, Aave markets, SparkLend spTokens, and Uniswap v4 pools (PYUSD/USDS, USDT/USDS). New controller `0x5c46Fc65855c0C7465a1EA85EEA0B24B601502D3` is live; old config migrated atomically. Notably includes the new Morpho V2 USDT vault at a 1,000,000x exchange rate allowance (wider than the standard 10x for typical ERC4626 vaults).
+
+2. **Cap Automator → v1.1:** Risk admin role transferred from old to new Cap Automator `0x4C1341636721b8B687647920B2E9481f3AB1F2eE`. All existing supply cap and borrow cap configs migrated across every SparkLend reserve automatically.
 
 3. **Kill Switch Oracle expansion:** cbBTC/BTC ratio oracle, rETH/ETH ratio oracle, WBTC/BTC Chainlink oracle, and weETH/ETH ratio oracle all added at a 0.95 threshold — meaning a 5%+ de-peg from the underlying triggers the kill switch.
 
